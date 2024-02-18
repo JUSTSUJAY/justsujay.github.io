@@ -1,0 +1,7 @@
+title: Anything & Everything
+description: Anything and Everythingt that matters
+url: https://justsujay.github.io/posts/
+plugins:
+  - jekyll-feed
+feed:
+  path: feed.xml

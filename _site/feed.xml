@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anything &amp; Everything</title>
+    <description>Anything and Everythingt that matters</description>
+    <link>https://justsujay.github.io/posts//</link>
+    <atom:link href="https://justsujay.github.io/posts//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 18 Feb 2024 22:37:37 +0530</pubDate>
+    <lastBuildDate>Sun, 18 Feb 2024 22:37:37 +0530</lastBuildDate>
+    <generator>Jekyll v4.3.3</generator>
+    
+  </channel>
+</rss>  
