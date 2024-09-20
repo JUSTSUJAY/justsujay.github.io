@@ -108,24 +108,30 @@
     <header>
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-                <h1 class="title">Sujay</h1>
+                <h1 class="title">
+                    <a href="../">Sujay</a>
+                </h1>
             </div>
             <nav>
-                <ul style="display: flex; list-style: none; margin: 0; padding: 0;">
-                    <li style="margin-left: 20px;"><a href="../">Home</a></li>
-                    <li style="margin-left: 20px;"><a href="../index.html#about">About</a></li>
-                    <li style="margin-left: 20px;"><a href="../../projects/">Projects</a></li>
-                    <li style="margin-left: 20px;"><a href="../../resume/">Resume</a></li>
-                    <li style="margin-left: 20px;"><a href="../../blogs/">Blog</a></li>
-                    <li style="margin-left: 20px;"><a href="../index.html#contact">Contact</a></li>
-                    <li style="margin-left: 20px;">
-                    </li>
+                <!-- Navigation Menu -->
+                <ul class="nav-menu" style="list-style: none; margin: 0; padding: 0;">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../blogs/">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
                 </ul>
+                <!-- Hamburger icon for mobile -->
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="blog-content">
+    <main class="blog-content style="margin-top: 400px;">
         <h1>The Future of AI: Trends to Watch in 2024</h1>
         <div class="blog-meta">Published on September 14, 2024 by Sujay</div>
         
@@ -152,6 +158,14 @@
             <p>&copy; 2024 Sujay Kapadnis. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 
 </body>
 </html>

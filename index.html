@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sujay</title>
     <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <!-- Favicon Script -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             let favicon_video_image_counter = 0;
@@ -81,6 +82,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
@@ -89,19 +91,27 @@
                 </h1>
             </div>
             <nav>
-                <ul style="display: flex; list-style: none; margin: 0; padding: 0;">
-                    <li style="margin-left: 20px;"><a href="./">Home</a></li>
-                    <li style="margin-left: 20px;"><a href="#about">About</a></li>
-                    <li style="margin-left: 20px;"><a href="./projects/">Projects</a></li>
-                    <li style="margin-left: 20px;"><a href="/resume/">Resume</a></li>
-                    <li style="margin-left: 20px;"><a href="./blogs/">Blog</a></li>
-                    <li style="margin-left: 20px;"><a href="#contact">Contact</a></li>
+                <!-- Navigation Menu -->
+                <ul class="nav-menu" style="list-style: none; margin: 0; padding: 0;">
+                    <li><a href="./">Home</a></li>
+                    <li><a href="./projects/">Projects</a></li>
+                    <li><a href="/resume/">Resume</a></li>
+                    <li><a href="./blogs/">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
+                <!-- Hamburger icon for mobile -->
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
     </header>
     
-
+    
+    
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <h2>Advancing AI for a Better Tomorrow</h2>
@@ -210,5 +220,16 @@
             <p>&copy; 2024 Sujay Kapadnis. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+    
+    
 </body>
 </html>
