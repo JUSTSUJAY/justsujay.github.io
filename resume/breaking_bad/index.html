@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walter White - Chemistry Innovator</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto Mono', monospace;
+            background: #0D0D0D;
+            color: #00FF00;
+            overflow: hidden;
+        }
+
+        #lab {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .beaker {
+            width: 220px;
+            height: 200px;
+            background: url('../bg_images/beaker.png') no-repeat center center;
+            background-size: contain;
+            margin: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .beaker:hover {
+            transform: scale(1.1);
+        }
+
+        .liquid {
+            position: absolute;
+            bottom: 10%;
+            left: 30%;
+            width: 40%;
+            height: 0;
+            background: #00FF00;
+            transition: height 1s, background-color 1s;
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: rgba(13, 13, 13, 0.9);
+            border: 2px solid #00FF00;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        #close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #00FF00;
+            cursor: pointer;
+        }
+
+        #hazmat-suit {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            background: url('../bg_images/hamzat.png') no-repeat;
+            background-size: contain;
+            cursor: pointer;
+        }
+
+        @keyframes bubble {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .bubbling {
+            animation: bubble 0.5s infinite;
+        }
+
+        #cooking-progress {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #00FF00;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 100%;
+            background: #00FF00;
+            transition: width 0.5s;
+        }
+
+        #money-counter {
+            position: fixed;
+            top: 50px;
+            left: 20px;
+            font-size: 24px;
+            color: #00FF00;
+        }
+
+        #dea-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: red;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        #purity-meter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #00FF00;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        #partner-selector {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #partner-selector select {
+            background: #0D0D0D;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            padding: 5px;
+        }
+
+        #lab-upgrade {
+            position: fixed;
+            bottom: 60px;
+            left: 20px;
+            background: #0D0D0D;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #periodic-table {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: url('../bg_images/periodic_table.png') no-repeat;
+            background-size: contain;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="lab"></div>
+    <div id="hazmat-suit"></div>
+    <div id="modal">
+        <span id="close-modal">X</span>
+        <div id="modal-content"></div>
+    </div>
+    <div id="cooking-progress"><div id="progress-bar"></div></div>
+    <div id="money-counter">$0</div>
+    <div id="dea-alert">DEA ALERT! Hide your stuff!</div>
+    <div id="purity-meter">99.1%</div>
+    <div id="partner-selector">
+        <select id="partner">
+            <option value="jesse">Jesse</option>
+            <option value="gus">Gus</option>
+            <option value="mike">Mike</option>
+        </select>
+    </div>
+    <button id="lab-upgrade">Upgrade Lab</button>
+    <div id="periodic-table"></div>
+
+    <script>
+        const lab = document.getElementById('lab');
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.getElementById('close-modal');
+        const hazmatSuit = document.getElementById('hazmat-suit');
+        const progressBar = document.getElementById('progress-bar');
+        const moneyCounter = document.getElementById('money-counter');
+        const deaAlert = document.getElementById('dea-alert');
+        const purityMeter = document.getElementById('purity-meter');
+        const partnerSelector = document.getElementById('partner');
+        const labUpgrade = document.getElementById('lab-upgrade');
+        const periodicTable = document.getElementById('periodic-table');
+
+        const skills = [
+            { name: "Chemical Synthesis", level: 99, description: "Mastered the art of synthesizing complex compounds with unparalleled purity." },
+            { name: "Problem Solving", level: 95, description: "Devised innovative solutions to overcome numerous challenges in production and distribution." },
+            { name: "Leadership", level: 90, description: "Built and managed a highly efficient team in a high-pressure environment." },
+            { name: "Adaptability", level: 92, description: "Quickly adjusted strategies to changing circumstances, ensuring continued success." },
+            { name: "Risk Management", level: 88, description: "Calculated and mitigated risks in a volatile industry." },
+            { name: "Strategic Planning", level: 94, description: "Developed and executed complex plans to expand operations and increase market share." }
+        ];
+
+        let cookingProgress = 0;
+        let money = 0;
+        let labLevel = 1;
+
+        function createBeakers() {
+            skills.forEach((skill, index) => {
+                const beaker = document.createElement('div');
+                beaker.className = 'beaker';
+                const liquid = document.createElement('div');
+                liquid.className = 'liquid';
+                beaker.appendChild(liquid);
+                beaker.onclick = () => showSkill(skill, liquid);
+                lab.appendChild(beaker);
+            });
+        }
+
+        function showSkill(skill, liquid) {
+            liquid.style.height = `${skill.level}%`;
+            liquid.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            liquid.classList.add('bubbling');
+            
+            modalContent.innerHTML = `
+                <h2>${skill.name}</h2>
+                <p>Skill Level: ${skill.level}%</p>
+                <p>${skill.description}</p>
+            `;
+            modal.style.display = 'block';
+
+            setTimeout(() => liquid.classList.remove('bubbling'), 2000);
+
+            updateCookingProgress();
+            updateMoney();
+            updatePurity();
+            playSound('bubble.mp3');
+        }
+
+        function updateCookingProgress() {
+            cookingProgress += 5;
+            if (cookingProgress > 100) cookingProgress = 100;
+            progressBar.style.width = `${cookingProgress}%`;
+        }
+
+        function updateMoney() {
+            money += 10000;
+            moneyCounter.textContent = `$${money.toLocaleString()}`;
+        }
+
+        function updatePurity() {
+            const purity = 99.1 + (Math.random() * 0.8 - 0.4).toFixed(1);
+            purityMeter.textContent = `${purity}%`;
+        }
+
+        function playSound(soundFile) {
+            const audio = new Audio(`../sounds/${soundFile}`);
+            audio.play();
+        }
+
+        function triggerDEAAlert() {
+            deaAlert.style.display = 'block';
+            setTimeout(() => deaAlert.style.display = 'none', 3000);
+        }
+
+        function upgradeLab() {
+            labLevel++;
+            lab.style.backgroundImage = `url('../bg_images/lab-level-${labLevel}.jpg')`;
+        }
+
+        closeModal.onclick = () => modal.style.display = 'none';
+        hazmatSuit.onclick = () => document.body.style.filter = document.body.style.filter ? '' : 'invert(1)';
+        partnerSelector.onchange = () => console.log(`Partner changed to ${partnerSelector.value}`);
+        labUpgrade.onclick = upgradeLab;
+        periodicTable.onclick = () => alert("You found a hidden easter egg!");
+
+        createBeakers();
+        setInterval(triggerDEAAlert, 30000);
+    </script>
+</body>
+</html>

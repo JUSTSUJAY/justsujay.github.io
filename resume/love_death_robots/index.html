@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zima Blue - Multiversal Creator</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #00FFFF;
+            --secondary-color: #FF00FF;
+            --background-color: #0A0A0A;
+            --text-color: #FFFFFF;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--background-color);
+            background: url('../bg_images/zima_landscape.jpg') no-repeat center center;
+            background-size: cover;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        #universe {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .episode {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-size: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .episode:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 2px solid var(--primary-color);
+            padding: 20px;
+            z-index: 100;
+        }
+
+        #close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        p {
+            color: var(--text-color);
+        }
+
+        #zima-blue {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: #00FFFF;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #zima-blue:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-5px, 5px) }
+            40% { transform: translate(-5px, -5px) }
+            60% { transform: translate(5px, 5px) }
+            80% { transform: translate(5px, -5px) }
+            100% { transform: translate(0) }
+        }
+
+        .glitch {
+            animation: glitch 0.3s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div id="universe"></div>
+    <div id="modal">
+        <span id="close-modal">X</span>
+        <div id="modal-content"></div>
+    </div>
+    <div id="zima-blue"></div>
+
+    <script>
+        const universe = document.getElementById('universe');
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.getElementById('close-modal');
+        const zimaBlue = document.getElementById('zima-blue');
+
+        const skills = [
+            { name: "Multiversal Creativity", level: 99, description: "Mastered the art of creating entire universes with unique rules and aesthetics." },
+            { name: "Temporal Manipulation", level: 95, description: "Expertly weave non-linear narratives across multiple timelines." },
+            { name: "Cybernetic Integration", level: 90, description: "Seamlessly blend organic and mechanical elements in design and storytelling." },
+            { name: "Dystopian Forecasting", level: 88, description: "Accurately predict and visualize potential future societal challenges." },
+            { name: "Existential Problem Solving", level: 92, description: "Tackle complex philosophical quandaries through innovative storytelling." },
+            { name: "Adaptive AI Development", level: 94, description: "Create and evolve artificial intelligences that challenge the boundaries of consciousness." }
+        ];
+
+        const blues = [
+            '../bg_images/blue1.png',
+            '../bg_images/blue2.png',
+            '../bg_images/blue3.png',
+            '../bg_images/blue4.png',
+            '../bg_images/blue5.png',
+            ];
+
+
+        function createEpisodes() {
+            skills.forEach((skill, index) => {
+                const episode = document.createElement('div');
+                episode.className = 'episode';
+                episode.style.backgroundImage = `url('${blues[index]}')`;    
+                episode.style.left = `${Math.random() * 80}%`;
+                episode.style.top = `${Math.random() * 80}%`;
+                episode.onclick = () => showSkill(skill);
+                universe.appendChild(episode);
+            });
+        }
+
+        function showSkill(skill) {
+            modalContent.innerHTML = `
+                <h2>${skill.name}</h2>
+                <p>Mastery Level: ${skill.level}%</p>
+                <p>${skill.description}</p>
+            `;
+            modal.style.display = 'block';
+            modal.classList.add('glitch');
+            setTimeout(() => modal.classList.remove('glitch'), 500);
+        }
+
+        closeModal.onclick = () => modal.style.display = 'none';
+
+        zimaBlue.onclick = () => {
+            document.body.style.backgroundColor = document.body.style.backgroundColor === 'rgb(0, 255, 255)' ? '#0A0A0A' : '#00FFFF';
+        };
+
+        createEpisodes();
+    </script>
+</body>
+</html>
