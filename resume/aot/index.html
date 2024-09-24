@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eren Yeager - Data Titan</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text&display=swap');
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #F5DEB3;
+            --text-color: #FFFFFF;
+            --text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Crimson Text', serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            height: 100%;
+            overflow-x: hidden;
+            background-image: url('../bg_images/eren.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            text-shadow: var(--text-shadow);
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        p, ul {
+            text-shadow: var(--text-shadow);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .skill-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            display: inline-block;
+            width: 180px;
+            font-weight: bold;
+        }
+
+        .skill-bar {
+            background-color: var(--secondary-color);
+            height: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .machine-learning { width: 95%; }
+        .data-analysis { width: 90%; }
+        .strategic-thinking { width: 100%; }
+        .programming { width: 85%; }
+
+        .experience-item {
+            margin-bottom: 20px;
+        }
+
+        .experience-title {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .cta-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: rgba(139, 0, 0, 0.7);
+            color: var(--secondary-color);
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid var(--secondary-color);
+            transition: all 0.3s ease;
+            text-shadow: var(--text-shadow);
+        }
+
+        .cta-button:hover {
+            background-color: rgba(245, 222, 179, 0.7);
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .skill-name {
+                width: 140px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../../styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    
+</head>
+<body>
+    <body>
+        <div class="content">
+            <h1>Eren Yeager</h1>
+            <p style="text-align: center; font-style: italic;">"To surpass monsters, you must be willing to abandon your humanity."</p>
+    
+            <h2>Profile</h2>
+            <p>Strategic and analytical Data Titan with a passion for uncovering hidden patterns and defending humanity through the power of machine learning. Experienced in transforming complex datasets into actionable insights, developing predictive models, and leading data-driven operations beyond the walls of traditional analytics.</p>
+    
+            <h2>Skills</h2>
+            <div class="skill-container">
+                <div><span class="skill-name">Machine Learning</span><div class="skill-bar machine-learning"></div></div>
+                <div><span class="skill-name">Data Analysis</span><div class="skill-bar data-analysis"></div></div>
+                <div><span class="skill-name">Strategic Thinking</span><div class="skill-bar strategic-thinking"></div></div>
+                <div><span class="skill-name">Programming</span><div class="skill-bar programming"></div></div>
+            </div>
+    
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <p><span class="experience-title">Lead Data Scientist - Survey Corps Analytics Division</span><br>
+                Spearheaded the development of predictive models to forecast Titan movements and optimize resource allocation. Implemented machine learning algorithms that increased mission success rates by 40%.</p>
+            </div>
+            <div class="experience-item">
+                <p><span class="experience-title">Machine Learning Engineer - Walls' Defense Systems</span><br>
+                Engineered an AI-powered early warning system using computer vision and sensor data to detect Titan threats. Reduced response time by 60% and improved overall wall defense efficacy.</p>
+            </div>
+    
+            <h2>Education</h2>
+            <div class="experience-item">
+                <p><span class="experience-title">Ph.D. in Titan Data Science - Paradis Institute of Technology</span><br>
+                Thesis: "Leveraging Deep Learning for Titan Behavior Prediction and Countermeasure Optimization"</p>
+            </div>
+    
+            <h2>Special Abilities</h2>
+            <ul>
+                <li>Colossal Data Processing</li>
+                <li>Neural Network Architecture Design</li>
+                <li>Predictive Analytics Mastery</li>
+                <li>Strategic Data Visualization</li>
+            </ul>
+    
+            <a href="#" class="cta-button">Join the Data Battle</a>
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const content = document.querySelector('.content');
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(20px)';
+                content.style.transition = 'opacity 1s ease, transform 1s ease';
+    
+                setTimeout(() => {
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }, 200);
+            });
+        </script>
+    </body>
+
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphonse Elric - Data Alchemist</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Noto+Sans:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #C5B358;
+            --secondary-color: #800000;
+            --text-color: #F5F5DC;
+            --background-color: #1A1A1A;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            height: 90%;
+            background-color: var(--background-color);
+            background-image: url('../bg_images/edward_elric.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2 {
+            font-family: 'Philosopher', sans-serif;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 2em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .section {
+            margin-bottom: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .skill-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .skill-item {
+            flex-basis: 48%;
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+        }
+
+        .experience-title {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .transmutation-circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .circle-1 { top: 50px; left: 50px; animation: rotate 20s linear infinite; }
+        .circle-2 { bottom: 50px; right: 50px; animation: rotate 25s linear infinite reverse; }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .skill-item {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Alphonse Elric</h1>
+        <p class="quote">"Humankind cannot gain anything without first giving something in return. To obtain, something of equal value must be lost. That is Alchemy's First Law of Equivalent Exchange. In those days, we really believed that to be the world's one, and only, truth."</p>
+
+        <div class="section">
+            <h2>Transmutation Circle</h2>
+            <p>Highly skilled Machine Learning Alchemist with a passion for transmuting raw data into powerful insights. Adept at crafting neural networks that mimic the flow of energy in transmutation circles. Committed to the principle of Equivalent Exchange in all data endeavors, ensuring ethical and balanced AI solutions.</p>
+        </div>
+
+        <div class="section">
+            <h2>Alchemical Skills</h2>
+            <div class="skill-container">
+                <div class="skill-item">
+                    <div class="skill-name">Neural Alchemy (Deep Learning)</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Transmutation Analysis (Data Mining)</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Elemental Prediction (Forecasting)</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 88%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Algorithmic Runes (ML Algorithms)</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 92%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Alchemical Endeavors</h2>
+            <div class="experience-item">
+                <p><span class="experience-title">Senior Data Alchemist - Amestris Tech Innovations</span><br>
+                Pioneered the development of a state-of-the-art Homunculus Detection System using advanced computer vision and anomaly detection techniques, increasing threat identification accuracy by 78%.</p>
+            </div>
+            <div class="experience-item">
+                <p><span class="experience-title">Machine Learning Researcher - Central City University</span><br>
+                Led a groundbreaking project on "Quantum Alchemical Computing", fusing principles of alchemy with quantum machine learning to solve complex optimization problems 50x faster than traditional methods.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Philosopher's Stone of Knowledge</h2>
+            <ul>
+                <li>Ph.D. in Alchemical Machine Learning - Central City University</li>
+                <li>M.Sc. in Data Transmutation - East City Institute of Technology</li>
+                <li>Certified TensorFlow Alchemist</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="transmutation-circle circle-1"></div>
+    <div class="transmutation-circle circle-2"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = `opacity 1s ease ${index * 0.2}s, transform 1s ease ${index * 0.2}s`;
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izuku Midoriya - Heroic UX/UI Designer</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Quicksand:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #00a843;
+            --secondary-color: #ff4747;
+            --accent-color: #ffd541;
+            --text-color: #333333;
+            --bg-color: #f0f0f0;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .main-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: var(--secondary-color);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .quirk-meter {
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            height: 20px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .quirk-level {
+            background-color: var(--secondary-color);
+            height: 100%;
+            border-radius: 15px;
+            transition: width 1s ease-in-out;
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .cta-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img src="../bg_images/izuku.png" alt="Izuku Midoriya" style="width: 100%; border-radius: 50%; margin-bottom: 20px;">
+            <h2>Quirk Skills</h2>
+            <div>
+                <p>One For All (UX Research)</p>
+                <div class="quirk-meter"><div class="quirk-level" style="width: 85%;"></div></div>
+            </div>
+            <div>
+                <p>Delaware Smash (Wireframing)</p>
+                <div class="quirk-meter"><div class="quirk-level" style="width: 90%;"></div></div>
+            </div>
+            <div>
+                <p>Full Cowling (Prototyping)</p>
+                <div class="quirk-meter"><div class="quirk-level" style="width: 95%;"></div></div>
+            </div>
+            <div>
+                <p>Shoot Style (Visual Design)</p>
+                <div class="quirk-meter"><div class="quirk-level" style="width: 80%;"></div></div>
+            </div>
+            <h2>Contact</h2>
+            <p>📱 +81 123-456-7890</p>
+            <p>📧 deku@uadesign.com</p>
+            <p>🌐 www.dekudesigns.com</p>
+            <p>📍 Musutafu, Japan</p>
+        </div>
+        <div class="main-content">
+            <h1>Izuku Midoriya</h1>
+            <p style="text-align: center; font-style: italic; color: var(--secondary-color);">"Go beyond! Plus Ultra Design!"</p>
+            
+            <h2>Hero Profile</h2>
+            <p>Passionate and determined UX/UI Designer with a quirk for creating user-centric digital experiences. Known for going above and beyond in every project, with a keen eye for detail and a never-give-up attitude. Ready to take on any design challenge and emerge victorious!</p>
+            
+            <h2>Hero Academia</h2>
+            <div class="experience-item">
+                <h3>U.A. High School of Design</h3>
+                <p>Bachelor of Heroic Arts in User Experience Design</p>
+                <p>Graduated with honors, Class 1-A</p>
+            </div>
+            
+            <h2>Hero Internships</h2>
+            <div class="experience-item">
+                <h3>All Might Agency - Junior UX Designer</h3>
+                <p>Assisted in the redesign of the Hero Network app, increasing user engagement by 120%</p>
+                <p>Developed and implemented a new design system, "One For All UI", now used across all agency projects</p>
+            </div>
+            <div class="experience-item">
+                <h3>Endeavor Innovations - UI/UX Intern</h3>
+                <p>Created high-fidelity prototypes for the "Flame Hero" mobile game, which reached 1 million downloads in its first week</p>
+                <p>Conducted user research and usability testing, identifying key pain points in the hero costume design process</p>
+            </div>
+            
+            <h2>Special Moves</h2>
+            <ul>
+                <li>Empathy Engine: Ability to deeply understand user needs and pain points</li>
+                <li>Quirk Analysis: Rapid prototyping and iteration based on user feedback</li>
+                <li>Full Cowling Creativity: Consistently delivering innovative design solutions under pressure</li>
+                <li>United States of Design Smash: Collaborative approach, bringing together diverse ideas for powerful results</li>
+            </ul>
+            
+            <button class="cta-button">Recruit This Hero!</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const quirkLevels = document.querySelectorAll('.quirk-level');
+            quirkLevels.forEach(level => {
+                const width = level.style.width;
+                level.style.width = '0';
+                setTimeout(() => {
+                    level.style.width = width;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
