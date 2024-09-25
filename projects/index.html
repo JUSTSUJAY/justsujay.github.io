@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sujay | Projects</title>
+    <title>Sujay Kapadnis | Projects</title>
     <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -78,70 +78,132 @@
         });
     </script>
     <link rel="stylesheet" href="../styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <style>
-        .project-list {
-            margin: 60px 0;
-            list-style: none;
-            padding: 0;
-        }
-        .project-list li {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1 class="title">
-                    <a href="../">Sujay</a>
-                </h1>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <a href="../">Sujay Kapadnis</a>
             </div>
             <nav>
-                <!-- Navigation Menu -->
-                <ul class="nav-menu" style="list-style: none; margin: 0; padding: 0;">
+                <ul class="nav-menu">
                     <li><a href="../">Home</a></li>
                     <li><a href="../projects/">Projects</a></li>
                     <li><a href="../resume/">Resume</a></li>
                     <li><a href="../blogs/">Blog</a></li>
                     <li><a href="../index.html#contact">Contact</a></li>
                 </ul>
-                <!-- Hamburger icon for mobile -->
                 <div class="hamburger">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
             </nav>
-        </div>
-    </header>
+        </header>
 
-    <main class="container">
-        <h2>My Projects</h2>
-        <!-- adding the projects in a list to keep it minimalistic -->
-         <div class="project-list">
-            <ol>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-                <li><h3>Project 1</h3></li>
-            </ol>
-         </div>
-    </main>
+        <main class="container">
+            <h1 class="page-title">Quantum Projects</h1>
+            <div class="project-grid">
+                <div class="quantum-card project-card" onclick="showProjectDetails('QuantumAI Assistant')">
+                    <h3>QuantumAI Assistant</h3>
+                    <p>An AI-powered assistant leveraging quantum algorithms for enhanced natural language processing and decision-making capabilities.</p>
+                </div>
+                <div class="quantum-card project-card" onclick="showProjectDetails('Quantum Encryption System')">
+                    <h3>Quantum Encryption System</h3>
+                    <p>A state-of-the-art encryption system using quantum key distribution for unbreakable secure communication.</p>
+                </div>
+                <div class="quantum-card project-card" onclick="showProjectDetails('Quantum Machine Learning Framework')">
+                    <h3>Quantum Machine Learning Framework</h3>
+                    <p>A comprehensive framework for implementing machine learning algorithms on quantum computers, achieving exponential speedups.</p>
+                </div>
+                <div class="quantum-card project-card" onclick="showProjectDetails('Quantum Financial Modeling')">
+                    <h3>Quantum Financial Modeling</h3>
+                    <p>Advanced financial modeling and risk assessment tools using quantum computing for high-frequency trading and portfolio optimization.</p>
+                </div>
+                <div class="quantum-card project-card" onclick="showProjectDetails('Quantum Drug Discovery Platform')">
+                    <h3>Quantum Drug Discovery Platform</h3>
+                    <p>A platform accelerating drug discovery processes by simulating molecular interactions using quantum algorithms.</p>
+                </div>
+                <div class="quantum-card project-card" onclick="showProjectDetails('Quantum Internet Protocol')">
+                    <h3>Quantum Internet Protocol</h3>
+                    <p>Developing next-generation internet protocols based on quantum entanglement for ultra-secure and instantaneous global communication.</p>
+                </div>
+            </div>
+        </main>
+
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
             <p>&copy; 2024 Sujay Kapadnis. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
+        // Quantum field animation
+        const quantumField = document.getElementById('quantum-field');
+        
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+
+            animation.onfinish = () => animateParticle(particle);
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        function showProjectDetails(projectName) {
+            modalTitle.textContent = projectName;
+            modalDescription.textContent = "Detailed description of " + projectName + " goes here. This would include information about the project's goals, technologies used, challenges overcome, and results achieved.";
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
     

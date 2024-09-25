@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Knight Developer - Asta's Coding Grimoire</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cinzel', serif;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #ui-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 20px;
+        }
+        .skill-button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: rgba(255, 215, 0, 0.6);
+            border: 2px solid #ffd700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .skill-button:hover {
+            background: rgba(255, 215, 0, 0.8);
+            transform: scale(1.1);
+        }
+        #skill-details {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            padding: 20px;
+            display: none;
+        }
+        #projects {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            padding: 20px;
+        }
+        #grimoire-page {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+            display: none;
+        }
+        #grimoire-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: #ffd700;
+            text-shadow: 0 0 5px #ffd700;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div id="scene-container"></div>
+    <div id="ui-layer">
+        <button class="skill-button" onclick="showSkill('JavaScript')">JavaScript Magic</button>
+        <button class="skill-button" onclick="showSkill('React')">React Sorcery</button>
+        <button class="skill-button" onclick="showSkill('Node.js')">Node.js Enchantment</button>
+        <button class="skill-button" onclick="showSkill('Python')">Python Wizardry</button>
+    </div>
+    <div id="skill-details"></div>
+    <div id="projects">
+        <h3>Magical Projects</h3>
+        <ul>
+            <li>Clover Kingdom Chat App</li>
+            <li>Magic Knight Task Tracker</li>
+            <li>Grimoire Database System</li>
+        </ul>
+    </div>
+    <div id="grimoire-page"></div>
+    <div id="grimoire-hint">✨ Explore the Grimoire ✨</div>
+
+    <script>
+        // Three.js scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('scene-container').appendChild(renderer.domElement);
+
+        // Create a 3D grimoire
+        const geometry = new THREE.BoxGeometry(2, 3, 0.3);
+        const texture = new THREE.TextureLoader().load('../bg_images/grimore.png');
+        const material = new THREE.MeshPhongMaterial({ map: texture });
+        const grimoire = new THREE.Mesh(geometry, material);
+        scene.add(grimoire);
+
+        // Add lighting
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(0, 0, 10);
+        scene.add(light);
+
+        camera.position.z = 5;
+
+        // Particle system
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 1500;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 5;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: 0xffd700
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            grimoire.rotation.y += 0.01;
+            particlesMesh.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Skill details
+        const skillDetails = {
+            'JavaScript': 'Mastery of JavaScript, the language of web sorcery. Can conjure interactive and dynamic web experiences.',
+            'React': 'Proficient in React, crafting reusable UI components like magical artifacts.',
+            'Node.js': 'Skilled in Node.js, weaving server-side spells for scalable and efficient applications.',
+            'Python': 'Adept at Python, brewing powerful scripts and data analysis potions.'
+        };
+
+        function showSkill(skill) {
+            const detailsElement = document.getElementById('skill-details');
+            detailsElement.innerHTML = `<h3>${skill}</h3><p>${skillDetails[skill]}</p>`;
+            detailsElement.style.display = 'block';
+        }
+
+        // Interactive grimoire pages
+        const pages = [
+            { title: "Work Experience", content: "Senior Developer at Clover Kingdom Tech (2018-Present)" },
+            { title: "Education", content: "B.S. in Magical Computing, Wizard Academy (2014-2018)" },
+            { title: "Certifications", content: "Certified Scrum Master, AWS Certified Developer" }
+        ];
+
+        let currentPage = 0;
+
+        function updateGrimoirePage() {
+            const pageElement = document.getElementById('grimoire-page');
+            pageElement.innerHTML = `<h2>${pages[currentPage].title}</h2><p>${pages[currentPage].content}</p>`;
+            pageElement.style.display = 'block';
+        }
+
+        function turnPage() {
+            currentPage = (currentPage + 1) % pages.length;
+            updateGrimoirePage();
+        }
+
+        // Add click event listener to the scene container
+        document.getElementById('scene-container').addEventListener('click', function(event) {
+            const mouse = new THREE.Vector2(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                -(event.clientY / window.innerHeight) * 2 + 1
+            );
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObject(grimoire);
+            
+            if (intersects.length > 0) {
+                turnPage();
+            }
+        });
+    </script>
+</body>
+</html>

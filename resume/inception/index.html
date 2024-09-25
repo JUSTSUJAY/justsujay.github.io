@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inception: Dream Architect</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Saira', sans-serif;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+        #dreamscape {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .dream-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        #totem {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: url('../bg_images/inception_totem.png') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        #totem:hover {
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        .skill-bar {
+            background-color: #333;
+            height: 20px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-level {
+            background-color: #4CAF50;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 1s;
+        }
+        .skill-level::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: wave 2s infinite linear;
+        }
+        @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        #kick {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .falling-text {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: fall 5s linear;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="dreamscape"></div>
+    <div class="dream-layer" id="layer1">
+        <div class="content">
+            <h1>Cobb</h1>
+            <h2>Dream Architect & Full Stack Developer</h2>
+            <p>Specializing in multi-layered web experiences and deep user engagement</p>
+        </div>
+    </div>
+    <div class="dream-layer" id="layer2">
+        <div class="content">
+            <h2>Skills</h2>
+            <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Dream Architecture (JavaScript)</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Reality Bending (React)</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Subconscious Navigation (Node.js)</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Memory Manipulation (Python)</div>
+        </div>
+    </div>
+    <div class="dream-layer" id="layer3">
+        <div class="content">
+            <h2>Experience</h2>
+            <p>Lead Architect at Inception Corp (2010-Present)</p>
+            <p>Dream Security Specialist at Cobol Engineering (2005-2010)</p>
+        </div>
+    </div>
+    <div class="dream-layer" id="layer4">
+        <div class="content">
+            <h2>Projects</h2>
+            <ul>
+                <li>The Fischer Job - Complex multi-layer inception</li>
+                <li>Ariadne's Labyrinth - Infinite scroll maze generator</li>
+                <li>Limbo Escape - Virtual reality deep dive experience</li>
+            </ul>
+        </div>
+    </div>
+    <div id="totem"></div>
+    <div id="kick">KICK</div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('dreamscape').appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        const dreamLayers = document.querySelectorAll('.dream-layer');
+        let currentLayer = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        function showNextLayer() {
+            dreamLayers[currentLayer].style.opacity = '0';
+            currentLayer = (currentLayer + 1) % dreamLayers.length;
+            dreamLayers[currentLayer].style.opacity = '1';
+            
+            if (currentLayer === 1) {
+                setTimeout(() => {
+                    const skills = document.querySelectorAll('.skill-level');
+                    skills[0].style.width = '95%';
+                    skills[1].style.width = '90%';
+                    skills[2].style.width = '85%';
+                    skills[3].style.width = '80%';
+                }, 500);
+            }
+        }
+
+        document.getElementById('totem').addEventListener('click', showNextLayer);
+
+        // Initial layer visibility
+        dreamLayers[0].style.opacity = '1';
+
+        // Cityscape rotation
+        let angle = 0;
+        function rotateCityscape() {
+            angle += 0.001;
+            camera.position.x = Math.cos(angle) * 5;
+            camera.position.z = Math.sin(angle) * 5;
+            camera.lookAt(scene.position);
+        }
+
+        function animateDreamscape() {
+            requestAnimationFrame(animateDreamscape);
+            rotateCityscape();
+        }
+        animateDreamscape();
+
+        // Kick effect
+        document.getElementById('kick').addEventListener('click', () => {
+            document.body.style.animation = 'shake 0.5s';
+            document.body.style.animationIterationCount = '3';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 1500);
+        });
+
+        // Falling text effect
+        const words = ['Dream', 'Reality', 'Inception', 'Architect', 'Subconscious', 'Totem', 'Kick'];
+        setInterval(() => {
+            const word = words[Math.floor(Math.random() * words.length)];
+            const fallingText = document.createElement('div');
+            fallingText.textContent = word;
+            fallingText.classList.add('falling-text');
+            fallingText.style.left = `${Math.random() * 100}%`;
+            document.body.appendChild(fallingText);
+            setTimeout(() => {
+                fallingText.remove();
+            }, 5000);
+        }, 2000);
+    </script>
+</body>
+</html>

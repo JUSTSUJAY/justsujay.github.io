@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sujay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Sujay Kapadnis - Quantum Developer</title>
     <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
-    <!-- Favicon Script -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             let favicon_video_image_counter = 0;
@@ -78,158 +78,226 @@
             }, 100);
         });
     </script>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1 class="title">
-                    <a href="../">Sujay</a>
-                </h1>
-            </div>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">Sujay Kapadnis</div>
             <nav>
-                <!-- Navigation Menu -->
-                <ul class="nav-menu" style="list-style: none; margin: 0; padding: 0;">
-                    <li><a href="./">Home</a></li>
-                    <li><a href="./projects/">Projects</a></li>
-                    <li><a href="/resume/">Resume</a></li>
-                    <li><a href="./blogs/">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <!-- Hamburger icon for mobile -->
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <a href="./">Home</a>
+                <a href="./projects/">Projects</a>  
+                <a href="./resume/">Resume</a>  
+                <a href="./blogs/">Blog</a>
+                <a href="#contact">Contact</a>
             </nav>
-        </div>
-    </header>
-    
-    
-    
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <h2>Advancing AI for a Better Tomorrow</h2>
+        </header>
+
+        <section id="home" class="content-section">
+            <h1>Advancing AI for a Better Tomorrow</h1>
             <p>Exploring the frontiers of machine learning and artificial intelligence to solve real-world problems.</p>
-            <a href="#projects" class="cta-button">View My Work</a>
-        </div>
-    </section>
+        </section>
 
-    <section id="about" class="content-section">
-        <h2>About Me</h2>
-    <div class="container" style="display: flex; align-items: center;">
-        <div class="profile-image-container" style="flex: 1;">
-            <img src="./project_management.png" alt="Sujay image" class="profile-image" style="max-width: 70%;">
-        </div>
-        <div style="flex: 2; padding-left: 20px;">
-            <p>I'm working on Full-Stack AI Projects with the goal of becoming an Indie Developer in mind. Previously I worked at an SF-based Startup and worked on a Real-time Machine Learning platform(Online Learing was fun). I was part of a Robotics Club at my University, where I programmed multiple bots with the help of Arduino or Raspberry Pis. </p>
-            <p>I'm fabulous at Machine Learning and know things to it's core. I like to break down the algorithms. I am well-informed about the recent trends. I am a Kaggle master with a good rank and contribution to the community. I've closed some Issues in Projects like OpenDevin.</p>
-            <p> You'll find me learning new things and trying them out. I can touch type at 80-90 wpm.</p>
-        </div>
-    </div>
-</section>
+        <section id="about" class="content-section">
+            <h2>About Me</h2>
+            <div class="quantum-card">
+                <p>I'm working on Full-Stack AI Projects with the goal of becoming an Indie Developer. Previously, I worked at an SF-based Startup on a Real-time Machine Learning platform. I was part of a Robotics Club at my University, where I programmed multiple bots with Arduino and Raspberry Pi.</p>
+                <p>I'm fabulous at Machine Learning and know things to its core. I like to break down algorithms and stay well-informed about recent trends. I am a Kaggle master with a good rank and contribution to the community. I've closed some Issues in Projects like OpenDevin.</p>
+                <p>You'll find me learning new things and trying them out. I can touch type at 80-90 wpm.</p>
+            </div>
+        </section>
 
-
-    <section id="projects" class="content-section">
-        <div class="container">
+        <section id="projects" class="content-section">
             <h2>Featured Projects</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3>Gestura</h3>
-                    <p>A state-of-the-art transformer model capable of transcribing Sign Language Fingerspelling based on Landmarks from Google Holistic Mediapipe.</p>
-                    <a href="https://www.kaggle.com/code/sujaykapadnis/transforming-asl-fingerspelling-with-tensorflow" class="project-link">Learn More</a>
+            <div class="quantum-card" onclick="window.location.href='https://www.kaggle.com/code/sujaykapadnis/transforming-asl-fingerspelling-with-tensorflow'">
+                <h3>Gestura</h3>
+                <p>A state-of-the-art transformer model capable of transcribing Sign Language Fingerspelling based on Landmarks from Google Holistic Mediapipe.</p>
+            </div>
+            <div class="quantum-card" onclick="window.location.href='https://enguru.streamlit.app'">
+                <h3>EnGuru</h3>
+                <p>Groq-Powered AI Tutor Capable of Meaningful Conversations based on User's understanding of the Subject.</p>
+            </div>
+            <div class="quantum-card" onclick="window.location.href='https://www.kaggle.com/code/sujaykapadnis/bengali-speech-recognition-for-everyone'">
+                <h3>BhasaAI</h3>
+                <p>Solution to a Bengali Speech Recognition Research Competition, trained on top of OpenAI Whisper.</p>
+            </div>
+        </section>
+
+        <section id="skills" class="content-section">
+            <h2>Quantum Skillset</h2>
+            <div class="skills-grid">
+                <div class="quantum-card skill-card">
+                    <h3>Machine Learning</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;"></div>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>EnGuru</h3>
-                    <p>Groq-Powered AI Tutor Capable of Meaningful Conversations based on User's understanding of the Subject.</p>
-                    <a href="https://enguru.streamlit.app" class="project-link">Learn More</a>
+                <div class="quantum-card skill-card">
+                    <h3>Deep Learning</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 90%;"></div>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>BhasaAI</h3>
-                    <p>Solution to a Bengali Speech Recognition Research Competition, trained on top of OpenAI Whisper.</p>
-                    <a href="https://www.kaggle.com/code/sujaykapadnis/bengali-speech-recognition-for-everyone" class="project-link">Learn More</a>
+                <div class="quantum-card skill-card">
+                    <h3>Natural Language Processing</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 88%;"></div>
+                    </div>
+                </div>
+                <div class="quantum-card skill-card">
+                    <h3>Computer Vision</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 92%;"></div>
+                    </div>
+                </div>
+                <div class="quantum-card skill-card">
+                    <h3>Python</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 98%;"></div>
+                    </div>
+                </div>
+                <div class="quantum-card skill-card">
+                    <h3>TensorFlow</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 85%;"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>        
+        
 
-    <!-- <section id="publications" class="content-section">
-        <div class="container">
-            <h2>Selected Publications</h2>
-            <ul class="publication-list">
-                <li>
-                    <strong>"Self-Supervised Learning: A New Paradigm for Computer Vision"</strong>
-                    <em>NeurIPS 2023</em>
-                </li>
-                <li>
-                    <strong>"Advancing Multimodal AI: Bridging Vision and Language"</strong>
-                    <em>ICML 2022</em>
-                </li>
-                <li>
-                    <strong>"Robotic Perception: From Sensors to Understanding"</strong>
-                    <em>IEEE Robotics and Automation Letters, 2021</em>
-                </li>
-            </ul>
-        </div>
-    </section> -->
-
-    <section id="blog" class="content-section">
-        <div class="container">
+        <section id="blog" class="content-section">
             <h2>Latest Blog Posts</h2>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <h3>The Future of AI: Trends to Watch in 2024</h3>
-                    <p>Exploring emerging technologies and research directions that will shape the AI landscape...</p>
-                    <a href="blogs/aifuture/" class="blog-link">Read More</a>
-                </div>
-                <div class="blog-card">
-                    <h3>Demystifying Transformer Architecture</h3>
-                    <p>A deep dive into the inner workings of transformer models and their impact on NLP tasks...</p>
-                    <a href="#" class="blog-link">Read More</a>
-                </div>
-                <div class="blog-card">
-                    <h3>Ethics in AI: Navigating the Challenges</h3>
-                    <p>Discussing the ethical considerations and potential societal impacts of advanced AI systems...</p>
-                    <a href="#" class="blog-link">Read More</a>
-                </div>
+            <div class="quantum-card">
+                <h3>The Future of AI: Trends to Watch in 2024</h3>
+                <p>Exploring emerging technologies and research directions that will shape the AI landscape...</p>
             </div>
-        </div>
-    </section>
+            <div class="quantum-card">
+                <h3>Demystifying Transformer Architecture</h3>
+                <p>A deep dive into the inner workings of transformer models and their impact on NLP tasks...</p>
+            </div>
+            <div class="quantum-card">
+                <h3>Ethics in AI: Navigating the Challenges</h3>
+                <p>Discussing the ethical considerations and potential societal impacts of advanced AI systems...</p>
+            </div>
+        </section>
 
-    <section id="contact" class="content-section">
-        <div class="container">
-            <h2 style="text-align: center;">Get in Touch</h2>
-            <div class="contact-info" style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px;">
-                <p><i class="fas fa-envelope"></i> <a href="mailto:sujaykapadnis.33@gmail.com">@Sujay</a></p>
-                <p><i class="fab fa-twitter"></i> <a href="https://x.com/sujay_kapadnis" target="_blank">@sujay_kapadnis</a></p>
+        <section id="contact" class="content-section">
+            <h2>Get in Touch</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:sujaykapadnis.33@gmail.com">sujaykapadnis.33@gmail.com</a></p>
+            </div>
+            <div class="contact-info">
+                <p><i class="fab fa-twitter"></i> <a href="https://twitter.com/sujay_kapadnis" target="_blank">@sujay_kapadnis</a></p>
+            </div>
+            <div class="contact-info">
                 <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/sujay-kapadnis" target="_blank">linkedin.com/in/sujay-kapadnis</a></p>
+            </div>
+            <div class="contact-info">
                 <p><i class="fab fa-github"></i> <a href="https://github.com/justsujay" target="_blank">github.com/justsujay</a></p>
             </div>
-        </div>
-    </section>
-    
-    
+        </section>
+
+        <section id="newsletter" class="content-section">
+            <div class="quantum-card newsletter-card">
+                <h2>Subscribe to the Quantum Pulse</h2>
+                <p>Stay updated with the latest in AI, quantum computing, and more!</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <input type="email" id="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="quantum-button">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        
+        
+    </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Sujay Kapadnis. All rights reserved.</p>
-        </div>
+        <p>&copy; 2024 Sujay Kapadnis. All rights reserved.</p>
     </footer>
 
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-    
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        const quantumField = document.getElementById('quantum-field');
+        const sections = document.querySelectorAll('.content-section');
+
+        // Create quantum particles
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+
+            animation.onfinish = () => animateParticle(particle);
+        }
+
+        // subscribe to newsletter
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Form submitted');
+            const email = document.getElementById('email-input').value;
+            
+            // Replace with your Mailchimp API endpoint
+            const url = 'https://us9.api.mailchimp.com/3.0/lists/e02d897a40/members';
+        
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'apikey 233b5913b0585fb8760dd5185d739dd5-us9'
+                },
+                body: JSON.stringify({
+                    email_address: email,
+                    status: 'subscribed'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Thanks for subscribing to the Quantum Pulse!');
+                this.reset();
+            })
+            .catch(error => console.error('Error:', error));
         });
+        
+        
+
+        // Reveal sections on scroll
+        window.addEventListener('scroll', revealSections);
+
+        function revealSections() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (sectionTop < windowHeight * 0.75) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initial reveal check
+        revealSections();
     </script>
-    
-    
 </body>
 </html>
