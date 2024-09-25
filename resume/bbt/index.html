@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Big Bang Theory: Resume Edition</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0077be;
+            --secondary-color: #ffd700;
+            --text-color: #333;
+            --bg-color: #f0f0f0;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        #apartment-4a {
+            width: 100vw;
+            height: 100vh;
+            background: url('../bg_images/apartment_4a.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #whiteboard {
+            width: 80%;
+            height: 80%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 10px solid #8b4513;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        #bazinga {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #bazinga:hover {
+            transform: scale(1.2);
+        }
+        .skill-bar {
+            background-color: #ddd;
+            height: 20px;
+            margin: 10px 0;
+            position: relative;
+        }
+        .skill-level {
+            background-color: var(--primary-color);
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 1s;
+        }
+        #soft-kitty {
+            position: fixed;
+            top: 70px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: url('../bg_images/soft_kitty.png') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+        }
+        #physics-joke {
+            color: black;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-style: italic;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .atom {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            animation: orbit 5s infinite linear;
+        }
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="apartment-4a">
+        <div id="whiteboard">
+            <h1>Dr. Sheldon Cooper</h1>
+            <h2>Theoretical Physicist & Full Stack Developer</h2>
+            
+            <div class="section">
+                <h3>Skills (with a standard deviation of 0.003)</h3>
+                <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Quantum Mechanics (JavaScript)</div>
+                <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>String Theory (React)</div>
+                <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Particle Physics (Node.js)</div>
+                <div class="skill-bar"><div class="skill-level" style="width: 0%"></div>Computational Algorithms (Python)</div>
+            </div>
+            
+            <div class="section">
+                <h3>Experience</h3>
+                <p>Senior Theoretical Physicist at Caltech (2003-Present)</p>
+                <p>Visiting Professor at Heidelberg University (Summer 2009)</p>
+            </div>
+            
+            <div class="section">
+                <h3>Education</h3>
+                <p>Ph.D. in Physics, Caltech (Age 16)</p>
+                <p>M.Sc. in Physics, Caltech (Age 14)</p>
+                <p>B.Sc. in Physics, University of Texas (Age 11)</p>
+            </div>
+            
+            <div class="section">
+                <h3>Projects</h3>
+                <ul>
+                    <li>Cooper-Hofstadter Theory of Slow-Moving Particles</li>
+                    <li>Paradoxical Moment-of-Inertia Changes Due to Quantum Effects in Supercooled Liquids</li>
+                    <li>A Proof That Algebraic Topology Can Never Have a Non-Self-Contradictory Set of Abelian Groups</li>
+                </ul>
+            </div>
+            
+            <div id="bazinga">Bazinga!</div>
+        </div>
+    </div>
+    <div id="soft-kitty"></div>
+    <div id="physics-joke"></div>
+
+    <script>
+        const whiteboard = document.getElementById('whiteboard');
+        const bazinga = document.getElementById('bazinga');
+        const softKitty = document.getElementById('soft-kitty');
+        const physicsJoke = document.getElementById('physics-joke');
+        const skills = document.querySelectorAll('.skill-level');
+
+        // Animate skill bars
+        setTimeout(() => {
+            skills[0].style.width = '99.97%';
+            skills[1].style.width = '98.82%';
+            skills[2].style.width = '97.56%';
+            skills[3].style.width = '96.31%';
+        }, 500);
+
+        // Bazinga effect
+        bazinga.addEventListener('click', () => {
+            const audio = new Audio('../bg_images/bazinga.mp3');
+            audio.play();
+            bazinga.style.transform = 'scale(2)';
+            setTimeout(() => bazinga.style.transform = 'scale(1)', 300);
+        });
+
+        // Soft Kitty song
+        softKitty.addEventListener('click', () => {
+            const audio = new Audio('../bg_images/soft_kitty.mp3');
+            audio.play();
+        });
+
+        // Physics jokes
+        const jokes = [
+            "Why can't you trust atoms? They make up everything!",
+            "I would tell you a chemistry joke, but all the good ones Argon.",
+            "If you're not part of the solution, you're part of the precipitate.",
+            "A photon checks into a hotel. The bellhop asks, 'Can I help you with your luggage?' The photon replies, 'I don't have any. I'm traveling light.'"
+        ];
+
+        setInterval(() => {
+            physicsJoke.textContent = jokes[Math.floor(Math.random() * jokes.length)];
+            physicsJoke.style.opacity = '1';
+            setTimeout(() => physicsJoke.style.opacity = '0', 5000);
+        }, 10000);
+
+        // Create orbiting atoms
+        for (let i = 0; i < 5; i++) {
+            const atom = document.createElement('div');
+            atom.classList.add('atom');
+            atom.style.top = `${Math.random() * 100}%`;
+            atom.style.left = `${Math.random() * 100}%`;
+            whiteboard.appendChild(atom);
+        }
+
+        // Easter egg: Knock knock knock
+        let knockCount = 0;
+        let lastKnockTime = 0;
+
+        document.addEventListener('click', (e) => {
+            const currentTime = new Date().getTime();
+            if (currentTime - lastKnockTime > 1000) {
+                knockCount = 1;
+            } else {
+                knockCount++;
+            }
+            lastKnockTime = currentTime;
+
+            if (knockCount === 3) {
+                const penny = document.createElement('img');
+                penny.src = '../bg_images/penny.png';
+                penny.style.position = 'fixed';
+                penny.style.top = '50%';
+                penny.style.left = '0';
+                penny.style.transform = 'translateY(-50%)';
+                penny.style.height = '200px';
+                document.body.appendChild(penny);
+                
+                const audio = new Audio('../bg_images/penny.mp3');
+                audio.play();
+
+                setTimeout(() => penny.remove(), 3000);
+                knockCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>

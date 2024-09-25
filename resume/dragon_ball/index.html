@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Son Goku - Galactic Problem Solver</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Press Start 2P', cursive;
+            background: #000;
+            color: #0F0;
+        }
+
+        #universe {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: url('../bg_images/universe.png') no-repeat center center;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .planet {
+            position: absolute;
+            width: 25px;
+            height:25px;
+            border-radius: 50%;
+            background-size: cover;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .planet:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #FFF;
+        }
+
+        #scouter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 100px;
+            background: url('../bg_images/scouter.png') no-repeat;
+            background-size: contain;
+        }
+
+        #power-level {
+            position: absolute;
+            top: 60px;
+            right: 40px;
+            font-size: 24px;
+            color: #F00;
+        }
+
+        #dragon-radar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: url('../bg_images/dragon_radar.png') no-repeat;
+            background-size: contain;
+            cursor: pointer;
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #F00;
+            padding: 20px;
+            z-index: 100;
+            color: #FFF;
+        }
+
+        #close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #F00;
+            cursor: pointer;
+        }
+
+        @keyframes powerUp {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .power-up {
+            animation: powerUp 0.5s ease-in-out;
+        }
+
+        #goku {
+            position: fixed;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: url('../bg_images/goku.png') no-repeat;
+            background-size: contain;
+            transition: bottom 1s;
+        }
+
+        @keyframes flyAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(90deg); }
+            50% { transform: translate(0, -100px) rotate(180deg); }
+            75% { transform: translate(-50px, -50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        .dragon-ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('../bg_images/dragon_ball.png') no-repeat;
+            background-size: contain;
+            animation: flyAround 10s infinite linear;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="universe"></div>
+    <div id="scouter"><div id="power-level">0</div></div>
+    <div id="dragon-radar"></div>
+    <div id="goku"></div>
+    <div id="modal">
+        <span id="close-modal">X</span>
+        <div id="modal-content"></div>
+    </div>
+
+    <script>
+        const universe = document.getElementById('universe');
+        const powerLevel = document.getElementById('power-level');
+        const dragonRadar = document.getElementById('dragon-radar');
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.getElementById('close-modal');
+        const goku = document.getElementById('goku');
+
+        const skills = [
+            { name: "Problem Solving", level: 9001, description: "Overcame seemingly impossible challenges across multiple galaxies." },
+            { name: "Adaptability", level: 8500, description: "Mastered numerous transformation techniques to tackle diverse situations." },
+            { name: "Leadership", level: 8000, description: "United warriors from different universes to save existence itself." },
+            { name: "Perseverance", level: 9500, description: "Continuously pushes beyond limits, achieving new power levels." },
+            { name: "Teamwork", level: 8200, description: "Formed unbreakable bonds with allies to overcome universal threats." },
+            { name: "Innovation", level: 7800, description: "Developed unique problem-solving techniques like the Spirit Bomb." }
+        ];
+
+        const planetImages = [
+            '../bg_images/earth.png',
+            '../bg_images/mars.jpg ',
+            '../bg_images/planet.png',
+            '../bg_images/planet2.png',
+            '../bg_images/planet3.png',
+            '../bg_images/planet4.png',
+            '../bg_images/planet5.png',
+            ];
+        function createPlanets() {
+            skills.forEach((skill, index) => {
+                const planet = document.createElement('div');
+                planet.className = 'planet';
+                planet.style.backgroundImage = `url('${planetImages[index]}')`;
+                planet.style.left = `${Math.random() * 80}%`;
+                planet.style.top = `${Math.random() * 80}%`;
+                planet.onclick = () => showSkill(skill);
+                universe.appendChild(planet);
+            });
+        }
+
+        function showSkill(skill) {
+            powerLevel.textContent = skill.level;
+            powerLevel.classList.add('power-up');
+            setTimeout(() => powerLevel.classList.remove('power-up'), 500);
+
+            modalContent.innerHTML = `<h2>${skill.name}</h2><p>Power Level: ${skill.level}</p><p>${skill.description}</p>`;
+            modal.style.display = 'block';
+
+            goku.style.bottom = '20px';
+            setTimeout(() => goku.style.bottom = '-200px', 3000);
+        }
+
+        closeModal.onclick = () => modal.style.display = 'none';
+
+        dragonRadar.onclick = () => {
+            for (let i = 0; i < 7; i++) {
+                const dragonBall = document.createElement('div');
+                dragonBall.className = 'dragon-ball';
+                dragonBall.style.left = `${Math.random() * 90}%`;
+                dragonBall.style.top = `${Math.random() * 90}%`;
+                universe.appendChild(dragonBall);
+                setTimeout(() => dragonBall.remove(), 10000);
+            }
+        };
+
+        createPlanets();
+    </script>
+</body>
+</html>

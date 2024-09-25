@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Resume: John Doe</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        :root {
+            --primary: #00ffff;
+            --secondary: #ff00ff;
+            --background: #000000;
+            --text: #ffffff;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+            background-color: var(--background);
+            color: var(--text);
+            overflow: hidden;
+        }
+        
+        #quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+        
+        #interface {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        
+        h1, h2 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .section {
+            margin: 40px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        .skill, .experience, .project {
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .skill:hover, .experience:hover, .project:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        #quantum-code {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        
+        #code-content {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--primary);
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="quantum-field"></div>
+    <div id="interface">
+        <h1>John Doe</h1>
+        <h2>Quantum Developer</h2>
+        
+        <div class="section" id="skills">
+            <h3>Quantum Skills</h3>
+            <div class="skill" data-skill="Quantum Algorithms">Quantum Algorithms</div>
+            <div class="skill" data-skill="Quantum Machine Learning">Quantum Machine Learning</div>
+            <div class="skill" data-skill="Quantum Cryptography">Quantum Cryptography</div>
+            <div class="skill" data-skill="Quantum Error Correction">Quantum Error Correction</div>
+        </div>
+        
+        <div class="section" id="experience">
+            <h3>Spacetime Continuum</h3>
+            <div class="experience" data-exp="Quantum Researcher at CERN">Quantum Researcher at CERN</div>
+            <div class="experience" data-exp="Lead Developer at Quantum Startups">Lead Developer at Quantum Startups</div>
+            <div class="experience" data-exp="Quantum Consultant for NASA">Quantum Consultant for NASA</div>
+        </div>
+        
+        <div class="section" id="projects">
+            <h3>Quantum Realms</h3>
+            <div class="project" data-project="Quantum Internet Protocol">Quantum Internet Protocol</div>
+            <div class="project" data-project="Entanglement-based Quantum Computer">Entanglement-based Quantum Computer</div>
+            <div class="project" data-project="Time Crystal Simulation">Time Crystal Simulation</div>
+        </div>
+    </div>
+    
+    <div id="quantum-code">
+        <pre id="code-content"></pre>
+    </div>
+
+    <script>
+        const quantumField = document.getElementById('quantum-field');
+        const sections = document.querySelectorAll('.section');
+        const quantumCode = document.getElementById('quantum-code');
+        const codeContent = document.getElementById('code-content');
+
+        // Create quantum particles
+        for (let i = 0; i < 100; i++) {
+            createParticle();
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+
+            animation.onfinish = () => animateParticle(particle);
+        }
+
+        // Reveal sections
+        setTimeout(() => {
+            sections.forEach((section, index) => {
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 300);
+            });
+        }, 1000);
+
+        // Quantum code display
+        const items = document.querySelectorAll('.skill, .experience, .project');
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                const type = item.className;
+                const data = item.getAttribute(`data-${type}`);
+                const code = generateQuantumCode(type, data);
+                codeContent.textContent = code;
+                quantumCode.style.opacity = '1';
+                quantumCode.style.pointerEvents = 'auto';
+            });
+        });
+
+        quantumCode.addEventListener('click', () => {
+            quantumCode.style.opacity = '0';
+            quantumCode.style.pointerEvents = 'none';
+        });
+
+        function generateQuantumCode(type, data) {
+            const quantumCircuit = `
+    ┌───┐┌───┐┌───┐┌───┐┌───┐
+q_0: ┤ H ├┤ X ├┤ Y ├┤ Z ├┤ M ├
+    └───┘└───┘└───┘└───┘└───┘
+    `;
+            return `// Quantum ${type}: ${data}
+
+import qiskit
+
+def quantum_${type.toLowerCase()}():
+    qr = QuantumRegister(1)
+    cr = ClassicalRegister(1)
+    qc = QuantumCircuit(qr, cr)
+    
+    qc.h(qr[0])  # Hadamard gate
+    qc.x(qr[0])  # Pauli-X gate
+    qc.y(qr[0])  # Pauli-Y gate
+    qc.z(qr[0])  # Pauli-Z gate
+    qc.measure(qr, cr)
+    
+    return qc
+
+circuit = quantum_${type.toLowerCase()}()
+print(circuit)
+${quantumCircuit}
+// Execute on quantum computer
+result = execute(circuit, backend).result()
+print(result.get_counts(circuit))`;
+        }
+    </script>
+</body>
+</html>

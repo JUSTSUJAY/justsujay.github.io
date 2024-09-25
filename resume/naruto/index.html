@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikamaru Nara - Strategic Analyst & Project Manager</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #E6D2B5;
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow: hidden;
+        }
+
+        .scroll {
+            width: 100vw;
+            height: 100vh;
+            background: url('https://example.com/scroll-texture.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .content {
+            width: 80%;
+            height: 90%;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        h1, h2 {
+            font-family: 'Permanent Marker', cursive;
+            color: #FF4500;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #FF4500;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        p, ul {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .skill {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .skill-name {
+            display: inline-block;
+            width: 200px;
+            font-weight: bold;
+        }
+
+        .skill-level {
+            display: inline-block;
+            width: 150px;
+            height: 10px;
+            background-color: #ddd;
+            vertical-align: middle;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background-color: #FF4500;
+            width: 0;
+            transition: width 1s;
+            position: relative;
+        }
+
+        .skill-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .experience-item {
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #shadow-jutsu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: url('../bg_images/shikamaru.png') no-repeat;
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #shadow-jutsu:hover {
+            transform: scale(1.1);
+        }
+
+        .chakra-seal {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('../bg_images/chakra_seal.png') no-repeat;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll">
+        <div class="content">
+            <h1 id="name">Shikamaru Nara</h1>
+            <p id="title" class="hidden">Strategic Analyst & Project Manager</p>
+
+            <h2>Profile</h2>
+            <p id="profile" class="hidden">Highly analytical and strategic thinker with exceptional problem-solving skills. Known for developing innovative solutions to complex challenges and leading teams to successful project completion. Specializes in shadow organization techniques and lazy efficiency optimization.</p>
+
+            <h2>Skills</h2>
+            <div id="skills" class="hidden">
+                <div class="skill">
+                    <span class="skill-name">Strategic Planning</span>
+                    <div class="skill-level"><div class="skill-fill" style="width: 98%"></div></div>
+                </div>
+                <div class="skill">
+                    <span class="skill-name">Project Management</span>
+                    <div class="skill-level"><div class="skill-fill" style="width: 95%"></div></div>
+                </div>
+                <div class="skill">
+                    <span class="skill-name">Team Leadership</span>
+                    <div class="skill-level"><div class="skill-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="skill">
+                    <span class="skill-name">Risk Analysis</span>
+                    <div class="skill-level"><div class="skill-fill" style="width: 97%"></div></div>
+                </div>
+            </div>
+
+            <h2>Experience</h2>
+            <div id="experience" class="hidden">
+                <div class="experience-item">
+                    <h3>Chief Strategist - Konoha Intelligence Division</h3>
+                    <p>Led a team in developing and implementing village-wide security strategies, resulting in a 30% decrease in security breaches.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Project Manager - Chunin Exam Reformation Initiative</h3>
+                    <p>Spearheaded the redesign of the Chunin Exam process, improving efficiency by 40% and participant satisfaction by 25%.</p>
+                </div>
+            </div>
+
+            <h2>Education</h2>
+            <div id="education" class="hidden">
+                <p>Konoha Ninja Academy Graduate</p>
+                <p>Advanced Strategic Studies - Nara Clan Secret Techniques</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="shadow-jutsu" onclick="activateShadowJutsu()"></div>
+
+    <script>
+        function activateShadowJutsu() {
+            const hiddenElements = document.querySelectorAll('.hidden');
+            hiddenElements.forEach(el => {
+                el.classList.add('visible');
+            });
+
+            const skills = document.querySelectorAll('.skill-fill');
+            skills.forEach(skill => {
+                const width = skill.style.width;
+                skill.style.width = '0';
+                setTimeout(() => { skill.style.width = width; }, 100);
+            });
+
+            createChakraSeals();
+        }
+
+        function createChakraSeals() {
+            for (let i = 0; i < 5; i++) {
+                const seal = document.createElement('div');
+                seal.classList.add('chakra-seal', 'floating');
+                seal.style.left = `${Math.random() * 90}%`;
+                seal.style.top = `${Math.random() * 90}%`;
+                document.body.appendChild(seal);
+                setTimeout(() => { seal.style.opacity = 1; }, i * 200);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Society Job Board - Ichigo Kurosaki</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto+Mono&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #000;
+            font-family: 'Roboto Mono', monospace;
+            color: #0F0;
+            overflow: hidden;
+        }
+
+        #job-board {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://example.com/soul-society-map.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .mission-report {
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #0F0;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .mission-report:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .mission-title {
+            font-family: 'Permanent Marker', cursive;
+            color: #F00;
+            margin-bottom: 10px;
+        }
+
+        #hollow-cursor {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: url('../bg_images/bleach_hollow.png') no-repeat center center;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        #zanpakuto {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: url('../bg_images/zangetsu.png') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+        }
+
+        #reiatsu-meter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #0F0;
+        }
+
+        #reiatsu-level {
+            width: 0%;
+            height: 100%;
+            background: #0F0;
+            transition: width 0.5s;
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #F00;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        #close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #F00;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="job-board"></div>
+    <div id="hollow-cursor"></div>
+    <div id="zanpakuto"></div>
+    <div id="reiatsu-meter"><div id="reiatsu-level"></div></div>
+    <div id="modal">
+        <span id="close-modal">X</span>
+        <div id="modal-content"></div>
+    </div>
+
+    <script>
+        const jobBoard = document.getElementById('job-board');
+        const hollowCursor = document.getElementById('hollow-cursor');
+        const zanpakuto = document.getElementById('zanpakuto');
+        const reiatsuLevel = document.getElementById('reiatsu-level');
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.getElementById('close-modal');
+
+        const missionReports = [
+            { title: "Threat Detection", content: "Successfully identified and neutralized 50 high-level threats in Karakura Town." },
+            { title: "Team Leadership", content: "Led a squad of 10 Soul Reapers in a critical mission, achieving 100% success rate." },
+            { title: "Rapid Response", content: "Decreased average response time to hollow attacks by 40% through innovative strategies." },
+            { title: "Adaptability", content: "Mastered 5 new combat techniques in record time, improving overall effectiveness by 60%." },
+            { title: "Crisis Management", content: "Resolved a potentially catastrophic situation in the Soul Society, saving countless lives." },
+            { title: "Education", content: "Graduated top of class from Shinigami Academy. Mastered Bankai in record time." }
+        ];
+
+        function createMissionReports() {
+            missionReports.forEach((mission, index) => {
+                const report = document.createElement('div');
+                report.className = 'mission-report';
+                report.innerHTML = `<div class="mission-title">${mission.title}</div>`;
+                report.style.left = `${Math.random() * 70}%`;
+                report.style.top = `${Math.random() * 70}%`;
+                report.onclick = () => showModal(mission);
+                jobBoard.appendChild(report);
+            });
+        }
+
+        function showModal(mission) {
+            modalContent.innerHTML = `<h2>${mission.title}</h2><p>${mission.content}</p>`;
+            modal.style.display = 'block';
+            increaseReiatsu();
+        }
+
+        closeModal.onclick = () => modal.style.display = 'none';
+
+        document.addEventListener('mousemove', (e) => {
+            hollowCursor.style.left = e.pageX + 'px';
+            hollowCursor.style.top = e.pageY + 'px';
+        });
+
+        let reiatsu = 0;
+        function increaseReiatsu() {
+            reiatsu += 20;
+            if (reiatsu > 100) reiatsu = 100;
+            reiatsuLevel.style.width = reiatsu + '%';
+            if (reiatsu === 100) unleashBankai();
+        }
+
+        function unleashBankai() {
+            jobBoard.style.filter = 'invert(1)';
+            setTimeout(() => jobBoard.style.filter = 'none', 1000);
+            reiatsu = 0;
+            reiatsuLevel.style.width = '0%';
+        }
+
+        zanpakuto.onclick = increaseReiatsu;
+
+        createMissionReports();
+    </script>
+</body>
+</html>

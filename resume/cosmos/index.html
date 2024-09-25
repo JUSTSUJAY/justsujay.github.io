@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Odyssey</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Mono', monospace;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+        #cosmos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #interface {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+        .section {
+            margin: 20px 0;
+            opacity: 0;
+        }
+        .skill {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .skill:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        #artifact {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+        }
+        #portal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent, #000);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="cosmos"></div>
+    <div id="interface">
+        <h1>Cosmic Explorer</h1>
+        <div class="section" id="skills">
+            <div class="skill">Quantum Computing</div>
+            <div class="skill">Interstellar Navigation</div>
+            <div class="skill">Xenolinguistics</div>
+            <div class="skill">Temporal Mechanics</div>
+            <div class="skill">Astrobiology</div>
+        </div>
+        <div class="section" id="experience">
+            <p>Chief Science Officer, USS Nebula (2250-Present)</p>
+            <p>Xenoarchaeologist, Galactic Institute (2245-2250)</p>
+        </div>
+        <div class="section" id="achievements">
+            <p>Decoded the Andromeda Signal (2248)</p>
+            <p>First Contact Specialist, Proxima Centauri Mission (2246)</p>
+        </div>
+    </div>
+    <img id="artifact" src="../bg_images/astro_suit.png" alt="Mysterious Artifact">
+    <div id="portal"></div>
+
+    <script>
+        const cosmos = document.getElementById('cosmos');
+        const interface = document.getElementById('interface');
+        const artifact = document.getElementById('artifact');
+        const portal = document.getElementById('portal');
+        const skills = document.querySelectorAll('.skill');
+
+        // Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        cosmos.appendChild(renderer.domElement);
+
+        // Create stars
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({color: 0xFFFFFF});
+
+        const starsVertices = [];
+        for (let i = 0; i < 10000; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = (Math.random() - 0.5) * 2000;
+            starsVertices.push(x, y, z);
+        }
+
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const starField = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starField);
+
+        camera.position.z = 5;
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            starField.rotation.y += 0.0002;
+            starField.rotation.x += 0.0001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // GSAP Animations
+        gsap.to('h1', {opacity: 1, duration: 2, delay: 1});
+        gsap.to('.section', {opacity: 1, duration: 1, stagger: 0.5, delay: 2});
+        gsap.to('#artifact', {opacity: 1, duration: 1, delay: 4});
+
+        // Skill interactions
+        skills.forEach(skill => {
+            skill.addEventListener('click', () => {
+                gsap.to(skill, {scale: 1.2, yoyo: true, repeat: 1});
+                const color = Math.random() * 0xFFFFFF;
+                gsap.to(starField.material.color, {
+                    r: (color >> 16 & 255) / 255,
+                    g: (color >> 8 & 255) / 255,
+                    b: (color & 255) / 255,
+                    duration: 1
+                });
+            });
+        });
+
+        // Artifact interaction
+        let artifactClicks = 0;
+        artifact.addEventListener('click', () => {
+            artifactClicks++;
+            gsap.to(artifact, {rotation: 360 * artifactClicks, duration: 1});
+            if (artifactClicks === 5) {
+                gsap.to(portal, {opacity: 1, duration: 2});
+                gsap.to(camera.position, {z: 1000, duration: 5});
+                gsap.to(interface, {opacity: 0, duration: 2});
+                setTimeout(() => {
+                    window.location.href = 'cosmic_revelation.html';
+                }, 5000);
+            }
+        });
+
+        // Responsive design
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

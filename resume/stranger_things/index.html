@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranger Things: Developer Edition</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Benguiat+Bold&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e6212b;
+            --secondary-color: #352879;
+            --text-color: #fff;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Benguiat Bold', sans-serif;
+            background-color: #000;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+        #hawkins {
+            width: 100vw;
+            height: 100vh;
+            background: url('../bg_images/hawkins.png') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            transition: filter 2s;
+        }
+        #upside-down {
+            width: 100vw;
+            height: 100vh;
+            background: url('../bg_images/upside_down.png') no-repeat center center;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        #content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 4em;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+            margin-bottom: 0;
+        }
+        h2 {
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+        .section {
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+        }
+        .skill {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        .skill:hover {
+            transform: scale(1.1);
+        }
+        #demogorgon {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            width: 200px;
+            height: 200px;
+            background: url('../bg_images/demogorgon.png') no-repeat center center;
+            background-size: contain;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+        #lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .light {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ffff00;
+            box-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00;
+            animation: flicker 0.5s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div id="hawkins"></div>
+    <div id="upside-down"></div>
+    <div id="content">
+        <h1>MIKE WHEELER</h1>
+        <h2>Full Stack Developer</h2>
+        <div class="section" id="skills">
+            <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">Python</div>
+            <div class="skill">MongoDB</div>
+        </div>
+        <div class="section" id="experience">
+            <h3>Experience</h3>
+            <p>Senior Developer at Hawkins National Laboratory (2016-Present)</p>
+            <p>Junior Developer at Starcourt Mall IT Department (2013-2016)</p>
+        </div>
+        <div class="section" id="projects">
+            <h3>Projects</h3>
+            <p>The Upside Down Simulator - VR Experience</p>
+            <p>Eleven's Telekinesis API - Mind Control Interface</p>
+            <p>Demogorgon Tracker - Real-time Monster Locator</p>
+        </div>
+    </div>
+    <div id="demogorgon"></div>
+    <div id="lights"></div>
+    <div id="konami-hint" style="position: fixed; bottom: 10px; right: 10px; opacity: 0.1;"></div>
+        ↑↑↓↓←→←→BA
+    </div>
+
+    <script>
+        const hawkins = document.getElementById('hawkins');
+        const upsideDown = document.getElementById('upside-down');
+        const demogorgon = document.getElementById('demogorgon');
+        const lights = document.getElementById('lights');
+        const sections = document.querySelectorAll('.section');
+
+        let isUpsideDown = false;
+
+        function toggleUpsideDown() {
+            isUpsideDown = !isUpsideDown;
+            if (isUpsideDown) {
+                hawkins.style.filter = 'invert(1) hue-rotate(180deg)';
+                upsideDown.style.opacity = '1';
+            } else {
+                hawkins.style.filter = 'none';
+                upsideDown.style.opacity = '0';
+            }
+        }
+
+        demogorgon.addEventListener('click', toggleUpsideDown);
+
+        demogorgon.addEventListener('mouseover', () => {
+            demogorgon.style.transform = 'translate(-50px, -50px)';
+        });
+
+        demogorgon.addEventListener('mouseout', () => {
+            demogorgon.style.transform = 'translate(0, 0)';
+        });
+
+        function createLight() {
+            const light = document.createElement('div');
+            light.classList.add('light');
+            light.style.left = `${Math.random() * 100}%`;
+            light.style.top = `${Math.random() * 100}%`;
+            lights.appendChild(light);
+            setTimeout(() => {
+                light.remove();
+            }, 2000);
+        
+            // Add hidden message
+            if (Math.random() < 0.1) {  // 10% chance for each light
+                const konamiLetters = ['K', 'O', 'N', 'A', 'M', 'I'];
+                light.textContent = konamiLetters[Math.floor(Math.random() * konamiLetters.length)];
+                light.style.fontSize = '20px';
+                light.style.display = 'flex';
+                light.style.justifyContent = 'center';
+                light.style.alignItems = 'center';
+                light.style.color = 'rgba(255, 255, 255, 0.1)';
+            }
+        }
+
+        setInterval(createLight, 500);
+
+        function revealSections() {
+            sections.forEach((section, index) => {
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 500);
+            });
+        }
+
+        window.addEventListener('load', revealSections);
+
+        // Easter egg: Konami code to summon Eleven
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    const eleven = document.createElement('img');
+                    eleven.src = '../bg_images/eleven.png';
+                    eleven.style.position = 'fixed';
+                    eleven.style.bottom = '20px';
+                    eleven.style.left = '20px';
+                    eleven.style.height = '200px';
+                    document.body.appendChild(eleven);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+    </script>
+
+</body>
+</html>
