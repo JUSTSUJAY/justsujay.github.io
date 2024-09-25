@@ -1,0 +1,24 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Replace API Key
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.COSMOS_SECRET }}
+        run: |
+          sed -i 's/MAILCHIMP_API_KEY_PLACEHOLDER/'$MAILCHIMP_API_KEY'/g' index.html
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: .
