@@ -255,30 +255,22 @@
         // subscribe to newsletter
         document.getElementById('newsletter-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log('Form submitted');
             const email = document.getElementById('email-input').value;
             
-            // Replace with your Mailchimp API endpoint
-            const url = 'https://cors-anywhere.herokuapp.com/https://us9.api.mailchimp.com/3.0/lists/e02d897a40/members';
-        
-            fetch(url, {
+            fetch('https://mjurfray.pythonanywhere.com/subscribe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'apikey c57d2ae54a071996ae6bb902c9f65d20-us9'
                 },
-                body: JSON.stringify({
-                    email_address: email,
-                    status: 'subscribed'
-                })
+                body: JSON.stringify({email: email})
             })
             .then(response => response.json())
             .then(data => {
-                alert('Thanks for subscribing to the Quantum Pulse!');
+                alert(data.message);
                 this.reset();
             })
             .catch(error => console.error('Error:', error));
-        });
+        });       
         
         
 
