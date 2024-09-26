@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reality Architect - Dimensional Engineer</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        #reality-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #reality-state {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        .skill-node {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff00ff, #00ffff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .skill-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ff00ff;
+        }
+        #skill-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div id="reality-canvas"></div>
+    <div id="reality-state">Reality Stability: 100%</div>
+    <div id="skill-info"></div>
+
+    <script>
+        let scene, camera, renderer, composer;
+        let realityStability = 100;
+        let lastMouseX = 0, lastMouseY = 0;
+        const skills = [
+            { name: "Reality Manipulation", level: 95, description: "Bending the fabric of existence to create impossible structures and experiences." },
+            { name: "Quantum Entanglement", level: 92, description: "Linking disparate concepts across multiple dimensions for innovative problem-solving." },
+            { name: "Temporal Engineering", level: 90, description: "Manipulating the flow of time to optimize productivity and project timelines." },
+            { name: "Dimensional Synthesis", level: 88, description: "Merging concepts from parallel realities to generate groundbreaking ideas." },
+            { name: "Cognitive Augmentation", level: 94, description: "Enhancing mental capabilities through advanced neural interfacing techniques." },
+            { name: "Existential Programming", level: 91, description: "Coding the fundamental laws of reality to create new possibilities." }
+        ];
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('reality-canvas').appendChild(renderer.domElement);
+
+            camera.position.z = 5;
+
+            createRealityField();
+            createSkillNodes();
+            animate();
+
+            window.addEventListener('resize', onWindowResize, false);
+            window.addEventListener('mousemove', onMouseMove, false);
+            window.addEventListener('click', onClick, false);
+        }
+
+        function createRealityField() {
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            for (let i = 0; i < 10000; i++) {
+                vertices.push(THREE.MathUtils.randFloatSpread(2000));
+                vertices.push(THREE.MathUtils.randFloatSpread(2000));
+                vertices.push(THREE.MathUtils.randFloatSpread(2000));
+            }
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            const material = new THREE.PointsMaterial({ color: 0xffffff, size: 3 });
+            const points = new THREE.Points(geometry, material);
+            scene.add(points);
+        }
+
+        function createSkillNodes() {
+            skills.forEach((skill, index) => {
+                const node = document.createElement('div');
+                node.className = 'skill-node';
+                node.textContent = skill.name;
+                node.style.left = `${Math.random() * 80 + 10}%`;
+                node.style.top = `${Math.random() * 80 + 10}%`;
+                node.addEventListener('click', () => showSkillInfo(skill));
+                document.body.appendChild(node);
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+
+            // Reality warping effect
+            scene.rotation.x += 0.001 * (100 - realityStability) / 100;
+            scene.rotation.y += 0.002 * (100 - realityStability) / 100;
+
+            camera.position.z = 5 + Math.sin(Date.now() * 0.001) * (100 - realityStability) / 100;
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseMove(event) {
+            const deltaX = event.clientX - lastMouseX;
+            const deltaY = event.clientY - lastMouseY;
+            const movement = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            realityStability = Math.max(0, realityStability - movement * 0.1);
+            updateRealityState();
+
+            lastMouseX = event.clientX;
+            lastMouseY = event.clientY;
+
+            if (realityStability < 50) {
+                warpReality();
+            }
+        }
+
+        function onClick() {
+            realityStability = Math.max(0, realityStability - 10);
+            updateRealityState();
+            if (realityStability < 50) {
+                warpReality();
+            }
+        }
+
+        function updateRealityState() {
+            document.getElementById('reality-state').textContent = `Reality Stability: ${Math.round(realityStability)}%`;
+        }
+
+        function warpReality() {
+            gsap.to(scene.rotation, {
+                x: Math.random() * Math.PI * 2,
+                y: Math.random() * Math.PI * 2,
+                duration: 2,
+                ease: 'power2.inOut'
+            });
+
+            document.querySelectorAll('.skill-node').forEach(node => {
+                gsap.to(node, {
+                    left: `${Math.random() * 80 + 10}%`,
+                    top: `${Math.random() * 80 + 10}%`,
+                    rotation: Math.random() * 360,
+                    scale: Math.random() * 0.5 + 0.75,
+                    duration: 2,
+                    ease: 'power2.inOut'
+                });
+            });
+
+            const hue = Math.random() * 360;
+            document.body.style.background = `hsl(${hue}, 50%, 10%)`;
+        }
+
+        function showSkillInfo(skill) {
+            const skillInfo = document.getElementById('skill-info');
+            skillInfo.innerHTML = `
+                <h2>${skill.name}</h2>
+                <p>Mastery: ${skill.level}%</p>
+                <p>${skill.description}</p>
+            `;
+            skillInfo.style.display = 'block';
+            gsap.from(skillInfo, { y: 100, opacity: 0, duration: 0.5 });
+        }
+
+        function recoverStability() {
+            realityStability = Math.min(100, realityStability + 0.1);
+            updateRealityState();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        
+            // Reality warping effect
+            scene.rotation.x += 0.001 * (100 - realityStability) / 100;
+            scene.rotation.y += 0.002 * (100 - realityStability) / 100;
+        
+            camera.position.z = 5 + Math.sin(Date.now() * 0.001) * (100 - realityStability) / 100;
+        
+            recoverStability(); // Add this line
+        }
+        
+
+        init();
+    </script>
+</body>
+</html>
