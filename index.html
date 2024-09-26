@@ -252,6 +252,15 @@
             animation.onfinish = () => animateParticle(particle);
         }
 
+        function showQuantumModal(message) {
+            document.getElementById('quantum-modal-message').textContent = message;
+            document.getElementById('quantum-modal').style.display = 'block';
+        }
+        
+        function closeQuantumModal() {
+            document.getElementById('quantum-modal').style.display = 'none';
+        }
+
         // subscribe to newsletter
         document.getElementById('newsletter-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -266,7 +275,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message);
+                showQuantumModal(data.message);
                 this.reset();
             })
             .catch(error => console.error('Error:', error));
@@ -292,4 +301,12 @@
         revealSections();
     </script>
 </body>
+<div id="quantum-modal" class="quantum-modal">
+    <div class="quantum-modal-content">
+        <h2>Quantum Subscription Confirmed</h2>
+        <p id="quantum-modal-message"></p>
+        <button class="quantum-button" onclick="closeQuantumModal()">Close</button>
+    </div>
+</div>
+
 </html>
