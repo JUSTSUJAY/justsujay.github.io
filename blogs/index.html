@@ -85,15 +85,15 @@
     <div id="app">
         <header>
             <div class="logo">
-                <a href="../">Sujay Kapadnis</a>
+                <a href="../../">Sujay Kapadnis</a>
             </div>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="../">Home</a></li>
-                    <li><a href="../projects/">Projects</a></li>
-                    <li><a href="../resume/">Resume</a></li>
-                    <li><a href="../blogs/">Blog</a></li>
-                    <li><a href="../index.html#contact">Contact</a></li>
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../blogs/">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -101,64 +101,32 @@
                     <span></span>
                 </div>
             </nav>
-        </header>
-
-        <main class="container">   
             
+        </header>
+        <main class="container">
             <h1 class="page-title">Quantum Insights</h1>
             <div class="blog-grid">
                 <div class="search-container">
                     <input type="text" id="search-input" placeholder="Search blogs...">
                 </div>
-                <div class="quantum-card blog-card" onclick="showBlogPost('The Quantum Revolution in AI')">
+                <div class="quantum-card blog-card" onclick="window.location.href='./scds/'">
+                    <h3>Slowly Changing Dimensions</h3>
+                    <p>SCDs are dimensions that change over time, these changes are not very frequent. For example the price of the product, the change will usually happen because of the inflation.</p>
+                    <span class="blog-date">Feb 21, 2025</span>
+                </div>
+                <div class="quantum-card blog-card" onclick="window.location.href='./quantum-revolution-ai/'">
                     <h3>The Quantum Revolution in AI</h3>
-                    <p>Exploring how quantum computing is set to transform the landscape of artificial intelligence and machine learning.</p>
+                    <p>The convergence of quantum computing and artificial intelligence is poised to revolutionize the field of AI, opening up new frontiers in machine learning, optimization, and problem-solving.</p>
                     <span class="blog-date">May 15, 2024</span>
-                </div>
-                <div class="quantum-card blog-card" onclick="showBlogPost('Entanglement: The Quantum Internet Backbone')">
-                    <h3>Entanglement: The Quantum Internet Backbone</h3>
-                    <p>Delving into the fascinating world of quantum entanglement and its potential to create an unhackable internet.</p>
-                    <span class="blog-date">April 22, 2024</span>
-                </div>
-                <div class="quantum-card blog-card" onclick="showBlogPost('Quantum Algorithms: Breaking Computational Barriers')">
-                    <h3>Quantum Algorithms: Breaking Computational Barriers</h3>
-                    <p>An in-depth look at groundbreaking quantum algorithms and their impact on solving complex problems.</p>
-                    <span class="blog-date">March 10, 2024</span>
-                </div>
-                <div class="quantum-card blog-card" onclick="showBlogPost('The Ethics of Quantum AI')">
-                    <h3>The Ethics of Quantum AI</h3>
-                    <p>Examining the ethical implications and societal impacts of combining quantum computing with artificial intelligence.</p>
-                    <span class="blog-date">February 5, 2024</span>
-                </div>
-                <div class="quantum-card blog-card" onclick="showBlogPost('Quantum Machine Learning: A New Paradigm')">
-                    <h3>Quantum Machine Learning: A New Paradigm</h3>
-                    <p>Unveiling the potential of quantum-enhanced machine learning algorithms and their real-world applications.</p>
-                    <span class="blog-date">January 18, 2024</span>
-                </div>
-                <div class="quantum-card blog-card" onclick="showBlogPost('The Future of Quantum Cryptography')">
-                    <h3>The Future of Quantum Cryptography</h3>
-                    <p>Exploring the cutting-edge developments in quantum cryptography and its role in future cybersecurity.</p>
-                    <span class="blog-date">December 3, 2023</span>
                 </div>
             </div>
         </main>
-
-        <div id="blog-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 id="modal-title"></h2>
-                <p id="modal-excerpt"></p>
-                <a href="#" id="read-more" class="cta-button">Read Full Article</a>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Sujay Kapadnis. All rights reserved.</p>
             </div>
-        </div>
+        </footer>
     </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Sujay Kapadnis. All rights reserved.</p>
-        </div>
-    </footer>
-
     <script>
         // Quantum field animation
         const quantumField = document.getElementById('quantum-field');
@@ -166,7 +134,7 @@
         for (let i = 0; i < 50; i++) {
             createParticle();
         }
-
+    
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -175,7 +143,7 @@
             quantumField.appendChild(particle);
             animateParticle(particle);
         }
-
+    
         function animateParticle(particle) {
             const duration = Math.random() * 3000 + 2000;
             const keyframes = [
@@ -188,52 +156,10 @@
                 direction: 'alternate',
                 easing: 'ease-in-out'
             });
-
+    
             animation.onfinish = () => animateParticle(particle);
         }
-
-        // Search functionality
-        const searchInput = document.getElementById('search-input');
-    const blogCards = document.querySelectorAll('.blog-card');
-
-    searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-
-        blogCards.forEach(card => {
-            const title = card.querySelector('h3').textContent.toLowerCase();
-            const content = card.querySelector('p').textContent.toLowerCase();
-
-            if (title.includes(searchTerm) || content.includes(searchTerm)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-
-        // Modal functionality
-        const modal = document.getElementById('blog-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalExcerpt = document.getElementById('modal-excerpt');
-        const readMoreLink = document.getElementById('read-more');
-        const closeBtn = document.getElementsByClassName('close')[0];
-
-        function showBlogPost(postTitle) {
-            const slug = postTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-            window.location.href = `./${slug}/`;
-        }
-        
-
-        closeBtn.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
+    
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
