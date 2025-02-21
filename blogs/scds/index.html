@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slowly Changing Dimensions | Sujay Kapadnis</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+            border: 1px solid #ddd;
+        }
+
+        .post-content th, .post-content td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .post-content th {
+            font-weight: bold;
+            /* background-color: #f2f2f2;  Removed background color from header */
+        }
+
+        .post-content td:nth-child(1),
+        .post-content th:nth-child(1) {
+            width: 15%; /* Adjust as needed */
+        }
+
+        .post-content td:nth-child(2),
+        .post-content th:nth-child(2) {
+            width: 25%; /* Adjust as needed */
+        }
+
+        .post-content td:nth-child(3),
+        .post-content th:nth-child(3) {
+            width: 20%; /* Adjust as needed */
+        }
+        /* Add more nth-child selectors if you have more columns and want to control their widths */
+    </style>
+</head>
+<body>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <a href="../../">Sujay Kapadnis</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../blogs/">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+
+        </header>
+        <main class="container blog-post">
+            <h1 class="page-title">Slowly Changing Dimensions</h1>
+            <div class="post-meta">
+                <span class="post-date">Feb 21, 2025</span>
+                <span class="post-author">by Sujay Kapadnis</span>
+            </div>
+            <article class="post-content">
+                <p>SCDs are dimensions that change over time, these changes are not very frequent. For example the price of the product, the change will usually happen because of the inflation.</p>
+                <h1>Types of SCDs</h1>
+                <ol>
+                    <li><p>Multiple types of SCDs exist.</p>
+                    </li>
+                    <li><p>SCDs are dimensions that change over time, these changes are not very frequent. For example the price of the product, the change will usually happen because of the inflation.</p>
+                    </li>
+                    <li><p>SCD 0 -  <strong>Passive Approach</strong></p>
+                        <ol>
+                            <li>If there's a change in the Source System (OLTP), we're not going to implement that change in the warehouse table (OLAP).</li>
+                            <li>These are considered "dead columns" that were relevant for analysis a while back but are not anymore, so such updates are declined in the Warehouse table.</li>
+                            <li><strong>Example:</strong> Imagine a <code>Customer</code> dimension table with a <code>customer_segment</code> column. If the business decides to no longer analyze data based on <code>customer_segment</code>, any updates to this column from the source system would be ignored in the data warehouse. The <code>customer_segment</code> column becomes an SCD 0 attribute.</li>
+                        </ol>
+                    </li>
+                    <li><p>SCD 1 - <strong>Overwriting</strong></p>
+                        <ol>
+                            <li>If we have a wrong entry in our source table and we rectify it, that change is to be reflected in the warehouse table. Such changes are immediately done in the warehouse table as well.</li>
+                            <li>SCD 1 maintains the <strong>latest snapshot</strong>, and historical data is <strong>overwritten</strong> and thus ignored.</li>
+                            <li><strong>Example:</strong></li>
+                        </ol>
+                        <p> <strong>Before Correction in Source (and Warehouse):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>New York</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <strong>After Correction in Source (and Update in Warehouse - SCD 1):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <em>Notice that the <code>city</code> for <code>customer_id</code> 101 is updated directly in the warehouse table, and the previous city "New York" is lost.</em></p>
+                    </li>
+                    <li><p>SCD 2 - <strong>Historical Approach</strong></p>
+                        <ol>
+                            <li>For every change in the source table, we add a <strong>new row</strong> to the warehouse table.</li>
+                            <li>These multiple entries are then flagged using extra columns to find the latest entry, for example, <code>is_latest</code> flag, and <code>valid_from</code> and <code>valid_to</code> date columns to track the history.</li>
+                            <li><strong>Example:</strong></li>
+                        </ol>
+                        <p> <strong>Initial State:</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                    <th>is_latest</th>
+                                    <th>valid_from</th>
+                                    <th>valid_to</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>New York</td>
+                                    <td>true</td>
+                                    <td>2023-01-01</td>
+                                    <td>9999-12-31</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <strong>After City Change in Source (SCD 2 Implementation):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                    <th>is_latest</th>
+                                    <th>valid_from</th>
+                                    <th>valid_to</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>New York</td>
+                                    <td>false</td>
+                                    <td>2023-01-01</td>
+                                    <td>2024-02-21</td>
+                                </tr>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                    <td>true</td>
+                                    <td>2024-02-22</td>
+                                    <td>9999-12-31</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <em>A new row is added to reflect the change in <code>city</code>. The previous row is marked as not the latest (<code>is_latest = false</code>) and its <code>valid_to</code> date is updated to reflect when it was valid. The new row becomes the latest with <code>is_latest = true</code> and a new <code>valid_from</code> date.</em></p>
+                    </li>
+                    <li><p>SCD 3 - <strong>Additional Column</strong></p>
+                        <ol>
+                            <li>To reflect a change in the source table, an <strong>extra column is maintained per column change</strong> in the source table, in the warehouse table. This stores the current and previous values.</li>
+                            <li><strong>Drawback:</strong> Loss of complete historical data as only the immediate previous value is stored. Thus, SCD 3 is <strong>rarely used</strong>.</li>
+                            <li><strong>Example:</strong></li>
+                        </ol>
+                        <p> <strong>Initial State:</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>New York</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <strong>After City Change in Source (SCD 3 Implementation):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                    <th>previous_city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                    <td>New York</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <em>A new column <code>previous_city</code> is added to store the previous city value. When the city changes to "Los Angeles", the old value "New York" is moved to <code>previous_city</code>, and the <code>city</code> column is updated to "Los Angeles". Only the immediately preceding city is retained as history.</em></p>
+                    </li>
+                    <li><p>SCD 4 - <strong>History Table (or Combination SCD1 and SCD2)</strong></p>
+                        <ol>
+                            <li>It is a <strong>mix of SCD1 and SCD2</strong>, utilizing two tables.</li>
+                            <li><strong>SCD1 Table (Current Table):</strong> Maintains a table in the warehouse which <strong>doesn't store history</strong> and has the <strong>latest snapshot</strong> (like SCD 1).</li>
+                            <li><strong>SCD2 Table (History Table):</strong> Maintains a separate table which <strong>adds a new row per change</strong> in the source table (like SCD 2).</li>
+                            <li><strong>Example:</strong></li>
+                        </ol>
+                        <p> <strong>SCD1 Table (Customer_Current):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <strong>SCD2 Table (Customer_History):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                    <th>valid_from</th>
+                                    <th>valid_to</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>New York</td>
+                                    <td>2023-01-01</td>
+                                    <td>2024-02-21</td>
+                                </tr>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                    <td>2024-02-22</td>
+                                    <td>9999-12-31</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p> <em>The <code>Customer_Current</code> table always has the latest customer information (SCD 1). The <code>Customer_History</code> table tracks all historical changes (SCD 2).</em></p>
+                    </li>
+                    <li><p>SCD 6 - <strong>Hybrid Approach (Combination of SCD1, SCD2, and SCD3)</strong></p>
+                        <ol>
+                            <li>It's a combination of <strong>SCD1, SCD2, and SCD3</strong>, integrating aspects of all three.</li>
+                            <li>A <strong>live changes table (SCD1)</strong> is maintained along with a <strong>history table with new rows for history tracking (SCD2)</strong>, and also includes <strong>extra columns to store previous values (SCD3)</strong> for some attributes if needed. SCD 6 is complex and <strong>rarely used</strong> due to its complexity.</li>
+                            <li><strong>Example:</strong></li>
+                        </ol>
+                        <p><strong>SCD1 Table (Customer_Current):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                    <th>previous_city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                    <td>New York</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><strong>SCD2 Table (Customer_History):</strong></p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>customer_id</th>
+                                    <th>customer_name</th>
+                                    <th>city</th>
+                                    <th>valid_from</th>
+                                    <th>valid_to</th>
+                                    <th>previous_city</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>New York</td>
+                                    <td>2023-01-01</td>
+                                    <td>2024-02-21</td>
+                                    <td>NULL</td>
+                                </tr>
+                                <tr>
+                                    <td>101</td>
+                                    <td>John Doe</td>
+                                    <td>Los Angeles</td>
+                                    <td>2024-02-22</td>
+                                    <td>9999-12-31</td>
+                                    <td>New York</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><em>The <code>Customer_Current</code> table maintains the latest information and the immediately preceding city (SCD 1 &amp; SCD 3). The <code>Customer_History</code> table tracks historical changes with new rows and also keeps the previous city for each historical record (SCD 2 &amp; SCD 3).</em></p>
+                    </li>
+                </ol>
+
+            </article>
+        </main>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Sujay Kapadnis. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Quantum field animation
+        const quantumField = document.getElementById('quantum-field');
+
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+
+            animation.onfinish = () => animateParticle(particle);
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

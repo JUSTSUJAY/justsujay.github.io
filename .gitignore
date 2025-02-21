@@ -1,3 +1,5 @@
 animated_favicons/
 server/
 .vscode/
+node_modules/
+sample-post.md
