@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Central Limit Theorem | Sujay Kapadnis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha384-q8i/X+945R+Xz0UPTfjZYS0uR4wBJquG0hBp1+8By+9rKkDy+/dvmuKJ05h3z0p3" crossorigin="anonymous"></script>
+  
+  <!-- Favicon animation script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+        "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+        "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+        "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+        "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+        "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+        "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+        "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+        "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+        "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+        "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+        "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+        "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+        "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+        "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+        "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+        "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+        "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+        "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+        "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+        "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+        "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+        "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+        "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+        "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+        "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+        "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+        "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+        "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+      ];
+
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
+
+      let favicon_video_loaded_images = [];
+
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
+        });
+      });
+
+      setInterval(function () {
+        if (favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
+        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        ) {
+          favicon_video_image_counter = 0;
+        } else {
+          favicon_video_image_counter++;
+        }
+      }, 100);
+    });
+  </script>
+
+  <!-- Existing theme stylesheet -->
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Inline styles -->
+  <style>
+    /* Bus illustration section */
+    .bus-illustration {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      background: transparent;
+    }
+    .bus {
+      border: 2px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      background-color: transparent;
+      min-width: 150px;
+      margin: 10px;
+    }
+    .passengers {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    /* Chart container */
+    .chart-container {
+      margin: 30px 0;
+      background: transparent;
+      border: none;
+      padding: 20px;
+    }
+    .chart-container > h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    /* Updated styles for interactive section */
+    .distribution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+    }
+    .chart-wrapper {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 8px;
+      height: 400px;
+    }
+    .chart-wrapper h3 {
+      color: #ccc;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .chart-wrapper canvas {
+      background-color: transparent;
+      border-radius: 8px;
+      max-width: 100%;
+    }
+
+    /* New styles for interactive section */
+    .interactive-section {
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .controls {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .control-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    .slider-container {
+      padding: 15px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .slider {
+      width: 100%;
+      margin: 10px 0;
+    }
+    .regenerate-btn {
+      background: var(--accent-color, #4CAF50);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 20px;
+    }
+    .regenerate-btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Quantum Field Animation -->
+  <div id="quantum-field"></div>
+
+  <div id="app">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <a href="../../">Sujay Kapadnis</a>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../">Home</a></li>
+          <li><a href="../../projects/">Projects</a></li>
+          <li><a href="../../resume/">Resume</a></li>
+          <li><a href="../../blogs/">Blog</a></li>
+          <li><a href="../../index.html#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container blog-post">
+      <h1 class="page-title">Central Limit Theorem</h1>
+      <div class="post-meta">
+        <span class="post-date">Feb 23, 2025</span>
+        <span class="post-author">by Sujay Kapadnis</span>
+      </div>
+
+      <article class="post-content">
+        <p>
+          Have you ever participated in a poll? Or any process that may have
+          collected data that represents you and a variety of other people?
+          Today’s topic will explain the intuition behind polling.
+        </p>
+
+        <h3>Understanding the Central Limit Theorem (CLT)</h3>
+        <p>Consider the following scenario.</p>
+        <p>
+          There’s a marathon race arranged in your country, and you are the
+          organizer of this grand event. Runners from all over the world are
+          going to participate and have already arrived in your country.
+        </p>
+        <p>
+          On the day of the event, all the participants are being transported to
+          the venue, but one of the buses broke down on the way. Unfortunately,
+          the bus is full of foreigners who can’t communicate with people
+          nearby.
+        </p>
+        <p>
+          Now, to resolve this matter, you set off on the road with your team.
+          Lucky for you, you immediately find a bus surrounded by a group of
+          unhappy foreigners. You obtain information about those passengers,
+          including their weights, and notice that the mean weight is nearly 220
+          pounds (~99 kg). (Anything is possible when you know statistics!)
+          There’s no way a random group of marathon runners could all be this
+          heavy. You immediately inform your team to keep searching.
+        </p>
+
+        <!-- Bus Illustration -->
+        <div class="bus-illustration">
+          <div class="bus">
+            <i class="fas fa-bus" style="font-size: 2em; color: #4CAF50;"></i>
+            <p>Bus A: Marathon Runners</p>
+            <p>Avg Weight: 155 lbs</p>
+            <div class="passengers">
+              <i class="fas fa-running" style="color: #2196F3;"></i>
+              <i class="fas fa-running" style="color: #2196F3;"></i>
+              <i class="fas fa-running" style="color: #2196F3;"></i>
+              <i class="fas fa-running" style="color: #2196F3;"></i>
+            </div>
+          </div>
+          <div class="bus">
+            <i class="fas fa-bus" style="font-size: 2em; color: #FF5722;"></i>
+            <p>Bus B: Other Passengers</p>
+            <p>Avg Weight: 220 lbs</p>
+            <div class="passengers">
+              <i class="fas fa-male" style="font-size: 1.5em; color: #FF9800;"></i>
+              <i class="fas fa-male" style="font-size: 1.5em; color: #FF9800;"></i>
+              <i class="fas fa-male" style="font-size: 1.5em; color: #FF9800;"></i>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Congratulations! If you can grasp how someone who takes a quick look
+          at the weights of passengers on a bus can infer that they are probably
+          not on their way to a marathon’s starting line, then you now
+          understand the basic idea of the Central Limit Theorem.
+        </p>
+        <p>
+          The core principle of the Central Limit Theorem is that a large,
+          properly drawn sample will always represent the population from which
+          it was drawn. Obviously, it won’t be an exact replica and will vary,
+          but the probability that it will deviate massively from the population
+          is very low.
+        </p>
+        <p>
+          There’s still a possibility that people weighing 220 pounds do run in
+          a marathon—out of the total population, there might be almost 100 of
+          them—but the likelihood of so many being assigned to the same bus is
+          extremely low. Hence, you can confidently conclude that it’s not the
+          bus you were looking for.
+        </p>
+        <p>
+          This is the basic intuition of the CLT. The mean weight of a marathon
+          runner is about 155 pounds, so there’s less than a 1 in 100 chance
+          that the mean weight of those 60 passengers is 220.
+        </p>
+        <p>
+          We just used our knowledge of the population data (the mean weight of
+          a runner is 155 pounds) to conclude that it’s the wrong bus. The
+          inverse is also true, and that’s how polling works.
+        </p>
+        <p>
+          In reality, it’s impossible to compile a complete population dataset.
+          That’s why sufficiently large sample datasets are used to infer the
+          parent population dataset. This is where the CLT comes into play.
+        </p>
+        <p>
+          The Central Limit Theorem tells us that a large sample will not
+          typically deviate sharply from its underlying population. A mere poll
+          of 2,000 appropriately chosen people can reveal a great deal about how
+          an entire country is thinking.
+        </p>
+        <p>
+          The Central Limit Theorem states that the sample means will be
+          distributed roughly as a normal distribution around the population
+          mean. The population from which the samples are drawn does not have to
+          have a normal distribution for the sample means to be distributed
+          normally.
+        </p>
+
+        <!-- Interactive Chart Section -->
+        <div class="chart-container">
+          <h2>INTERACTIVE DISTRIBUTION PLOTS</h2>
+          
+          <div class="interactive-section">
+            <div class="controls">
+              <div class="control-group">
+                <div class="slider-container">
+                  <label for="sampleSize">Sample Size: <span id="sampleSizeValue">30</span></label>
+                  <input type="range" id="sampleSize" class="slider" min="5" max="100" value="30">
+                </div>
+              </div>
+              
+              <div class="control-group">
+                <div class="slider-container">
+                  <label for="numSamples">Number of Samples: <span id="numSamplesValue">1000</span></label>
+                  <input type="range" id="numSamples" class="slider" min="100" max="5000" value="1000">
+                </div>
+              </div>
+            </div>
+
+            <button onclick="regenerateData()" class="regenerate-btn">Generate New Samples</button>
+
+            <div class="distribution-grid">
+              <div class="chart-wrapper">
+                <h3>Population Distribution (Skewed)</h3>
+                <canvas id="populationDist"></canvas>
+              </div>
+              <div class="chart-wrapper">
+                <h3>Sample Means Distribution</h3>
+                <canvas id="sampleDist"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <p style="text-align:center; margin-top: 10px; color: #ccc;">
+            The larger the number of samples, the more closely the distribution
+            will approximate a normal distribution. And the larger the size of
+            each sample, the tighter that distribution will be.
+          </p>
+        </div>
+
+        <h1>Summary</h1>
+        <ol>
+          <li>
+            If you draw large, random samples from any population, the means of
+            those samples will be distributed normally around the population
+            mean.
+          </li>
+          <li>
+            Most sample means will lie reasonably close to the population mean;
+            the standard error defines “reasonably close.”
+          </li>
+          <li>
+            The Central Limit Theorem tells us the probability that a sample
+            mean will lie within a certain distance of the population mean. It’s
+            relatively unlikely that a sample mean will lie more than two
+            standard errors from the population mean, and extremely unlikely
+            that it will lie three or more standard errors away.
+          </li>
+        </ol>
+      </article>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>© 2025 Sujay Kapadnis. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Quantum field animation and mobile menu script -->
+  <script>
+    const quantumField = document.getElementById('quantum-field');
+
+    for (let i = 0; i < 50; i++) {
+      createParticle();
+    }
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.top = Math.random() * 100 + 'vh';
+      quantumField.appendChild(particle);
+      animateParticle(particle);
+    }
+
+    function animateParticle(particle) {
+      const duration = Math.random() * 3000 + 2000;
+      const keyframes = [
+        { transform: 'translate(0, 0)' },
+        {
+          transform: `translate(${
+            Math.random() * 200 - 100
+          }px, ${Math.random() * 200 - 100}px)`
+        }
+      ];
+      const animation = particle.animate(keyframes, {
+        duration: duration,
+        iterations: Infinity,
+        direction: 'alternate',
+        easing: 'ease-in-out'
+      });
+
+      animation.onfinish = () => animateParticle(particle);
+    }
+
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  </script>
+
+  <!-- Interactive chart script -->
+  <script>
+    let populationChart, sampleMeansChart;
+
+    // Generate skewed population data
+    function generatePopulation() {
+      const data = [];
+      for (let i = 0; i < 10000; i++) {
+        data.push(Math.exp(Math.random() * 2) + Math.random() * 5);
+      }
+      return data;
+    }
+
+    // Calculate mean of array
+    function mean(arr) {
+      return arr.reduce((a, b) => a + b) / arr.length;
+    }
+
+    // Generate sample means
+    function generateSampleMeans(population, sampleSize, numSamples) {
+      const means = [];
+      for (let i = 0; i < numSamples; i++) {
+        const sample = [];
+        for (let j = 0; j < sampleSize; j++) {
+          sample.push(population[Math.floor(Math.random() * population.length)]);
+        }
+        means.push(mean(sample));
+      }
+      return means;
+    }
+
+    // Create histogram data
+    function createHistogram(data, bins = 50) {
+      const min = Math.min(...data);
+      const max = Math.max(...data);
+      const binSize = (max - min) / bins;
+      
+      const histogram = Array(bins).fill(0);
+      data.forEach(value => {
+        const binIndex = Math.min(Math.floor((value - min) / binSize), bins - 1);
+        histogram[binIndex]++;
+      });
+      
+      const labels = Array(bins).fill(0).map((_, i) => (min + (i + 0.5) * binSize).toFixed(1));
+      
+      return { labels, data: histogram };
+    }
+
+    // Initialize charts
+    function initCharts() {
+      const population = generatePopulation();
+      const sampleSize = parseInt(document.getElementById('sampleSize').value);
+      const numSamples = parseInt(document.getElementById('numSamples').value);
+      const sampleMeans = generateSampleMeans(population, sampleSize, numSamples);
+
+      const popHist = createHistogram(population);
+      const sampleHist = createHistogram(sampleMeans);
+
+      // Population Distribution Chart
+      const popCtx = document.getElementById('populationDist').getContext('2d');
+      if (populationChart) {
+        populationChart.destroy();
+      }
+      populationChart = new Chart(popCtx, {
+        type: 'bar',
+        data: {
+          labels: popHist.labels,
+          datasets: [{
+            label: 'Population Distribution',
+            data: popHist.data,
+            backgroundColor: 'rgba(33, 150, 243, 0.5)',
+            borderColor: 'rgba(33, 150, 243, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Population Distribution (Skewed)',
+              color: '#ccc'
+            },
+            legend: {
+              labels: {
+                color: '#ccc'
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#ccc' },
+              grid: { color: '#555' }
+            },
+            y: {
+              ticks: { color: '#ccc' },
+              grid: { color: '#555' }
+            }
+          }
+        }
+      });
+
+      // Sample Means Distribution Chart
+      const sampleCtx = document.getElementById('sampleDist').getContext('2d');
+      if (sampleMeansChart) {
+        sampleMeansChart.destroy();
+      }
+      sampleMeansChart = new Chart(sampleCtx, {
+        type: 'bar',
+        data: {
+          labels: sampleHist.labels,
+          datasets: [{
+            label: 'Sample Means Distribution',
+            data: sampleHist.data,
+            backgroundColor: 'rgba(76, 175, 80, 0.5)',
+            borderColor: 'rgba(76, 175, 80, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Distribution of Sample Means',
+              color: '#ccc'
+            },
+            legend: {
+              labels: {
+                color: '#ccc'
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#ccc' },
+              grid: { color: '#555' }
+            },
+            y: {
+              ticks: { color: '#ccc' },
+              grid: { color: '#555' }
+            }
+          }
+        }
+      });
+    }
+
+    // Update UI elements
+    document.getElementById('sampleSize').addEventListener('input', function(e) {
+      document.getElementById('sampleSizeValue').textContent = e.target.value;
+    });
+
+    document.getElementById('numSamples').addEventListener('input', function(e) {
+      document.getElementById('numSamplesValue').textContent = e.target.value;
+    });
+
+    // Regenerate data and update charts
+    function regenerateData() {
+      initCharts();
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', initCharts);
+  </script>
+</body>
+</html>
