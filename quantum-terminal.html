@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Terminal | Sujay Kapadnis</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* Terminal Styles */
+        body {
+            overflow: hidden;
+            background-color: #000011;
+        }
+        
+        #terminal-container {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 80vh;
+            margin: 5vh auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ffff;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px 10px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .terminal-title {
+            color: #00ffff;
+            display: flex;
+            align-items: center;
+        }
+        
+        .terminal-title:before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #00ffff;
+            margin-right: 10px;
+            box-shadow: 0 0 10px #00ffff;
+            animation: pulse 2s infinite;
+        }
+        
+        .terminal-status {
+            font-size: 0.8em;
+            color: rgba(0, 255, 255, 0.7);
+        }
+        
+        #terminal-window {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            font-family: 'Roboto Mono', monospace;
+            color: #fff;
+            position: relative;
+        }
+        
+        #terminal-window::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #terminal-window::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        #terminal-window::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.5);
+            border-radius: 4px;
+        }
+        
+        #terminal-input-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        #terminal-prompt {
+            color: #00ffff;
+            margin-right: 10px;
+            font-weight: bold;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        #terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            outline: none;
+            caret-color: #00ffff;
+        }
+        
+        .command-line {
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        
+        .command-prompt {
+            color: #00ffff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .command-text {
+            color: #fff;
+        }
+        
+        .response-line {
+            margin: 5px 0 15px;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 0, 255, 0.5);
+        }
+        
+        .response-success {
+            color: rgba(0, 255, 255, 0.9);
+        }
+        
+        .response-error {
+            color: #ff00ff;
+        }
+        
+        .response-section {
+            margin-bottom: 10px;
+        }
+        
+        .ascii-art {
+            color: #00ffff;
+            font-family: monospace;
+            white-space: pre;
+            line-height: 1.2;
+            margin: 10px 0;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+        }
+        
+        .terminal-foreground-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.3;
+            z-index: 10;
+        }
+        
+        .terminal-glow-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.2);
+            z-index: 9;
+        }
+        
+        .blinking-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #00ffff;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px #00ffff; }
+            50% { box-shadow: 0 0 15px #00ffff; }
+            100% { box-shadow: 0 0 5px #00ffff; }
+        }
+        
+        .highlighted-text {
+            color: #ff00ff;
+            font-weight: bold;
+        }
+        
+        .response-line img, .response-line pre {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .typing-animation {
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #00ffff;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ffff }
+        }
+        
+        .matrix-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .quantum-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(0, 255, 255, 0.7);
+            border-radius: 50%;
+            opacity: 0.5;
+            filter: blur(1px);
+            transform-origin: center;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.7), rgba(255, 0, 255, 0.7));
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            border-right: 2px solid #00ffff;
+        }
+
+        .help-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .help-table th, .help-table td {
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 8px;
+            text-align: left;
+        }
+
+        .help-table th {
+            background-color: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+        }
+
+        .help-table tr:hover {
+            background-color: rgba(0, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <a href="./index.html" class="back-button">◀ Back to Home</a>
+    
+    <div id="terminal-container">
+        <div id="terminal-header">
+            <div class="terminal-title">Quantum Terminal v1.0</div>
+            <div class="terminal-status">Connected to Quantum Mainframe</div>
+        </div>
+        
+        <div id="terminal-window">
+            <div class="particle-container" id="particle-container"></div>
+            <div class="terminal-foreground-effect"></div>
+            <div class="terminal-glow-effect"></div>
+            
+            <!-- Terminal content will be added here dynamically -->
+        </div>
+        
+        <div id="terminal-input-container">
+            <span id="terminal-prompt">quantum:~$</span>
+            <input type="text" id="terminal-input" autocomplete="off" autofocus>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const terminalWindow = document.getElementById('terminal-window');
+            const terminalInput = document.getElementById('terminal-input');
+            const particleContainer = document.getElementById('particle-container');
+            
+            // Create quantum particles
+            createQuantumParticles();
+            
+            // Command history
+            let commandHistory = [];
+            let historyIndex = -1;
+            
+            // Initialize with welcome message
+            displayWelcomeMessage();
+            
+            // Focus the input field
+            terminalInput.focus();
+            
+            // Handle input submission
+            terminalInput.addEventListener('keydown', function(e) {
+                // Up arrow for previous command
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (historyIndex < commandHistory.length - 1) {
+                        historyIndex++;
+                        terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                    }
+                }
+                
+                // Down arrow for next command
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                    } else {
+                        historyIndex = -1;
+                        terminalInput.value = '';
+                    }
+                }
+                
+                // Enter to submit command
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    
+                    const command = terminalInput.value.trim();
+                    
+                    if (command) {
+                        // Add to history
+                        commandHistory.push(command);
+                        historyIndex = -1;
+                        
+                        // Display command
+                        displayCommand(command);
+                        
+                        // Process command
+                        processCommand(command);
+                        
+                        // Clear input
+                        terminalInput.value = '';
+                        
+                        // Scroll to bottom
+                        terminalWindow.scrollTop = terminalWindow.scrollHeight;
+                    }
+                }
+            });
+            
+            // Keep focus on input field
+            document.addEventListener('click', function() {
+                terminalInput.focus();
+            });
+            
+            function displayWelcomeMessage() {
+                const welcomeAscii = `
+ ██████  ██    ██  █████  ███    ██ ████████ ██    ██ ███    ███
+██    ██ ██    ██ ██   ██ ████   ██    ██    ██    ██ ████  ████
+██    ██ ██    ██ ███████ ██ ██  ██    ██    ██    ██ ██ ████ ██
+██ ▄▄ ██ ██    ██ ██   ██ ██  ██ ██    ██    ██    ██ ██  ██  ██
+ ██████   ██████  ██   ██ ██   ████    ██     ██████  ██      ██
+    ▀▀                                                           
+████████ ███████ ██████  ███    ███ ██ ███    ██  █████  ██     
+   ██    ██      ██   ██ ████  ████ ██ ████   ██ ██   ██ ██     
+   ██    █████   ██████  ██ ████ ██ ██ ██ ██  ██ ███████ ██     
+   ██    ██      ██   ██ ██  ██  ██ ██ ██  ██ ██ ██   ██ ██     
+   ██    ███████ ██   ██ ██      ██ ██ ██   ████ ██   ██ ███████`;
+                
+                const welcomeDiv = document.createElement('div');
+                welcomeDiv.className = 'ascii-art';
+                welcomeDiv.textContent = welcomeAscii;
+                terminalWindow.appendChild(welcomeDiv);
+                
+                const welcomeMessage = document.createElement('div');
+                welcomeMessage.className = 'response-line fade-in';
+                welcomeMessage.innerHTML = `
+                    <div class="response-section">Welcome to the <span class="highlighted-text">Quantum Terminal</span>.</div>
+                    <div class="response-section">Explore my skills, projects and experiences through this interactive interface.</div>
+                    <div class="response-section">Type <span class="highlighted-text">help</span> to see available commands.</div>
+                `;
+                terminalWindow.appendChild(welcomeMessage);
+            }
+            
+            function displayCommand(command) {
+                const commandLine = document.createElement('div');
+                commandLine.className = 'command-line';
+                commandLine.innerHTML = `<span class="command-prompt">quantum:~$</span><span class="command-text">${command}</span>`;
+                terminalWindow.appendChild(commandLine);
+            }
+            
+            function displayResponse(content, className = 'response-success') {
+                const responseLine = document.createElement('div');
+                responseLine.className = 'response-line fade-in';
+                
+                if (typeof content === 'string') {
+                    responseLine.innerHTML = `<div class="response-section ${className}">${content}</div>`;
+                } else {
+                    // If content is an HTML element
+                    responseLine.appendChild(content);
+                }
+                
+                terminalWindow.appendChild(responseLine);
+                
+                // Scroll to bottom
+                terminalWindow.scrollTop = terminalWindow.scrollHeight;
+            }
+            
+            function processCommand(command) {
+                const cmd = command.toLowerCase().trim();
+                const args = cmd.split(' ');
+                const primaryCmd = args[0];
+                
+                switch (primaryCmd) {
+                    case 'help':
+                        showHelp();
+                        break;
+                    case 'about':
+                        showAbout();
+                        break;
+                    case 'skills':
+                        showSkills();
+                        break;
+                    case 'projects':
+                        showProjects();
+                        break;
+                    case 'experience':
+                        showExperience();
+                        break;
+                    case 'contact':
+                        showContact();
+                        break;
+                    case 'clear':
+                        clearTerminal();
+                        break;
+                    case 'matrix':
+                        startMatrixEffect();
+                        break;
+                    case 'quantum':
+                        startQuantumSimulation(args[1]);
+                        break;
+                    case 'quote':
+                        showRandomQuote();
+                        break;
+                    case 'weather':
+                        showWeather(args[1]);
+                        break;
+                    case 'joke':
+                        tellJoke();
+                        break;
+                    case 'date':
+                        showDate();
+                        break;
+                    case 'ls':
+                    case 'dir':
+                        listFiles();
+                        break;
+                    case 'cat':
+                        if (args.length > 1) {
+                            catFile(args[1]);
+                        } else {
+                            displayResponse('Usage: cat [filename]', 'response-error');
+                        }
+                        break;
+                    case 'echo':
+                        echoCommand(args.slice(1).join(' '));
+                        break;
+                    case 'whoami':
+                        whoami();
+                        break;
+                    case 'exit':
+                        exitTerminal();
+                        break;
+                    default:
+                        displayResponse(`Command not found: ${command}. Type 'help' to see available commands.`, 'response-error');
+                }
+            }
+            
+            function showHelp() {
+                const helpContent = document.createElement('div');
+                helpContent.className = 'response-section';
+                
+                const helpIntro = document.createElement('p');
+                helpIntro.innerHTML = 'Available commands:';
+                helpContent.appendChild(helpIntro);
+                
+                const table = document.createElement('table');
+                table.className = 'help-table';
+                
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                `;
+                table.appendChild(thead);
+                
+                const tbody = document.createElement('tbody');
+                const commands = [
+                    { cmd: 'about', desc: 'Display information about me' },
+                    { cmd: 'skills', desc: 'List my technical skills and expertise' },
+                    { cmd: 'projects', desc: 'Show my notable projects' },
+                    { cmd: 'experience', desc: 'Display my work experience' },
+                    { cmd: 'contact', desc: 'Show my contact information' },
+                    { cmd: 'clear', desc: 'Clear the terminal screen' },
+                    { cmd: 'matrix', desc: 'Start Matrix digital rain effect' },
+                    { cmd: 'quantum [algorithm]', desc: 'Simulate a quantum algorithm (try: qft, grovers, teleport)' },
+                    { cmd: 'quote', desc: 'Display a random inspirational quote' },
+                    { cmd: 'weather [city]', desc: 'Show weather for a city' },
+                    { cmd: 'joke', desc: 'Tell a programming joke' },
+                    { cmd: 'date', desc: 'Display current date and time' },
+                    { cmd: 'ls', desc: 'List files in the current directory' },
+                    { cmd: 'cat [filename]', desc: 'Display contents of a file' },
+                    { cmd: 'echo [text]', desc: 'Display text on the screen' },
+                    { cmd: 'whoami', desc: 'Display current user' },
+                    { cmd: 'exit', desc: 'Return to the main website' },
+                    { cmd: 'help', desc: 'Display this help message' }
+                ];
+                
+                commands.forEach(cmd => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><span class="highlighted-text">${cmd.cmd}</span></td>
+                        <td>${cmd.desc}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                table.appendChild(tbody);
+                helpContent.appendChild(table);
+                
+                const tips = document.createElement('p');
+                tips.innerHTML = '<br>Tips: Use up/down arrows to navigate command history.';
+                helpContent.appendChild(tips);
+                
+                displayResponse(helpContent);
+            }
+            
+            function showAbout() {
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">About Sujay Kapadnis</span>
+                    </div>
+                    <div class="response-section">
+                        I'm working on Full-Stack AI Projects with the goal of becoming an Indie Developer. Previously, I worked at an SF-based Startup on a Real-time Machine Learning platform. I was part of a Robotics Club at my University, where I programmed multiple bots with Arduino and Raspberry Pi.
+                    </div>
+                    <div class="response-section">
+                        I'm fabulous at Machine Learning and know things to its core. I like to break down algorithms and stay well-informed about recent trends. I am a Kaggle master with a good rank and contribution to the community. I've closed some Issues in Projects like OpenDevin.
+                    </div>
+                    <div class="response-section">
+                        You'll find me learning new things and trying them out. I can touch type at 80-90 wpm.
+                    </div>
+                `);
+            }
+            
+            function showSkills() {
+                const skillsContent = document.createElement('div');
+                
+                const categories = [
+                    {
+                        name: "Machine Learning & AI",
+                        skills: ["Deep Learning", "Neural Networks", "Natural Language Processing", "Computer Vision", "Reinforcement Learning", "TensorFlow", "PyTorch", "Scikit-learn"]
+                    },
+                    {
+                        name: "Programming Languages",
+                        skills: ["Python", "JavaScript", "TypeScript", "C++", "SQL", "R", "Java"]
+                    },
+                    {
+                        name: "Web Development",
+                        skills: ["React", "Node.js", "Express", "Django", "Flask", "HTML5", "CSS3", "GraphQL"]
+                    },
+                    {
+                        name: "Data Engineering",
+                        skills: ["Pandas", "NumPy", "Spark", "Hadoop", "Kafka", "Airflow", "PostgreSQL", "MongoDB"]
+                    },
+                    {
+                        name: "DevOps & Cloud",
+                        skills: ["Docker", "Kubernetes", "CI/CD", "AWS", "GCP", "Azure", "Terraform"]
+                    }
+                ];
+                
+                categories.forEach(category => {
+                    const categoryElement = document.createElement('div');
+                    categoryElement.className = 'response-section';
+                    
+                    categoryElement.innerHTML = `<span class="highlighted-text">${category.name}</span>: ${category.skills.join(', ')}`;
+                    
+                    skillsContent.appendChild(categoryElement);
+                });
+                
+                displayResponse(skillsContent);
+            }
+            
+            function showProjects() {
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Featured Projects</span>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">1. Gestura</span>: A state-of-the-art transformer model capable of transcribing Sign Language Fingerspelling based on Landmarks from Google Holistic Mediapipe.
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">2. EnGuru</span>: Groq-Powered AI Tutor Capable of Meaningful Conversations based on User's understanding of the Subject.
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">3. BhasaAI</span>: Solution to a Bengali Speech Recognition Research Competition, trained on top of OpenAI Whisper.
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">4. Quantum Timeline Portal</span>: An immersive 3D visualization of project history with interactive navigation through a quantum tunnel.
+                    </div>
+                    <div class="response-section">
+                        Visit <a href="./projects/index.html" target="_blank" style="color: #00ffff;">projects page</a> to explore these in more detail.
+                    </div>
+                `);
+            }
+            
+            function showExperience() {
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Work Experience</span>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">Data Scientist</span> | Kalvium (2024 - Present)
+                        <ul>
+                            <li>Automated Video Response Questions Evaluations utilizing AI  </li>
+                            <li>Built OLTP to OLAP Data Pipelines for Data Analytics</li>
+                            <li>Auto Evaluation of Github PRs with instant feedback for improvment</li>
+                        </ul>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">SDE Intern</span> | TurboML (FEB 2024 - APR 2024)
+                        <ul>
+                            <li>Orchestrated the development of a real-time machine learning platform capable of leaning over millions of data points on the fly and achieving a 10% improvement in training efficiency over batch learning benchmarks, utilizing Kafka and the publish-subscribe model
+                            </li>
+                            <li>Innovated advanced machine learning algorithms tailored for robustness, delivering a 15% accuracy boost in online learning by optimizing resource consumption, and setting new industry standards.</li>
+                        </ul>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">Robotics Engineer</span> | SPCE ROBOCON (2021 - 2022)
+                        <ul>
+                            <li>Programmed 2 Lagori-themed robots using Raspberry Pi for active participation in the prestigious ABU ROBOCON 2022 competition among competitors from 13 countries worldwide, demonstrating proficiency in automation.</li>
+                            <li>Programmed a Holonomic Drive to be Controlled by a PS5</li>
+                            <li>Spearheaded a Team to final of a Robotics Competition for a unity game engine environment based competition</li>
+                        </ul>
+                    </div>
+                `);
+            }
+            
+            function showContact() {
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Contact Information</span>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">Email:</span> sujaykapadnis.33@gmail.com
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">LinkedIn:</span> <a href="https://www.linkedin.com/in/sujay-kapadnis" target="_blank" style="color: #00ffff;">linkedin.com/in/sujay-kapadnis</a>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">GitHub:</span> <a href="https://github.com/justsujay" target="_blank" style="color: #00ffff;">github.com/justsujay</a>
+                    </div>
+                    <div class="response-section">
+                        <span class="highlighted-text">Twitter:</span> <a href="https://twitter.com/sujay_kapadnis" target="_blank" style="color: #00ffff;">@sujay_kapadnis</a>
+                    </div>
+                `);
+            }
+            
+            function clearTerminal() {
+                // Clear all content except particles
+                while (terminalWindow.childNodes.length > 2) {
+                    if (terminalWindow.lastChild !== particleContainer && 
+                        !terminalWindow.lastChild.classList.contains('terminal-foreground-effect') && 
+                        !terminalWindow.lastChild.classList.contains('terminal-glow-effect')) {
+                        terminalWindow.removeChild(terminalWindow.lastChild);
+                    }
+                }
+                
+                // Add a small message
+                displayResponse('Terminal cleared. Type "help" to see available commands.');
+            }
+            
+            function startMatrixEffect() {
+                // Create Matrix canvas effect
+                const matrixEffect = document.createElement('canvas');
+                matrixEffect.className = 'matrix-effect';
+                terminalWindow.appendChild(matrixEffect);
+                
+                const ctx = matrixEffect.getContext('2d');
+                matrixEffect.width = terminalWindow.clientWidth;
+                matrixEffect.height = terminalWindow.clientHeight;
+                
+                const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+                const characters = matrix.split('');
+                
+                const fontSize = 10;
+                const columns = matrixEffect.width / fontSize;
+                
+                const drops = [];
+                for (let i = 0; i < columns; i++) {
+                    drops[i] = 1;
+                }
+                
+                let frameId;
+                
+                function drawMatrix() {
+                    ctx.fillStyle = 'rgba(0, 0, 11, 0.05)';
+                    ctx.fillRect(0, 0, matrixEffect.width, matrixEffect.height);
+                    
+                    ctx.fillStyle = '#0f0';
+                    ctx.font = fontSize + 'px monospace';
+                    
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = characters[Math.floor(Math.random() * characters.length)];
+                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                        
+                        if (drops[i] * fontSize > matrixEffect.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        
+                        drops[i]++;
+                    }
+                    
+                    frameId = requestAnimationFrame(drawMatrix);
+                }
+                
+                frameId = requestAnimationFrame(drawMatrix);
+                
+                // Display info message
+                displayResponse('Matrix digital rain initiated. Type "clear" to stop.');
+                
+                // Auto clear after 20 seconds
+                setTimeout(() => {
+                    if (matrixEffect.parentNode) {
+                        cancelAnimationFrame(frameId);
+                        matrixEffect.parentNode.removeChild(matrixEffect);
+                        displayResponse('Matrix effect automatically stopped after 20 seconds.');
+                    }
+                }, 20000);
+            }
+            
+            function startQuantumSimulation(algorithm) {
+                const validAlgorithms = ['qft', 'grovers', 'teleport'];
+                
+                if (!algorithm || !validAlgorithms.includes(algorithm)) {
+                    displayResponse(`
+                        <div class="response-section response-error">
+                            Please specify a valid quantum algorithm to simulate:
+                            <ul>
+                                <li><span class="highlighted-text">qft</span> - Quantum Fourier Transform</li>
+                                <li><span class="highlighted-text">grovers</span> - Grover's Search Algorithm</li>
+                                <li><span class="highlighted-text">teleport</span> - Quantum Teleportation</li>
+                            </ul>
+                            Example: quantum qft
+                        </div>
+                    `);
+                    return;
+                }
+                
+                let simulationOutput;
+                
+                switch (algorithm) {
+                    case 'qft':
+                        simulationOutput = `
+                            <div class="response-section">
+                                <span class="highlighted-text">Simulating Quantum Fourier Transform</span>
+                            </div>
+                            <div class="response-section">
+                                Initializing 4-qubit system in state |0000⟩
+                                <br>Applying Hadamard gates to all qubits...
+                                <br>System in superposition state.
+                                <br>Applying controlled phase rotations...
+                                <br>Swapping qubits...
+                                <br>QFT complete!
+                            </div>
+                            <div class="response-section">
+                                <pre style="background-color: rgba(0,0,0,0.3); padding: 10px; overflow-x: auto;">
+┌───┐     ┌──────────────┐┌──────┐┌──────────┐
+┤ H ├──■──┤ U1(π/2)      ├┤ U1(0)├┤ U1(0)    ├
+└───┘┌─┴─┐└──────────────┘└──────┘└──────────┘
+┌───┐┤ H ├─────■─────────┌──────┐┌──────────┐
+┤ H ├└───┘┌────┴────┐┌──┐│ Swap │┤ U1(π/2)  ├
+└───┘┌───┐│ U1(π/4) ├┤U1││      │└──────────┘
+┌───┐┤ H ├└─────────┘└──┘└──────┘┌──────────┐
+┤ H ├└───┘┌──────────┐┌──────┐┌──┴───┐┌────┐
+└───┘     └──────────┘└──────┘└──────┘└────┘</pre>
+                            </div>
+                        `;
+                        break;
+                    
+                    case 'grovers':
+                        simulationOutput = `
+                            <div class="response-section">
+                                <span class="highlighted-text">Simulating Grover's Search Algorithm</span>
+                            </div>
+                            <div class="response-section">
+                                Searching for target element in database of size 4 (2 qubits)
+                                <br>Initializing system in uniform superposition...
+                                <br>Applying oracle for marked element |11⟩...
+                                <br>Applying diffusion operator...
+                                <br>Iteration 1 complete!
+                                <br>Measuring system...
+                                <br>Found target element |11⟩ with probability 94.5%
+                            </div>
+                            <div class="response-section">
+                                <pre style="background-color: rgba(0,0,0,0.3); padding: 10px; overflow-x: auto;">
+Probability Distribution:
+|00⟩: 1.8%
+|01⟩: 1.8% 
+|10⟩: 1.8%
+|11⟩: 94.5% ████████████████████</pre>
+                            </div>
+                            <div class="response-section">
+                                Grover's algorithm achieves quadratic speedup over classical search!
+                            </div>
+                        `;
+                        break;
+                    
+                    case 'teleport':
+                        simulationOutput = `
+                            <div class="response-section">
+                                <span class="highlighted-text">Simulating Quantum Teleportation</span>
+                            </div>
+                            <div class="response-section">
+                                Preparing qubit state to teleport: |ψ⟩ = 0.707|0⟩ + 0.707i|1⟩
+                                <br>Creating entangled Bell pair between qubits 1 and 2...
+                                <br>Applying CNOT gate between qubit 0 and qubit 1...
+                                <br>Applying Hadamard gate to qubit 0...
+                                <br>Measuring qubits 0 and 1: Result = |10⟩
+                                <br>Applying correctional Z gate to qubit 2...
+                                <br>Teleportation complete!
+                            </div>
+                            <div class="response-section">
+                                <pre style="background-color: rgba(0,0,0,0.3); padding: 10px; overflow-x: auto;">
+┌────────────┐     ┌───┐     ┌─┐   
+┤ Initialize ├──■──┤ H ├──■──┤M├───────────────────
+└────────────┘┌─┴─┐└───┘┌─┴─┐└╥┘┌─┐               
+┌────────────┐┤ X ├─────┤ X ├─╫─┤M├─────────────── 
+┤            ├└───┘     └───┘ ║ └╥┘┌───┐ ┌───┐     
+┤ Bell Pair  ├─────────────■──╫──╫─┤ X ├─┤ Z ├─────
+└────────────┘             └──╫──╫─┘───┘ └───┘     
+                             ║  ║                  
+Classical Channel ═══════════╩══╩══════════════════
+                           0  1                    </pre>
+                            </div>
+                            <div class="response-section">
+                                Verification: Final state of qubit 2 = 0.707|0⟩ + 0.707i|1⟩
+                                <br>Successful teleportation!
+                            </div>
+                        `;
+                        break;
+                }
+                
+                displayResponse(simulationOutput);
+            }
+            
+            function showRandomQuote() {
+                const quotes = [
+                    { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
+                    { text: "The most disastrous thing that you can ever learn is your first programming language.", author: "Alan Kay" },
+                    { text: "Quantum computing is not just about solving problems faster; it's about solving problems that were previously impossible.", author: "Richard Feynman" },
+                    { text: "The difficulty lies not so much in developing new ideas as in escaping from old ones.", author: "John Maynard Keynes" },
+                    { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
+                    { text: "The measure of intelligence is the ability to change.", author: "Albert Einstein" },
+                    { text: "In theory, there is no difference between theory and practice. In practice, there is.", author: "Yogi Berra" },
+                    { text: "Computers are good at following instructions, but not at reading your mind.", author: "Donald Knuth" },
+                    { text: "Before software can be reusable it first has to be usable.", author: "Ralph Johnson" },
+                    { text: "The future is already here — it's just not very evenly distributed.", author: "William Gibson" }
+                ];
+                
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">"${randomQuote.text}"</span>
+                    </div>
+                    <div class="response-section">
+                        — ${randomQuote.author}
+                    </div>
+                `);
+            }
+            
+            function showWeather(city) {
+                if (!city) {
+                    displayResponse('Please specify a city name. Example: weather London', 'response-error');
+                    return;
+                }
+                
+                // Simulate weather data (in a real implementation, you would fetch this from an API)
+                const weatherData = {
+                    'new york': { temp: '72°F', condition: 'Partly Cloudy', humidity: '45%' },
+                    'london': { temp: '65°F', condition: 'Rainy', humidity: '80%' },
+                    'tokyo': { temp: '77°F', condition: 'Clear', humidity: '40%' },
+                    'paris': { temp: '70°F', condition: 'Sunny', humidity: '35%' },
+                    'sydney': { temp: '82°F', condition: 'Clear', humidity: '30%' },
+                    'berlin': { temp: '68°F', condition: 'Cloudy', humidity: '55%' },
+                    'toronto': { temp: '61°F', condition: 'Snowy', humidity: '75%' },
+                    'mumbai': { temp: '88°F', condition: 'Humid', humidity: '90%' }
+                };
+                
+                const normalizedCity = city.toLowerCase();
+                
+                if (weatherData[normalizedCity]) {
+                    const data = weatherData[normalizedCity];
+                    
+                    displayResponse(`
+                        <div class="response-section">
+                            <span class="highlighted-text">Weather for ${city}</span>
+                        </div>
+                        <div class="response-section">
+                            Temperature: ${data.temp}<br>
+                            Condition: ${data.condition}<br>
+                            Humidity: ${data.humidity}
+                        </div>
+                        <div class="response-section">
+                            Note: This is simulated weather data for demonstration purposes.
+                        </div>
+                    `);
+                } else {
+                    displayResponse(`
+                        <div class="response-section response-error">
+                            Weather data not available for "${city}".
+                        </div>
+                        <div class="response-section">
+                            Try one of these cities: New York, London, Tokyo, Paris, Sydney, Berlin, Toronto, Mumbai
+                        </div>
+                    `);
+                }
+            }
+            
+            function tellJoke() {
+                const jokes = [
+                    "Why do programmers prefer dark mode? Because light attracts bugs!",
+                    "Why did the developer go broke? Because they lost their cache!",
+                    "A SQL query walks into a bar, walks up to two tables and asks, 'Can I join you?'",
+                    "What's a quantum physicist's favorite food? Probability waves!",
+                    "Why was the function sad after a party? It didn't get called!",
+                    "Why do Java developers wear glasses? Because they don't C#!",
+                    "What did the quantum physicist say when his cat died and didn't die? That's the superposition I was in!",
+                    "How many programmers does it take to change a light bulb? None, that's a hardware problem!",
+                    "Two quantum physicists walk into a bar. Maybe.",
+                    "What do you call 8 hobbits? A hobbyte!"
+                ];
+                
+                const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+                
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Here's a joke for you:</span>
+                    </div>
+                    <div class="response-section">
+                        ${randomJoke}
+                    </div>
+                `);
+            }
+            
+            function showDate() {
+                const now = new Date();
+                const dateString = now.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric'
+                });
+                const timeString = now.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Current Date and Time</span>
+                    </div>
+                    <div class="response-section">
+                        ${dateString}<br>
+                        ${timeString}
+                    </div>
+                `);
+            }
+            
+            function listFiles() {
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Files in current directory:</span>
+                    </div>
+                    <div class="response-section">
+                        <span style="color: #00ffff;">about.txt</span><br>
+                        <span style="color: #00ffff;">skills.json</span><br>
+                        <span style="color: #00ffff;">projects.md</span><br>
+                        <span style="color: #00ffff;">resume.pdf</span><br>
+                        <span style="color: #ff00ff;">quantum-simulator.py</span><br>
+                        <span style="color: #ff00ff;">neural-network.py</span><br>
+                        <span style="color: #ff00ff;">portfolio.html</span><br>
+                        <span style="color: #ff00ff;">README.md</span><br>
+                    </div>
+                `);
+            }
+            
+            function catFile(filename) {
+                const files = {
+                    'about.txt': `
+# About Sujay Kapadnis
+
+I'm a machine learning engineer and quantum computing enthusiast.
+My passion is developing AI solutions that solve real-world problems.
+I enjoy exploring the intersection of quantum computing and machine learning.
+
+In my free time, I contribute to open-source projects and mentor aspiring developers.
+`,
+                    'skills.json': `
+{
+  "technical": [
+    {
+      "category": "Machine Learning",
+      "skills": ["Neural Networks", "Computer Vision", "NLP", "Reinforcement Learning"]
+    },
+    {
+      "category": "Programming",
+      "skills": ["Python", "JavaScript", "TypeScript", "C++", "Java", "SQL"]
+    },
+    {
+      "category": "Frameworks",
+      "skills": ["TensorFlow", "PyTorch", "React", "Node.js", "Django", "Flask"]
+    }
+  ],
+  "soft": ["Problem Solving", "Communication", "Leadership", "Teamwork", "Adaptability"]
+}
+`,
+                    'projects.md': `
+# Notable Projects
+
+## Gestura
+A state-of-the-art transformer model capable of transcribing Sign Language Fingerspelling.
+
+## EnGuru
+Groq-Powered AI Tutor Capable of Meaningful Conversations.
+
+## BhasaAI
+Bengali Speech Recognition solution trained on top of OpenAI Whisper.
+
+## Quantum Timeline Portal
+An immersive 3D visualization of project history.
+`,
+                    'README.md': `
+# Quantum Terminal
+
+An interactive command-line interface with quantum-themed effects.
+
+## Features
+- Quantum particle effects
+- Matrix digital rain
+- Quantum algorithm simulations
+- Weather information
+- Random quotes and jokes
+
+## Commands
+Type 'help' to see all available commands.
+`
+                };
+                
+                if (files[filename]) {
+                    const content = document.createElement('pre');
+                    content.style.backgroundColor = 'rgba(0,0,0,0.3)';
+                    content.style.padding = '10px';
+                    content.style.overflow = 'auto';
+                    content.textContent = files[filename];
+                    
+                    const response = document.createElement('div');
+                    response.className = 'response-section';
+                    response.appendChild(content);
+                    
+                    displayResponse(response);
+                } else {
+                    displayResponse(`File not found: ${filename}`, 'response-error');
+                }
+            }
+            
+            function echoCommand(text) {
+                if (text) {
+                    displayResponse(text);
+                } else {
+                    displayResponse('');
+                }
+            }
+            
+            function whoami() {
+                displayResponse(`
+                    <div class="response-section">
+                        <span class="highlighted-text">Current User:</span> quantum-visitor
+                    </div>
+                    <div class="response-section">
+                        Session started: ${new Date().toLocaleTimeString()}
+                    </div>
+                `);
+            }
+            
+            function exitTerminal() {
+                displayResponse(`
+                    <div class="response-section">
+                        Exiting terminal and returning to main website...
+                    </div>
+                `);
+                
+                // Redirect after a brief delay
+                setTimeout(() => {
+                    window.location.href = './index.html';
+                }, 1500);
+            }
+            
+            function createQuantumParticles() {
+                // Create quantum particles
+                const numParticles = 50;
+                
+                for (let i = 0; i < numParticles; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'quantum-particle';
+                    
+                    // Random initial position
+                    const x = Math.random() * 100;
+                    const y = Math.random() * 100;
+                    
+                    particle.style.left = `${x}%`;
+                    particle.style.top = `${y}%`;
+                    
+                    // Random color (cyan to magenta spectrum)
+                    const colorFactor = Math.random();
+                    const r = Math.floor(255 * (1 - colorFactor));
+                    const g = Math.floor(255 * 0.5 * (1 - Math.abs(2 * colorFactor - 1)));
+                    const b = Math.floor(255 * colorFactor);
+                    
+                    particle.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    
+                    // Size variation
+                    const size = Math.random() * 3 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Add to container
+                    particleContainer.appendChild(particle);
+                    
+                    // Animate particle
+                    animateQuantumParticle(particle);
+                }
+            }
+            
+            function animateQuantumParticle(particle) {
+                // Create random movement pattern
+                const duration = Math.random() * 15000 + 10000;
+                const xMove = Math.random() * 30 - 15;
+                const yMove = Math.random() * 30 - 15;
+                
+                // Apply animation
+                const animation = particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: Math.random() * 0.5 + 0.2 },
+                    { transform: `translate(${xMove}px, ${yMove}px) scale(${Math.random() * 1.5 + 0.5})`, opacity: Math.random() * 0.5 + 0.5 }
+                ], {
+                    duration: duration,
+                    iterations: Infinity,
+                    direction: 'alternate',
+                    easing: 'ease-in-out'
+                });
+                
+                // Overlap with another animation for more complex movement
+                const rotateAnimation = particle.animate([
+                    { transform: 'rotate(0deg)' },
+                    { transform: 'rotate(360deg)' }
+                ], {
+                    duration: Math.random() * 10000 + 10000,
+                    iterations: Infinity,
+                    easing: 'linear'
+                });
+            }
+            
+            // Keep the terminal input focused when the window is clicked
+            window.addEventListener('click', () => {
+                terminalInput.focus();
+            });
+        });
+    </script>
+</body>
+</html>
