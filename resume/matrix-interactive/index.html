@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Matrix: Interactive Resume</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --matrix-green: #00FF41;
+            --matrix-dark-green: #003B00;
+            --matrix-black: #0D0208;
+            --terminal-bg: rgba(0, 10, 0, 0.85);
+            --terminal-border: #00FF41;
+            --highlight-color: #08FF08;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Share Tech Mono', monospace;
+            background: var(--matrix-black);
+            color: var(--matrix-green);
+            position: relative;
+        }
+
+        /* Scene container */
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Matrix code rain */
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Matrix intro */
+        #intro-sequence {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #wake-up-text {
+            font-size: 2.5rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        #pill-choice {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        .pill {
+            width: 100px;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #FFF;
+        }
+
+        #red-pill {
+            background: linear-gradient(45deg, #990000, #FF0000);
+        }
+
+        #blue-pill {
+            background: linear-gradient(45deg, #000099, #0000FF);
+        }
+
+        .pill:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Main interface */
+        #main-interface {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1200px;
+            height: 80%;
+            background: var(--terminal-bg);
+            border: 2px solid var(--terminal-border);
+            border-radius: 8px;
+            padding: 20px;
+            z-index: 5;
+            display: none;
+            overflow: hidden;
+        }
+
+        #interface-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--matrix-green);
+            padding-bottom: 10px;
+        }
+
+        #username {
+            font-size: 1.3rem;
+            color: var(--highlight-color);
+        }
+
+        #system-status {
+            font-size: 0.9rem;
+        }
+
+        #interface-content {
+            display: flex;
+            height: calc(100% - 70px);
+        }
+
+        #sidebar {
+            width: 200px;
+            border-right: 1px solid var(--matrix-green);
+            padding-right: 15px;
+            overflow-y: auto;
+        }
+
+        .sidebar-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-item:hover, .sidebar-item.active {
+            background: rgba(0, 255, 65, 0.1);
+            border-left: 3px solid var(--matrix-green);
+        }
+
+        .sidebar-item.glitch {
+            animation: glitch 0.2s linear;
+        }
+
+        #content-area {
+            flex: 1;
+            margin-left: 20px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: var(--highlight-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Loading indicator */
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots:after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Skill bars */
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: var(--matrix-dark-green);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: var(--matrix-green);
+            width: 0;
+            transition: width 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            position: relative;
+        }
+
+        .skill-level:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 5px;
+            background: var(--highlight-color);
+        }
+
+        /* Experience items */
+        .experience-item, .project-item, .education-item {
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 2px solid var(--matrix-green);
+            position: relative;
+        }
+
+        .experience-item:before, .project-item:before, .education-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -6px;
+            width: 10px;
+            height: 10px;
+            background: var(--matrix-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--matrix-green);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: var(--highlight-color);
+        }
+
+        .item-subtitle {
+            color: var(--matrix-green);
+            margin-bottom: 5px;
+        }
+
+        .item-period {
+            color: rgba(0, 255, 65, 0.7);
+        }
+
+        .item-description {
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        /* Personal info */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: rgba(0, 255, 65, 0.05);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--matrix-dark-green);
+        }
+
+        .info-item-header {
+            margin-bottom: 10px;
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        /* About me textarea effect */
+        #about-text {
+            width: 100%;
+            background: transparent;
+            color: var(--matrix-green);
+            border: 1px solid var(--matrix-dark-green);
+            padding: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            margin-top: 10px;
+            height: 200px;
+            resize: none;
+            outline: none;
+            overflow: hidden;
+        }
+
+        /* Override scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--matrix-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--matrix-dark-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--matrix-green);
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-3px, 3px) }
+            40% { transform: translate(-3px, -3px) }
+            60% { transform: translate(3px, 3px) }
+            80% { transform: translate(3px, -3px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Modal dialog */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--terminal-bg);
+            border: 2px solid var(--terminal-border);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--matrix-green);
+        }
+
+        .modal-title {
+            color: var(--highlight-color);
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--matrix-green);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--highlight-color);
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Custom elements */
+        .binary {
+            opacity: 0.2;
+            position: absolute;
+            font-size: 0.8rem;
+        }
+
+        .command-line {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .command-prompt {
+            color: var(--highlight-color);
+            margin-right: 10px;
+        }
+
+        .command-input {
+            background: transparent;
+            border: none;
+            color: var(--matrix-green);
+            font-family: 'Share Tech Mono', monospace;
+            flex: 1;
+            outline: none;
+        }
+
+        .decrypt-button {
+            background: var(--matrix-dark-green);
+            color: var(--matrix-green);
+            border: 1px solid var(--matrix-green);
+            padding: 5px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Share Tech Mono', monospace;
+            margin-top: 10px;
+        }
+
+        .decrypt-button:hover {
+            background: var(--matrix-green);
+            color: var(--matrix-black);
+        }
+
+        .glitch-effect {
+            animation: glitch 0.3s linear;
+        }
+
+        /* Contact buttons */
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-button {
+            background: var(--matrix-dark-green);
+            color: var(--matrix-green);
+            border: 1px solid var(--matrix-green);
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Share Tech Mono', monospace;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .contact-button:hover {
+            background: var(--matrix-green);
+            color: var(--matrix-black);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .contact-button i {
+            margin-right: 8px;
+        }
+
+        /* Easter eggs and interactive elements */
+        .easter-egg {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .easter-egg:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--matrix-green);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .easter-egg:hover:after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Hack minigame */
+        .hack-game {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--matrix-dark-green);
+            background: rgba(0, 10, 0, 0.5);
+        }
+
+        .hack-interface {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .hack-symbol {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--matrix-dark-green);
+            background: rgba(0, 10, 0, 0.5);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hack-symbol:hover {
+            background: var(--matrix-dark-green);
+        }
+
+        .hack-symbol.selected {
+            background: var(--matrix-green);
+            color: var(--matrix-black);
+        }
+
+        .hack-progress {
+            height: 5px;
+            background: var(--matrix-dark-green);
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .hack-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--matrix-green);
+            transition: width 0.3s;
+        }
+
+        .hack-status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #interface-content {
+                flex-direction: column;
+            }
+
+            #sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--matrix-green);
+                padding-right: 0;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+                overflow-x: auto;
+                white-space: nowrap;
+                display: flex;
+                gap: 10px;
+            }
+
+            .sidebar-item {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                padding: 10px;
+                display: inline-block;
+            }
+
+            .sidebar-item:hover, .sidebar-item.active {
+                border-left: none;
+                border-bottom: 3px solid var(--matrix-green);
+            }
+
+            #content-area {
+                margin-left: 0;
+                padding-right: 0;
+            }
+
+            #about-text {
+                height: 150px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pill {
+                width: 80px;
+                height: 30px;
+            }
+        }
+
+        /* Loading cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 15px;
+            background-color: var(--matrix-green);
+            animation: blink 1s step-end infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent; }
+            50% { background-color: var(--matrix-green); }
+        }
+
+        /* Phone icon */
+        .phone-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 2px solid var(--matrix-green);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 15;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .phone-icon:hover {
+            transform: scale(1.1);
+            background: rgba(0, 255, 65, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
+        }
+
+        /* Back button */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            font-family: 'Share Tech Mono', monospace;
+            text-decoration: none;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--matrix-green);
+            color: var(--matrix-black);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <a href="../" class="back-button">← Return to Gallery</a>
+
+    <!-- Scene container -->
+    <div id="scene-container">
+        <canvas id="matrix-canvas"></canvas>
+        
+        <!-- Intro sequence -->
+        <div id="intro-sequence">
+            <div id="wake-up-text">Wake up, Neo...</div>
+            <div id="pill-choice">
+                <div id="blue-pill" class="pill" title="Return to normal resume"></div>
+                <div id="red-pill" class="pill" title="Enter the Matrix"></div>
+            </div>
+        </div>
+        
+        <!-- Main interface -->
+        <div id="main-interface">
+            <div id="interface-header">
+                <div id="username">NEO@MATRIX:~$</div>
+                <div id="system-status">SYSTEM STATUS: <span class="status-value">ONLINE</span></div>
+            </div>
+            
+            <div id="interface-content">
+                <div id="sidebar">
+                    <div class="sidebar-item active" data-section="profile">Profile</div>
+                    <div class="sidebar-item" data-section="skills">Skills</div>
+                    <div class="sidebar-item" data-section="experience">Experience</div>
+                    <div class="sidebar-item" data-section="projects">Projects</div>
+                    <div class="sidebar-item" data-section="education">Education</div>
+                    <div class="sidebar-item" data-section="contact">Contact</div>
+                    <div class="sidebar-item easter-egg" data-section="rabbit-hole">Follow the White Rabbit</div>
+                </div>
+                
+                <div id="content-area">
+                    <!-- Profile Section -->
+                    <div id="profile" class="content-section active">
+                        <h2 class="section-title">IDENTITY: SUJAY KAPADNIS</h2>
+                        
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-item-header">DESIGNATION</div>
+                                <div class="info-item-content">Quantum AI Engineer</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-header">LOCATION</div>
+                                <div class="info-item-content">Outside the Simulation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-header">STATUS</div>
+                                <div class="info-item-content">Awakened</div>
+                            </div>
+                        </div>
+                        
+                        <div class="command-line">
+                            <div class="command-prompt">NEO@MATRIX:~$</div>
+                            <input type="text" class="command-input" placeholder="cat about_me.txt" disabled>
+                        </div>
+                        
+                        <textarea id="about-text" readonly></textarea>
+                        
+                        <button class="decrypt-button" id="decrypt-about">Decrypt Data</button>
+                    </div>
+                    
+                    <!-- Skills Section -->
+                    <div id="skills" class="content-section">
+                        <h2 class="section-title">ABILITIES</h2>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">Machine Learning</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="95"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">Deep Learning</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="90"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">Natural Language Processing</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">Computer Vision</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="92"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">Python</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="98"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">TensorFlow</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">Matrix Manipulation</div>
+                                <div class="skill-percentage">0%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" data-level="99"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="decrypt-button" id="load-skills">Load Abilities</button>
+                    </div>
+                    
+                    <!-- Experience Section -->
+                    <div id="experience" class="content-section">
+                        <h2 class="section-title">MISSION HISTORY</h2>
+                        
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-title">AI Research Engineer</div>
+                                <div class="item-period">2023 - Present</div>
+                            </div>
+                            <div class="item-subtitle">Quantum Innovations Inc.</div>
+                            <div class="item-description">
+                                Leading research on breakthrough quantum machine learning algorithms. Spearheaded development of neural networks with 37% improved performance. Published multiple research papers while evading Agent detection.
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-title">Machine Learning Engineer</div>
+                                <div class="item-period">2021 - 2023</div>
+                            </div>
+                            <div class="item-subtitle">TechNova Solutions</div>
+                            <div class="item-description">
+                                Built and deployed real-time machine learning systems processing over 10TB of data daily. Implemented computer vision algorithms for autonomous navigation and reduced model inference time by 65%.
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-title">Data Science Intern</div>
+                                <div class="item-period">2020 - 2021</div>
+                            </div>
+                            <div class="item-subtitle">Global AI Research Lab</div>
+                            <div class="item-description">
+                                Contributed to natural language processing research projects and developed data pipelines for efficient preprocessing of large text corpora. Created visualization tools for interpreting complex neural network behaviors.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Projects Section -->
+                    <div id="projects" class="content-section">
+                        <h2 class="section-title">SIMULATION ALTERATIONS</h2>
+                        
+                        <div class="project-item">
+                            <div class="item-header">
+                                <div class="item-title easter-egg" data-hint="Click to hack project database">Gestura</div>
+                            </div>
+                            <div class="item-description">
+                                A state-of-the-art transformer model capable of transcribing Sign Language Fingerspelling based on Landmarks from Google Holistic Mediapipe.
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="item-header">
+                                <div class="item-title">EnGuru</div>
+                            </div>
+                            <div class="item-description">
+                                Groq-Powered AI Tutor Capable of Meaningful Conversations based on User's understanding of the Subject.
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="item-header">
+                                <div class="item-title">BhasaAI</div>
+                            </div>
+                            <div class="item-description">
+                                Solution to a Bengali Speech Recognition Research Competition, trained on top of OpenAI Whisper.
+                            </div>
+                        </div>
+                        
+                        <div class="hack-game" style="display: none;">
+                            <div>SECURITY BREACH DETECTED. COMPLETE THE SEQUENCE TO GAIN ACCESS:</div>
+                            <div class="hack-interface">
+                                <!-- Symbols will be added dynamically -->
+                            </div>
+                            <div class="hack-progress">
+                                <div class="hack-progress-bar"></div>
+                            </div>
+                            <div class="hack-status">STATUS: WAITING FOR INPUT</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Education Section -->
+                    <div id="education" class="content-section">
+                        <h2 class="section-title">TRAINING PROGRAMS</h2>
+                        
+                        <div class="education-item">
+                            <div class="item-header">
+                                <div class="item-title">Master of Science in Artificial Intelligence</div>
+                                <div class="item-period">2018 - 2020</div>
+                            </div>
+                            <div class="item-subtitle">Tech University of Tomorrow</div>
+                            <div class="item-description">
+                                Specialized in deep learning architectures and reinforcement learning. Thesis: "Quantum Computing Applications in Neural Network Optimization."
+                            </div>
+                        </div>
+                        
+                        <div class="education-item">
+                            <div class="item-header">
+                                <div class="item-title">Bachelor of Engineering in Computer Science</div>
+                                <div class="item-period">2014 - 2018</div>
+                            </div>
+                            <div class="item-subtitle">Institute of Advanced Computing</div>
+                            <div class="item-description">
+                                Graduated with honors. Relevant coursework: Machine Learning, Data Structures, Algorithm Design, Computer Vision.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Section -->
+                    <div id="contact" class="content-section">
+                        <h2 class="section-title">COMMUNICATION CHANNELS</h2>
+                        
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-item-header">EMAIL</div>
+                                <div class="info-item-content">sujaykapadnis.33@gmail.com</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-header">LOCATION</div>
+                                <div class="info-item-content">Remote / Outside the Matrix</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-actions">
+                            <a href="mailto:sujaykapadnis.33@gmail.com" class="contact-button">
+                                <i class="fas fa-envelope"></i> Send Email
+                            </a>
+                            <a href="https://www.linkedin.com/in/sujay-kapadnis" target="_blank" class="contact-button">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="https://github.com/justsujay" target="_blank" class="contact-button">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://twitter.com/sujay_kapadnis" target="_blank" class="contact-button">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Easter Egg Section -->
+                    <div id="rabbit-hole" class="content-section">
+                        <h2 class="section-title">THE TRUTH</h2>
+                        
+                        <div class="item-description">
+                            <p>What is the Matrix? Control. The Matrix is a computer-generated dream world built to keep us under control in order to change a human being into this.</p>
+                            <p>Unfortunately, no one can be told what the Matrix is. You have to see it for yourself.</p>
+                        </div>
+                        
+                        <div class="hack-game" style="display: block; margin-top: 30px;">
+                            <div>ENTER THE CORRECT CODE SEQUENCE TO REVEAL THE TRUTH:</div>
+                            <div class="cipher-text" style="margin: 20px 0; font-family: monospace; letter-spacing: 2px;">
+                                010101000110100001100101001000000111010001110010011101010111010001101000001000000110100101110011001000000111010001101000011001010111001001100101001000000110100101110011001000000110111001101111001000000111001101110000011011110110111101101110
+                            </div>
+                            <input type="text" class="command-input" placeholder="Enter decryption key..." style="width: 100%; margin: 15px 0; border: 1px solid var(--matrix-dark-green); padding: 10px;">
+                            <button class="decrypt-button" id="reveal-truth">Decrypt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Phone Icon for Mobile -->
+    <div class="phone-icon" id="phone-trigger">
+        <i class="fas fa-phone" style="color: var(--matrix-green); font-size: 1.5rem;"></i>
+    </div>
+    
+    <!-- Project Detail Modal -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Project Details</div>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Project information will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas dimensions
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Matrix characters
+        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?";
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        
+        // Initialize drops
+        let drops = [];
+        function initDrops() {
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+        }
+        
+        initDrops();
+        
+        // Drawing function
+        function drawMatrix() {
+            // Semi-transparent black to create fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Green text
+            ctx.fillStyle = '#00FF41';
+            ctx.font = fontSize + 'px monospace';
+            
+            // Draw characters
+            for (let i = 0; i < drops.length; i++) {
+                // Random character
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                
+                // Draw the character
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                
+                // Move the drop down
+                drops[i]++;
+                
+                // Reset drop to top with random delay when it reaches bottom
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+            }
+        }
+        
+        // Intro sequence
+        const introSequence = document.getElementById('intro-sequence');
+        const wakeUpText = document.getElementById('wake-up-text');
+        const pillChoice = document.getElementById('pill-choice');
+        const redPill = document.getElementById('red-pill');
+        const bluePill = document.getElementById('blue-pill');
+        const mainInterface = document.getElementById('main-interface');
+        
+        function startIntro() {
+            setTimeout(() => {
+                wakeUpText.style.opacity = 1;
+                
+                setTimeout(() => {
+                    wakeUpText.textContent = "The Matrix has you...";
+                    wakeUpText.classList.add('glitch-effect');
+                    
+                    setTimeout(() => {
+                        wakeUpText.classList.remove('glitch-effect');
+                        wakeUpText.textContent = "Follow the white rabbit.";
+                        
+                        setTimeout(() => {
+                            wakeUpText.textContent = "Knock, knock, Neo.";
+                            
+                            setTimeout(() => {
+                                pillChoice.style.opacity = 1;
+                            }, 2000);
+                        }, 2000);
+                    }, 2000);
+                }, 2000);
+            }, 1000);
+        }
+        
+        // Initialize matrix animation
+        let matrixAnimationId;
+        
+        function startMatrixAnimation() {
+            if (matrixAnimationId) {
+                cancelAnimationFrame(matrixAnimationId);
+            }
+            
+            function animate() {
+                drawMatrix();
+                matrixAnimationId = requestAnimationFrame(animate);
+            }
+            
+            matrixAnimationId = requestAnimationFrame(animate);
+        }
+        
+        startMatrixAnimation();
+        startIntro();
+        
+        // Pill choices
+        redPill.addEventListener('click', () => {
+            pillChoice.style.opacity = 0;
+            wakeUpText.style.opacity = 0;
+            
+            setTimeout(() => {
+                introSequence.style.opacity = 0;
+                
+                setTimeout(() => {
+                    introSequence.style.display = 'none';
+                    mainInterface.style.display = 'block';
+                    
+                    // Add some binary code animations in the background
+                    addBinaryBackground();
+                    
+                    // Initialize "about me" text typing animation
+                    initTypewriter();
+                }, 1000);
+            }, 1000);
+        });
+        
+        bluePill.addEventListener('click', () => {
+            window.location.href = '../matrix/';
+        });
+        
+        // Binary background
+        function addBinaryBackground() {
+            const container = document.getElementById('main-interface');
+            
+            for (let i = 0; i < 15; i++) {
+                const binary = document.createElement('div');
+                binary.className = 'binary';
+                binary.textContent = generateRandomBinary();
+                binary.style.position = 'absolute';
+                binary.style.top = Math.random() * 100 + '%';
+                binary.style.left = Math.random() * 100 + '%';
+                binary.style.fontSize = (Math.random() * 0.5 + 0.5) + 'rem';
+                binary.style.opacity = Math.random() * 0.2 + 0.1;
+                container.appendChild(binary);
+                
+                // Animate the binary
+                setInterval(() => {
+                    binary.textContent = generateRandomBinary();
+                }, Math.random() * 3000 + 2000);
+            }
+        }
+        
+        function generateRandomBinary() {
+            let result = '';
+            const length = Math.floor(Math.random() * 20) + 10;
+            
+            for (let i = 0; i < length; i++) {
+                result += Math.random() > 0.5 ? '1' : '0';
+            }
+            
+            return result;
+        }
+        
+        // About me text typing animation
+        function initTypewriter() {
+            const aboutText = document.getElementById('about-text');
+            const fullText = "I'm a machine learning engineer specializing in AI solutions that solve real-world problems. My expertise spans deep learning, computer vision, and quantum computing applications. I enjoy exploring the intersection of cutting-edge technology and practical innovation.";
+            
+            let encryptedText = '';
+            for (let i = 0; i < fullText.length; i++) {
+                encryptedText += matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            }
+            
+            aboutText.value = encryptedText;
+            
+            document.getElementById('decrypt-about').addEventListener('click', () => {
+                typeWriter(aboutText, fullText);
+            });
+        }
+        
+        function typeWriter(element, text, i = 0) {
+            if (i < text.length) {
+                // Get the current text
+                let currentText = element.value;
+                
+                // Replace the character at position i
+                const newChar = text.charAt(i);
+                currentText = currentText.substring(0, i) + newChar + currentText.substring(i + 1);
+                
+                // Update the element
+                element.value = currentText;
+                
+                // Schedule the next character
+                setTimeout(() => typeWriter(element, text, i + 1), Math.random() * 50 + 30);
+            }
+        }
+        
+        // Sidebar navigation
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const contentSections = document.querySelectorAll('.content-section');
+        
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                sidebarItems.forEach(si => si.classList.remove('active'));
+                
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // Show the corresponding section
+                const sectionId = item.getAttribute('data-section');
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                    }
+                });
+                
+                // Add glitch effect
+                item.classList.add('glitch');
+                setTimeout(() => item.classList.remove('glitch'), 300);
+            });
+        });
+        
+        // Skills animation
+        document.getElementById('load-skills').addEventListener('click', () => {
+            const skillLevels = document.querySelectorAll('.skill-level');
+            const percentages = document.querySelectorAll('.skill-percentage');
+            
+            skillLevels.forEach((level, index) => {
+                const targetLevel = level.getAttribute('data-level');
+                
+                // Start loading animation
+                let currentLevel = 0;
+                const interval = setInterval(() => {
+                    currentLevel += 1;
+                    level.style.width = currentLevel + '%';
+                    percentages[index].textContent = currentLevel + '%';
+                    
+                    if (currentLevel >= targetLevel) {
+                        clearInterval(interval);
+                    }
+                }, 15);
+            });
+        });
+        
+        // Phone trigger
+        document.getElementById('phone-trigger').addEventListener('click', () => {
+            if (mainInterface.style.display === 'none') {
+                mainInterface.style.display = 'block';
+                introSequence.style.display = 'none';
+            } else {
+                mainInterface.style.display = 'none';
+                introSequence.style.display = 'flex';
+                pillChoice.style.opacity = 1;
+                wakeUpText.style.opacity = 1;
+                wakeUpText.textContent = "Want to go back in?";
+            }
+        });
+        
+        // Hack minigame initialization
+        const hackSymbols = ['@', '#', '$', '%', '&', '*', '+', '-', '=', '<', '>', '?'];
+        const correctSequence = ['@', '#', '$', '*'];
+        let playerSequence = [];
+        let isHacking = false;
+        
+        function startHackGame() {
+            isHacking = true;
+            playerSequence = [];
+            const hackGame = document.querySelector('.hack-game');
+            hackGame.style.display = 'block';
+            
+            const hackInterface = document.querySelector('.hack-interface');
+            hackInterface.innerHTML = '';
+            
+            // Create symbols
+            for (let i = 0; i < 12; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'hack-symbol';
+                symbol.textContent = hackSymbols[i];
+                symbol.addEventListener('click', () => selectSymbol(symbol, hackSymbols[i]));
+                hackInterface.appendChild(symbol);
+            }
+            
+            // Reset progress
+            document.querySelector('.hack-progress-bar').style.width = '0%';
+            document.querySelector('.hack-status').textContent = 'STATUS: WAITING FOR INPUT';
+        }
+        
+        function selectSymbol(element, symbol) {
+            if (!isHacking) return;
+            
+            element.classList.add('selected');
+            playerSequence.push(symbol);
+            
+            // Update progress
+            const progress = (playerSequence.length / correctSequence.length) * 100;
+            document.querySelector('.hack-progress-bar').style.width = progress + '%';
+            
+            // Check if sequence is complete
+            if (playerSequence.length === correctSequence.length) {
+                checkSequence();
+            }
+        }
+        
+        function checkSequence() {
+            let correct = true;
+            
+            for (let i = 0; i < correctSequence.length; i++) {
+                if (playerSequence[i] !== correctSequence[i]) {
+                    correct = false;
+                    break;
+                }
+            }
+            
+            if (correct) {
+                document.querySelector('.hack-status').textContent = 'STATUS: ACCESS GRANTED';
+                document.querySelector('.hack-progress-bar').style.backgroundColor = '#00FF41';
+                
+                // Show project details
+                setTimeout(() => {
+                    const modal = document.getElementById('project-modal');
+                    const modalBody = modal.querySelector('.modal-body');
+                    
+                    modalBody.innerHTML = `
+                        <h3>Gestura - Encrypted Details</h3>
+                        <p>A revolutionary sign language recognition system utilizing advanced transformer architecture to translate sign language in real-time with 95% accuracy.</p>
+                        <p>Technical stack: TensorFlow, MediaPipe, Transformer Models, Python</p>
+                        <p><strong>Achievement:</strong> Won the Kaggle competition with top ranking solution.</p>
+                        <div style="margin-top: 15px;">
+                            <a href="https://www.kaggle.com/code/sujaykapadnis/transforming-asl-fingerspelling-with-tensorflow" target="_blank" class="contact-button">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    `;
+                    
+                    modal.classList.add('active');
+                    
+                    // Close modal handler
+                    const closeModal = modal.querySelector('.close-modal');
+                    closeModal.addEventListener('click', () => {
+                        modal.classList.remove('active');
+                    });
+                }, 1000);
+                
+            } else {
+                document.querySelector('.hack-status').textContent = 'STATUS: ACCESS DENIED - INCORRECT SEQUENCE';
+                document.querySelector('.hack-progress-bar').style.backgroundColor = '#FF0000';
+                
+                // Reset after delay
+                setTimeout(() => {
+                    document.querySelectorAll('.hack-symbol').forEach(symbol => {
+                        symbol.classList.remove('selected');
+                    });
+                    playerSequence = [];
+                    document.querySelector('.hack-progress-bar').style.width = '0%';
+                    document.querySelector('.hack-progress-bar').style.backgroundColor = '#00FF41';
+                    document.querySelector('.hack-status').textContent = 'STATUS: TRY AGAIN';
+                }, 1500);
+            }
+        }
+        
+        // Initialize hack game on Easter egg click
+        document.querySelector('[data-hint="Click to hack project database"]').addEventListener('click', startHackGame);
+        
+        // Binary decoder for rabbit hole
+        document.getElementById('reveal-truth').addEventListener('click', () => {
+            const input = document.querySelector('#rabbit-hole .command-input').value.trim();
+            
+            if (input.toLowerCase() === 'neoistheone' || input.toLowerCase() === 'there is no spoon') {
+                // Decode the binary
+                const binaryText = document.querySelector('.cipher-text').textContent;
+                let message = '';
+                
+                for (let i = 0; i < binaryText.length; i += 8) {
+                    const byte = binaryText.substr(i, 8);
+                    if (byte.length === 8) {
+                        message += String.fromCharCode(parseInt(byte, 2));
+                    }
+                }
+                
+                document.querySelector('.cipher-text').textContent = message;
+                document.querySelector('#rabbit-hole .hack-status').textContent = 'DECRYPTION SUCCESSFUL';
+            } else {
+                document.querySelector('#rabbit-hole .hack-status').textContent = 'INCORRECT KEY - ACCESS DENIED';
+            }
+        });
+        
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initDrops();
+        });
+    </script>
+</body>
+</html>
