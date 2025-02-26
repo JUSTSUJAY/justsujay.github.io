@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Timeline Portal | Sujay Kapadnis</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+    <style>
+        /* Quantum Timeline Portal Styles */
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #timeline-portal-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #timeline-portal {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .timeline-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .timeline-control-btn {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.7), rgba(255, 0, 255, 0.7));
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .timeline-control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        .project-info-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 15px;
+            color: #fff;
+            font-family: 'Roboto Mono', monospace;
+            z-index: 10;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease;
+        }
+        
+        .project-info-panel.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .project-info-panel h3 {
+            color: #00ffff;
+            margin-top: 0;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .project-info-panel .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .project-info-panel .tech {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        
+        .project-info-panel .view-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .project-info-panel .view-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .timeline-instruction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            z-index: 5;
+            pointer-events: none;
+            transition: opacity 1.5s;
+        }
+        
+        /* Loading indicator */
+        .portal-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+        
+        .quantum-spinner {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .quantum-spinner:before, .quantum-spinner:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse 2s linear infinite;
+        }
+        
+        .quantum-spinner:before {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00ffff, transparent 70%);
+            animation-delay: 0s;
+        }
+        
+        .quantum-spinner:after {
+            width: 70%;
+            height: 70%;
+            background: linear-gradient(135deg, #ff00ff, transparent 70%);
+            top: 15%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.7), rgba(255, 0, 255, 0.7));
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        .year-marker {
+            position: absolute;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            text-shadow: 0 0 10px #00ffff;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <a href="./" class="back-button">◀ Back to Projects</a>
+    
+    <!-- Timeline Portal Container -->
+    <div id="timeline-portal-container">
+        <!-- Loading indicator -->
+        <div id="portal-loading" class="portal-loading">
+            <div class="quantum-spinner"></div>
+        </div>
+        
+        <!-- Timeline Canvas -->
+        <canvas id="timeline-portal"></canvas>
+        
+        <!-- Timeline Controls -->
+        <div class="timeline-controls">
+            <button class="timeline-control-btn" id="prev-project">◀ Previous</button>
+            <button class="timeline-control-btn" id="auto-travel">Auto Travel</button>
+            <button class="timeline-control-btn" id="next-project">Next ▶</button>
+        </div>
+        
+        <!-- Project Information Panel -->
+        <div id="project-info" class="project-info-panel">
+            <h3 id="project-title">Project Title</h3>
+            <p id="project-description">Project description goes here.</p>
+            <div class="tech-stack" id="project-tech">
+                <!-- Tech stack items will be added dynamically -->
+            </div>
+            <a href="#" id="project-link" class="view-btn" target="_blank">View Project</a>
+        </div>
+        
+        <!-- Instruction Overlay -->
+        <div id="timeline-instruction" class="timeline-instruction">
+            <h3>Quantum Timeline Portal</h3>
+            <p>Travel through time and explore my project history</p>
+            <p>Use the controls below to navigate or drag to explore</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Project data for the timeline
+            const projectsData = [
+                {
+                    title: "QuantumAI Assistant",
+                    description: "An AI-powered assistant leveraging quantum algorithms for enhanced natural language processing and decision-making capabilities.",
+                    year: 2024,
+                    month: 4,
+                    link: "#",
+                    techStack: ["Quantum Computing", "Natural Language Processing", "Neural Networks", "PyTorch"],
+                    color: 0x00ffff,
+                    modelUrl: "sphere",
+                    position: {x: 0, y: 0, z: -20}
+                },
+                {
+                    title: "Quantum Encryption System",
+                    description: "A state-of-the-art encryption system using quantum key distribution for unbreakable secure communication.",
+                    year: 2023,
+                    month: 11,
+                    link: "#",
+                    techStack: ["Quantum Cryptography", "Key Distribution", "Information Security", "Python"],
+                    color: 0xff00ff,
+                    modelUrl: "cube",
+                    position: {x: -15, y: 8, z: -5}
+                },
+                {
+                    title: "Quantum Machine Learning Framework",
+                    description: "A comprehensive framework for implementing machine learning algorithms on quantum computers, achieving exponential speedups.",
+                    year: 2023,
+                    month: 8,
+                    link: "#",
+                    techStack: ["Quantum ML", "TensorFlow Quantum", "Qiskit", "Julia"],
+                    color: 0x00ff00,
+                    modelUrl: "dodecahedron",
+                    position: {x: 18, y: -5, z: -12}
+                },
+                {
+                    title: "Quantum Financial Modeling",
+                    description: "Advanced financial modeling and risk assessment tools using quantum computing for high-frequency trading and portfolio optimization.",
+                    year: 2023,
+                    month: 5,
+                    link: "#",
+                    techStack: ["Financial Analysis", "Quantum Optimization", "Algorithmic Trading", "R"],
+                    color: 0xffff00,
+                    modelUrl: "icosahedron",
+                    position: {x: -10, y: -15, z: -8}
+                },
+                {
+                    title: "Quantum Drug Discovery Platform",
+                    description: "A platform accelerating drug discovery processes by simulating molecular interactions using quantum algorithms.",
+                    year: 2022,
+                    month: 11,
+                    link: "#",
+                    techStack: ["Molecular Simulation", "Quantum Chemistry", "Bioinformatics", "CUDA"],
+                    color: 0xff0000,
+                    modelUrl: "octahedron",
+                    position: {x: 20, y: 12, z: -18}
+                },
+                {
+                    title: "Quantum Internet Protocol",
+                    description: "Developing next-generation internet protocols based on quantum entanglement for ultra-secure and instantaneous global communication.",
+                    year: 2022,
+                    month: 6,
+                    link: "#",
+                    techStack: ["Quantum Networking", "Entanglement Distribution", "Network Security", "C++"],
+                    color: 0x0000ff,
+                    modelUrl: "tetrahedron",
+                    position: {x: 5, y: -20, z: -25}
+                }
+            ];
+            
+            let scene, camera, renderer, controls;
+            let currentProjectIndex = 0;
+            let autoTravelInterval = null;
+            let projectObjects = [];
+            let portalParticles = [];
+            let yearMarkers = [];
+            
+            initTimelinePortal();
+            
+            function initTimelinePortal() {
+                const timeline = document.getElementById('timeline-portal');
+                const loadingIndicator = document.getElementById('portal-loading');
+                
+                // Create scene
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x000011);
+                
+                // Create camera
+                camera = new THREE.PerspectiveCamera(75, timeline.clientWidth / timeline.clientHeight, 0.1, 1000);
+                camera.position.z = 10;
+                
+                // Create renderer
+                renderer = new THREE.WebGLRenderer({
+                    canvas: timeline,
+                    antialias: true
+                });
+                renderer.setSize(timeline.clientWidth, timeline.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                
+                // Add controls
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.5;
+                
+                // Create quantum tunnel effect
+                createQuantumTunnel();
+                
+                // Add project objects
+                createProjectObjects();
+                
+                // Add year markers
+                createYearMarkers();
+                
+                // Handle resize
+                window.addEventListener('resize', onWindowResize);
+                
+                // Add controls functionality
+                document.getElementById('prev-project').addEventListener('click', () => navigateProject(-1));
+                document.getElementById('next-project').addEventListener('click', () => navigateProject(1));
+                document.getElementById('auto-travel').addEventListener('click', toggleAutoTravel);
+                
+                // Start animation loop
+                animate();
+                
+                // Hide loading indicator after everything is initialized
+                setTimeout(() => {
+                    loadingIndicator.style.display = 'none';
+                    showProjectInfo(currentProjectIndex);
+                    
+                    // Hide instruction after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('timeline-instruction').style.opacity = 0;
+                    }, 5000);
+                }, 2000);
+            }
+            
+            function createQuantumTunnel() {
+                // Create a quantum tunnel/portal effect with particles
+                const particleGeometry = new THREE.BufferGeometry();
+                const particleMaterial = new THREE.PointsMaterial({
+                    size: 0.5,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending,
+                    vertexColors: true
+                });
+                
+                const particleCount = 3000;
+                const positions = new Float32Array(particleCount * 3);
+                const colors = new Float32Array(particleCount * 3);
+                
+                for (let i = 0; i < particleCount; i++) {
+                    // Create spiral/tunnel effect
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = 5 + Math.random() * 30;
+                    const spiralOffset = Math.random() * 100 - 50;
+                    
+                    positions[i * 3] = Math.cos(angle) * radius;     // x
+                    positions[i * 3 + 1] = Math.sin(angle) * radius; // y
+                    positions[i * 3 + 2] = spiralOffset;             // z
+                    
+                    // Color gradient from cyan to magenta
+                    const colorFactor = Math.random();
+                    colors[i * 3] = colorFactor;         // r (0 to 1)
+                    colors[i * 3 + 1] = 0.5 - Math.abs(colorFactor - 0.5); // g (peak at center)
+                    colors[i * 3 + 2] = 1 - colorFactor; // b (1 to 0)
+                    
+                    // Store particle data for animation
+                    portalParticles.push({
+                        position: new THREE.Vector3(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]),
+                        velocity: Math.random() * 0.05 + 0.02,
+                        angle: angle,
+                        radius: radius,
+                        spiralFactor: Math.random() * 0.02 - 0.01
+                    });
+                }
+                
+                particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                
+                const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+                scene.add(particleSystem);
+                
+                // Add fog for depth
+                scene.fog = new THREE.FogExp2(0x000011, 0.005);
+                
+                // Add ambient light
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+                
+                // Add point lights
+                const pointLight1 = new THREE.PointLight(0x00ffff, 1, 100);
+                pointLight1.position.set(10, 10, 10);
+                scene.add(pointLight1);
+                
+                const pointLight2 = new THREE.PointLight(0xff00ff, 1, 100);
+                pointLight2.position.set(-10, -10, -10);
+                scene.add(pointLight2);
+                
+                // Add subtle directional light for better shading
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+                directionalLight.position.set(0, 0, 1);
+                scene.add(directionalLight);
+            }
+            
+            function createProjectObjects() {
+                projectsData.forEach((project, index) => {
+                    let geometry;
+                    
+                    // Create different geometries based on modelUrl
+                    switch (project.modelUrl) {
+                        case 'cube':
+                            geometry = new THREE.BoxGeometry(3, 3, 3);
+                            break;
+                        case 'dodecahedron':
+                            geometry = new THREE.DodecahedronGeometry(2);
+                            break;
+                        case 'icosahedron':
+                            geometry = new THREE.IcosahedronGeometry(2);
+                            break;
+                        case 'octahedron':
+                            geometry = new THREE.OctahedronGeometry(2);
+                            break;
+                        case 'tetrahedron':
+                            geometry = new THREE.TetrahedronGeometry(2);
+                            break;
+                        case 'sphere':
+                        default:
+                            geometry = new THREE.SphereGeometry(2, 32, 32);
+                    }
+                    
+                    // Create material with glow effect
+                    const material = new THREE.MeshStandardMaterial({
+                        color: project.color,
+                        metalness: 0.3,
+                        roughness: 0.4,
+                        emissive: project.color,
+                        emissiveIntensity: 0.5
+                    });
+                    
+                    const projectObject = new THREE.Mesh(geometry, material);
+                    
+                    // Position the object
+                    projectObject.position.set(
+                        project.position.x,
+                        project.position.y,
+                        project.position.z
+                    );
+                    
+                    // Add name property for identification
+                    projectObject.name = `project-${index}`;
+                    projectObject.userData = { projectIndex: index };
+                    
+                    // Add to scene
+                    scene.add(projectObject);
+                    projectObjects.push(projectObject);
+                    
+                    // Add particle ring around each project object
+                    createProjectRing(projectObject, project.color);
+                    
+                    // Add timeline connection between objects if not the first object
+                    if (index > 0) {
+                        createTimelineConnection(projectObjects[index - 1], projectObject, project.color);
+                    }
+                });
+                
+                // Create a circular connection to connect the last project to the first
+                if (projectObjects.length > 2) {
+                    createTimelineConnection(projectObjects[projectObjects.length - 1], projectObjects[0], 0xffffff);
+                }
+            }
+            
+            function createProjectRing(projectObject, color) {
+                const ringGeometry = new THREE.BufferGeometry();
+                const ringMaterial = new THREE.PointsMaterial({
+                    size: 0.2,
+                    color: color,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending
+                });
+                
+                const particleCount = 100;
+                const positions = new Float32Array(particleCount * 3);
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const angle = (i / particleCount) * Math.PI * 2;
+                    const radius = 3;
+                    
+                    positions[i * 3] = Math.cos(angle) * radius;
+                    positions[i * 3 + 1] = Math.sin(angle) * radius;
+                    positions[i * 3 + 2] = 0;
+                }
+                
+                ringGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                
+                const ring = new THREE.Points(ringGeometry, ringMaterial);
+                ring.position.copy(projectObject.position);
+                
+                // Make ring rotate around its own axis and the project object
+                ring.userData = {
+                    rotationSpeed: Math.random() * 0.01 + 0.005,
+                    projectObject: projectObject
+                };
+                
+                scene.add(ring);
+            }
+            
+            function createTimelineConnection(objA, objB, color) {
+                // Create a line connecting two projects
+                const points = [];
+                points.push(objA.position);
+                
+                // Calculate a curved midpoint for more interesting paths
+                const midPoint = new THREE.Vector3(
+                    (objA.position.x + objB.position.x) / 2,
+                    (objA.position.y + objB.position.y) / 2,
+                    (objA.position.z + objB.position.z) / 2
+                );
+                
+                // Add some randomness to the midpoint to create a curve
+                midPoint.x += (Math.random() - 0.5) * 10;
+                midPoint.y += (Math.random() - 0.5) * 10;
+                
+                points.push(midPoint);
+                points.push(objB.position);
+                
+                // Create curve using those points
+                const curve = new THREE.QuadraticBezierCurve3(
+                    objA.position,
+                    midPoint,
+                    objB.position
+                );
+                
+                // Generate points along the curve
+                const curvePoints = curve.getPoints(30);
+                
+                // Create geometry and material
+                const lineGeometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+                
+                // Create a custom shader material for animated glowing lines
+                const lineMaterial = new THREE.LineBasicMaterial({
+                    color: color,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                
+                const line = new THREE.Line(lineGeometry, lineMaterial);
+                scene.add(line);
+                
+                // Add quantum particle that travels along the timeline
+                createTimelineParticle(curve, color);
+            }
+            
+            function createTimelineParticle(curve, color) {
+                // Create a small sphere that will travel along the curve
+                const geometry = new THREE.SphereGeometry(0.2, 8, 8);
+                const material = new THREE.MeshBasicMaterial({
+                    color: color,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const particle = new THREE.Mesh(geometry, material);
+                
+                // Add to scene
+                scene.add(particle);
+                
+                // Store animation data
+                particle.userData = {
+                    curve: curve,
+                    progress: Math.random(), // Start at random point
+                    speed: Math.random() * 0.001 + 0.001
+                };
+            }
+            
+            function createYearMarkers() {
+                const years = [...new Set(projectsData.map(project => project.year))].sort();
+                
+                years.forEach(year => {
+                    // Create DOM element for year marker
+                    const marker = document.createElement('div');
+                    marker.className = 'year-marker';
+                    marker.textContent = year;
+                    document.body.appendChild(marker);
+                    
+                    yearMarkers.push({
+                        element: marker,
+                        year: year,
+                        position: new THREE.Vector3() // Will be updated in animation loop
+                    });
+                });
+            }
+            
+            function updateYearMarkers() {
+                // Group projects by year
+                const yearPositions = {};
+                
+                projectsData.forEach(project => {
+                    if (!yearPositions[project.year]) {
+                        yearPositions[project.year] = [];
+                    }
+                    
+                    const index = projectsData.findIndex(p => p.title === project.title);
+                    yearPositions[project.year].push(projectObjects[index].position);
+                });
+                
+                // Calculate average position for each year
+                Object.keys(yearPositions).forEach(year => {
+                    const positions = yearPositions[year];
+                    const avgPos = new THREE.Vector3();
+                    
+                    positions.forEach(pos => {
+                        avgPos.add(pos);
+                    });
+                    
+                    avgPos.divideScalar(positions.length);
+                    
+                    // Find marker for this year
+                    const marker = yearMarkers.find(m => m.year === parseInt(year));
+                    if (marker) {
+                        marker.position.copy(avgPos);
+                        
+                        // Convert 3D position to screen coordinates
+                        const screenPos = marker.position.clone();
+                        screenPos.project(camera);
+                        
+                        const width = renderer.domElement.clientWidth;
+                        const height = renderer.domElement.clientHeight;
+                        
+                        marker.element.style.left = (screenPos.x * 0.5 + 0.5) * width + 'px';
+                        marker.element.style.top = (-screenPos.y * 0.5 + 0.5) * height + 'px';
+                    }
+                });
+            }
+            
+            function showProjectInfo(index) {
+                const project = projectsData[index];
+                const projectInfo = document.getElementById('project-info');
+                const projectTitle = document.getElementById('project-title');
+                const projectDescription = document.getElementById('project-description');
+                const projectTech = document.getElementById('project-tech');
+                const projectLink = document.getElementById('project-link');
+                
+                projectTitle.textContent = project.title;
+                projectDescription.textContent = project.description;
+                
+                // Clear and add tech stack
+                projectTech.innerHTML = '';
+                project.techStack.forEach(tech => {
+                    const techElement = document.createElement('span');
+                    techElement.className = 'tech';
+                    techElement.textContent = tech;
+                    projectTech.appendChild(techElement);
+                });
+                
+                projectLink.href = project.link;
+                
+                // Show info panel with animation
+                projectInfo.classList.add('active');
+                
+                // Highlight current project
+                highlightProject(index);
+            }
+            
+            function highlightProject(index) {
+                // Reset all project objects
+                projectObjects.forEach((obj, i) => {
+                    const material = obj.material;
+                    material.emissiveIntensity = 0.5;
+                    
+                    // Scale back to normal
+                    new TWEEN.Tween(obj.scale)
+                        .to({ x: 1, y: 1, z: 1 }, 500)
+                        .easing(TWEEN.Easing.Elastic.Out)
+                        .start();
+                });
+                
+                // Highlight current project
+                const currentObj = projectObjects[index];
+                currentObj.material.emissiveIntensity = 1.0;
+                
+                // Scale up the current project
+                new TWEEN.Tween(currentObj.scale)
+                    .to({ x: 1.5, y: 1.5, z: 1.5 }, 500)
+                    .easing(TWEEN.Easing.Elastic.Out)
+                    .start();
+                
+                // Move camera to focus on the current project
+                new TWEEN.Tween(camera.position)
+                    .to({
+                        x: currentObj.position.x * 0.5,
+                        y: currentObj.position.y * 0.5,
+                        z: currentObj.position.z * 0.5 + 15
+                    }, 2000)
+                    .easing(TWEEN.Easing.Quadratic.InOut)
+                    .start();
+                
+                // Point camera at the object
+                controls.target.copy(currentObj.position);
+            }
+            
+            function navigateProject(direction) {
+                currentProjectIndex = (currentProjectIndex + direction + projectsData.length) % projectsData.length;
+                showProjectInfo(currentProjectIndex);
+            }
+            
+            function toggleAutoTravel() {
+                const autoTravelBtn = document.getElementById('auto-travel');
+                
+                if (autoTravelInterval) {
+                    clearInterval(autoTravelInterval);
+                    autoTravelInterval = null;
+                    autoTravelBtn.textContent = 'Auto Travel';
+                } else {
+                    autoTravelInterval = setInterval(() => {
+                        navigateProject(1);
+                    }, 5000);
+                    autoTravelBtn.textContent = 'Stop Auto Travel';
+                }
+            }
+            
+            function updateParticleAnimation() {
+                // Find the particle system
+                scene.children.forEach(child => {
+                    if (child instanceof THREE.Points && child.geometry.attributes.position.count === portalParticles.length) {
+                        const positions = child.geometry.attributes.position.array;
+                        
+                        // Update each particle
+                        for (let i = 0; i < portalParticles.length; i++) {
+                            const particle = portalParticles[i];
+                            
+                            // Move particles along z-axis for tunnel effect
+                            particle.position.z += particle.velocity;
+                            
+                            // Reset if particle goes too far
+                            if (particle.position.z > 50) {
+                                particle.position.z = -50;
+                            }
+                            
+                            // Add spiral movement
+                            particle.angle += particle.spiralFactor;
+                            particle.position.x = Math.cos(particle.angle) * particle.radius;
+                            particle.position.y = Math.sin(particle.angle) * particle.radius;
+                            
+                            // Update position in the geometry
+                            positions[i * 3] = particle.position.x;
+                            positions[i * 3 + 1] = particle.position.y;
+                            positions[i * 3 + 2] = particle.position.z;
+                        }
+                        
+                        child.geometry.attributes.position.needsUpdate = true;
+                    }
+                    
+                    // Animate rings around project objects
+                    if (child instanceof THREE.Points && child.userData.projectObject) {
+                        child.rotation.z += child.userData.rotationSpeed;
+                        
+                        // Make ring orbit around the project object
+                        const orbit = Date.now() * 0.0005;
+                        const projectObj = child.userData.projectObject;
+                        child.position.x = projectObj.position.x + Math.sin(orbit) * 0.5;
+                        child.position.y = projectObj.position.y + Math.cos(orbit) * 0.5;
+                    }
+                    
+                    // Animate particles along timeline curves
+                    if (child instanceof THREE.Mesh && child.userData.curve) {
+                        child.userData.progress += child.userData.speed;
+                        if (child.userData.progress > 1) {
+                            child.userData.progress = 0;
+                        }
+                        
+                        // Get new position along the curve
+                        const newPos = child.userData.curve.getPointAt(child.userData.progress);
+                        child.position.copy(newPos);
+                    }
+                    
+                    // Rotate project objects
+                    if (child instanceof THREE.Mesh && child.name.startsWith('project-')) {
+                        child.rotation.x += 0.005;
+                        child.rotation.y += 0.01;
+                    }
+                });
+                
+                // Update year markers positions
+                updateYearMarkers();
+            }
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Update controls
+                controls.update();
+                
+                // Update TWEEN animations
+                TWEEN.update();
+                
+                // Update particle animations
+                updateParticleAnimation();
+                
+                // Render scene
+                renderer.render(scene, camera);
+            }
+            
+            function onWindowResize() {
+                const timeline = document.getElementById('timeline-portal');
+                camera.aspect = timeline.clientWidth / timeline.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(timeline.clientWidth, timeline.clientHeight);
+            }
+            
+            // Auto-start the auto travel on page load
+            setTimeout(() => {
+                document.getElementById('auto-travel').click();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
