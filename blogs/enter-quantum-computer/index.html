@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Computers | Sujay Kapadnis</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* Superposition Coin */
+        .qubit-coin {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spin 4s infinite linear;
+            margin: 0 auto;
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* Entangled Pair */
+        .entangled-pair {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .entangled-pair::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%);
+        }
+
+        .qubit {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <a href="../../">Sujay Kapadnis</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../blogs/">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </header>
+        <main class="container blog-post">
+            <h1 class="page-title">Quantum Computers</h1>
+            <div class="post-meta">
+                <span class="post-date">March 02, 2025</span>
+                <span class="post-author">by Sujay Kapadnis</span>
+            </div>
+            <article class="post-content">
+                <p>This is the second post of Quantum Computers Series, if you haven't already, please check out my first post on computers. Let's get started!</p>
+                <p><a href="https://sujaykapadnis.tech/blogs/what-is-a-computer/">Post 1</a></p>
+                <h1>Enter the Quantum Computer! ✨</h1>
+                <p>Quantum computers don't use bits - they use something way cooler: <strong>qubits</strong>
+                Think of qubits as bits' wild cousins who play by different rules
+                The big difference? While a bit is stuck being <strong>0 OR 1</strong>, a qubit can be <strong>0, 1, or BOTH at the same time!</strong>
+                This mind-bending property is called <strong>superposition</strong></p>
+                <h1>Superposition: Being Two Things at Once</h1>
+                <p>Picture a spinning coin - is it heads or tails while spinning? Kind of both!
+                That's like a qubit - it can exist in multiple states until we measure it
+                <strong>Example</strong>: With 2 regular bits, we can represent one of 4 possible values at a time (00, 01, 10, or 11)
+                But with 2 qubits in superposition, we can represent all 4 values simultaneously!
+                It's like having multiple guesses at once instead of one at a time</p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="qubit-coin">
+                        <div class="front">0</div>
+                        <div class="back">1</div>
+                    </div>
+                    <p>A spinning coin represents a qubit in superposition—it's like being both 0 and 1 at the same time!</p>
+                </div>
+                <h1>Entanglement: Spooky Teamwork</h1>
+                <p>Quantum computers have another superpower: <strong>entanglement</strong>
+                Imagine two magic marbles - when one turns blue, the other instantly turns blue too, no matter the distance
+                That's entanglement: when qubits get linked so what happens to one instantly affects the other
+                Einstein called this "spooky action at a distance" because it seems so magical
+                This teamwork helps quantum computers solve certain puzzles much more efficiently</p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="entangled-pair">
+                        <div class="qubit">0</div>
+                        <div class="qubit">1</div>
+                    </div>
+                    <p>These two qubits are entangled—when one changes, the other instantly changes too, no matter the distance!</p>
+                </div>
+            </article>
+        </main>
+        <footer>
+            <div class="container">
+                <p>© 2025 Sujay Kapadnis. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Quantum field animation
+        const quantumField = document.getElementById('quantum-field');
+        
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+    
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+    
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+    
+            animation.onfinish = () => animateParticle(particle);
+        }
+    
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Entanglement Animation
+        setInterval(() => {
+            const qubits = document.querySelectorAll('.entangled-pair .qubit');
+            qubits.forEach(qubit => {
+                qubit.textContent = qubit.textContent === '0' ? '1' : '0';
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
