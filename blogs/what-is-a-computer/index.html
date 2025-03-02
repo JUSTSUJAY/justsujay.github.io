@@ -1,303 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's a Computer, Anyway. | Sujay Kapadnis</title>
-    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let favicon_video_image_counter = 0;
-            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
-            let favicon_video_images = [
-                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
-                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
-                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
-                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
-                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
-                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
-                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
-                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
-                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
-                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
-                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
-                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
-                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
-                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
-                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
-                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
-                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
-                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
-                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
-                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
-                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
-                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
-                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
-                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
-                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
-                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
-                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
-                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
-            ];
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's a Computer, Anyway. | Sujay Kapadnis</title>
+  <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let favicon_video_image_counter = 0;
+      let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+      let favicon_video_images = [
+        "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+        "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+        "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+        "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+        "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+        "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+        "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+        "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+        "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+        "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+        "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+        "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+        "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+        "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+        "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+        "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+        "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+        "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+        "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+        "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+        "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+        "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+        "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+        "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+        "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+        "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+        "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+        "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+      ];
 
-            async function favicon_video_to_data_url(url, callback) {
-                let xhr = new XMLHttpRequest();
-                xhr.onload = function () {
-                    let reader = new FileReader();
-                    reader.onloadend = function () {
-                        callback(reader.result);
-                    };
-                    reader.readAsDataURL(xhr.response);
-                };
-                xhr.open("GET", url);
-                xhr.responseType = "blob";
-                xhr.send();
-            }
+      async function favicon_video_to_data_url(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          let reader = new FileReader();
+          reader.onloadend = function () {
+            callback(reader.result);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.send();
+      }
 
-            let favicon_video_loaded_images = [];
+      let favicon_video_loaded_images = [];
 
-            favicon_video_images.map((url, idx) => {
-                favicon_video_to_data_url(url, function (dataUrl) {
-                    favicon_video_loaded_images[idx] = dataUrl;
-                });
-            });
-
-            setInterval(function () {
-                if (favicon_video_loaded_images[favicon_video_image_counter]) {
-                    favicon_video_icon_tag.href = favicon_video_loaded_images[
-                        favicon_video_image_counter
-                    ].replace("application/octet-stream", "image/png");
-                }
-                if (
-                    favicon_video_image_counter ==
-                    favicon_video_loaded_images.length - 1
-                )
-                    favicon_video_image_counter = 0;
-                else favicon_video_image_counter++;
-            }, 100);
+      favicon_video_images.map((url, idx) => {
+        favicon_video_to_data_url(url, function (dataUrl) {
+          favicon_video_loaded_images[idx] = dataUrl;
         });
-    </script>
-    <link rel="stylesheet" href="../../styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
-    <style>
-        /* Styles for Input-Process-Output Visualization */
-        .computer-flow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .flow-step {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin: 0 10px;
-        }
-        .flow-arrow {
-            font-size: 24px;
-            color: #3498db;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
+      });
 
-        /* Styles for Bit Visualization */
-        .bit-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
+      setInterval(function () {
+        if (favicon_video_loaded_images[favicon_video_image_counter]) {
+          favicon_video_icon_tag.href = favicon_video_loaded_images[
+            favicon_video_image_counter
+          ].replace("application/octet-stream", "image/png");
         }
-        .bit {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin: 0 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-        }
-        .bit[data-value="0"] {
-            background-color: gray;
-        }
-        .bit[data-value="1"] {
-            background-color: green;
-            box-shadow: 0 0 5px green;
-        }
+        if (
+          favicon_video_image_counter ==
+          favicon_video_loaded_images.length - 1
+        )
+          favicon_video_image_counter = 0;
+        else favicon_video_image_counter++;
+      }, 100);
+    });
+  </script>
+  <link rel="stylesheet" href="../../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    /* Updated Styles for Transparent Elements */
 
-        /* Styles for Limitation Animation */
-        .limitation-demo {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .option {
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: #ecf0f1;
-            border: 2px solid #bdc3c7;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .option.checking {
-            background-color: #e74c3c;
-            color: white;
-            border-color: #c0392b;
-        }
-    </style>
+    /* Input-Process-Output Visualization */
+    .computer-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .flow-step {
+      background-color: transparent; /* transparent background */
+      color: white;
+      padding: 10px 20px;
+      border: 2px solid green; /* green outline */
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+    .flow-arrow {
+      font-size: 24px;
+      color: #3498db;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* Bit Visualization */
+    .bit-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .bit {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      background-color: transparent; /* transparent background */
+    }
+    /* Bits that are ON (1) */
+    .bit[data-value="1"] {
+      border: 2px solid green;
+      color: green;
+      box-shadow: 0 0 5px green;
+    }
+    /* Bits that are OFF (0) */
+    .bit[data-value="0"] {
+      border: 2px solid red;
+      color: red;
+    }
+
+    /* Limitation Animation (Options) */
+    .limitation-demo {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .option {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: transparent; /* transparent */
+      border: 2px solid green; /* green outline */
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      color: white;
+    }
+    .option.checking {
+      border-color: red; /* highlight active option with red outline */
+    }
+  </style>
 </head>
 <body>
-    <div id="quantum-field"></div>
-    <div id="app">
-        <header>
-            <div class="logo">
-                <a href="../../">Sujay Kapadnis</a>
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="../../">Home</a></li>
-                    <li><a href="../../projects/">Projects</a></li>
-                    <li><a href="../../resume/">Resume</a></li>
-                    <li><a href="../../blogs/">Blog</a></li>
-                    <li><a href="../../index.html#contact">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </nav>
-        </header>
-        <main class="container blog-post">
-            <h1 class="page-title">What's a Computer, Anyway.</h1>
-            <div class="post-meta">
-                <span class="post-date">March 02, 2025</span>
-                <span class="post-author">by Sujay Kapadnis</span>
-            </div>
-            <article class="post-content">
-                <p>This is the first post in the series of Quantum Computer, to understand what Quantum computers are, we first need to understand what a computer actually is.</p>
-                <h1>What Even Is a Computer? 🤔</h1>
-                <ul>
-                    <li><strong>Think of a computer as a smart toy box</strong> - you give it something (input), it thinks about it, then gives you something back (output)</li>
-                    <li><strong>Example</strong>: Type "2+2" into a calculator → it processes this → outputs "4"</li>
-                    <li>That's computing in its simplest form! <strong>Input → Process → Output</strong></li>
-                </ul>
-                <!-- Input-Process-Output Visualization -->
-                <div class="computer-flow">
-                    <div class="flow-step">Input</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">Process</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">Output</div>
-                </div>
-                <p>The animation above shows the basic flow of how a computer works: taking an input, processing it, and producing an output.</p>
-                <h1>The Computers We Use Daily</h1>
-                <ul>
-                    <li>Classical computers are what we use every day - <strong>phones, laptops, gaming consoles</strong></li>
-                    <li>They're amazing at everyday tasks - <strong>playing videos, opening documents, sending messages</strong></li>
-                    <li>But... they sometimes hit a wall with super complex problems</li>
-                    <li>That's where <strong>quantum computers</strong> come in - like superheroes for certain types of problems!</li>
-                </ul>
-                <h1>Peek Inside: The Bit Brigade</h1>
-                <ul>
-                    <li>Classical computers use <strong>bits</strong> - tiny "helpers" that work like light switches</li>
-                    <li>A bit can only be <strong>OFF (0)</strong> or <strong>ON (1)</strong> - just two possible states</li>
-                    <li>These bits team up to represent everything: <strong>numbers, letters, pictures, videos</strong></li>
-                    <li><strong>Example</strong>: The letter "A" in computer language is "01000001" - a string of 8 bits</li>
-                </ul>
-                <!-- Bit Visualization -->
-                <div class="bit-container">
-                    <div class="bit" data-value="0">0</div>
-                    <div class="bit" data-value="1">1</div>
-                    <div class="bit" data-value="0">0</div>
-                    <div class="bit" data-value="0">0</div>
-                    <div class="bit" data-value="0">0</div>
-                    <div class="bit" data-value="0">0</div>
-                    <div class="bit" data-value="0">0</div>
-                    <div class="bit" data-value="1">1</div>
-                </div>
-                <p>This shows how 8 bits represent the letter "A" in binary (01000001). Green circles are "1" (ON), gray are "0" (OFF).</p>
-                <h1>The Bit Limitation</h1>
-                <ul>
-                    <li>Bits can only be one thing at a time - either <strong>0 OR 1</strong></li>
-                    <li>For complex problems with many possibilities, classical computers <strong>try each option one by one</strong></li>
-                    <li>Like searching a giant maze by <strong>checking each path individually</strong></li>
-                    <li>Fine for simple tasks, but can <strong>take forever for really complex problems</strong></li>
-                </ul>
-                <!-- Limitation Animation -->
-                <div class="limitation-demo">
-                    <div class="option">Option 1</div>
-                    <div class="option">Option 2</div>
-                    <div class="option">Option 3</div>
-                    <div class="option">Option 4</div>
-                </div>
-                <p>The animation above illustrates how a classical computer checks each option sequentially, one at a time, which can be slow for complex tasks.</p>
-            </article>
-        </main>
-        <footer>
-            <div class="container">
-                <p>© 2025 Sujay Kapadnis. All rights reserved.</p>
-            </div>
-        </footer>
-    </div>
-    <script>
-        // Quantum field animation
-        const quantumField = document.getElementById('quantum-field');
-        
-        for (let i = 0; i < 50; i++) {
-            createParticle();
-        }
+  <div id="quantum-field"></div>
+  <div id="app">
+    <header>
+      <div class="logo">
+        <a href="../../">Sujay Kapadnis</a>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../">Home</a></li>
+          <li><a href="../../projects/">Projects</a></li>
+          <li><a href="../../resume/">Resume</a></li>
+          <li><a href="../../blogs/">Blog</a></li>
+          <li><a href="../../index.html#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+    <main class="container blog-post">
+      <h1 class="page-title">What's a Computer, Anyway.</h1>
+      <div class="post-meta">
+        <span class="post-date">March 02, 2025</span>
+        <span class="post-author">by Sujay Kapadnis</span>
+      </div>
+      <article class="post-content">
+        <p>This is the first post in the series of Quantum Computer, to understand what Quantum computers are, we first need to understand what a computer actually is.</p>
+        <h1>What Even Is a Computer? 🤔</h1>
+        <ul>
+          <li><strong>Think of a computer as a smart toy box</strong> - you give it something (input), it thinks about it, then gives you something back (output)</li>
+          <li><strong>Example</strong>: Type "2+2" into a calculator → it processes this → outputs "4"</li>
+          <li>That's computing in its simplest form! <strong>Input → Process → Output</strong></li>
+        </ul>
+        <!-- Input-Process-Output Visualization -->
+        <div class="computer-flow">
+          <div class="flow-step">Input</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Process</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Output</div>
+        </div>
+        <p>The animation above shows the basic flow of how a computer works: taking an input, processing it, and producing an output.</p>
+        <h1>The Computers We Use Daily</h1>
+        <ul>
+          <li>Classical computers are what we use every day - <strong>phones, laptops, gaming consoles</strong></li>
+          <li>They're amazing at everyday tasks - <strong>playing videos, opening documents, sending messages</strong></li>
+          <li>But... they sometimes hit a wall with super complex problems</li>
+          <li>That's where <strong>quantum computers</strong> come in - like superheroes for certain types of problems!</li>
+        </ul>
+        <h1>Peek Inside: The Bit Brigade</h1>
+        <ul>
+          <li>Classical computers use <strong>bits</strong> - tiny "helpers" that work like light switches</li>
+          <li>A bit can only be <strong>OFF (0)</strong> or <strong>ON (1)</strong> - just two possible states</li>
+          <li>These bits team up to represent everything: <strong>numbers, letters, pictures, videos</strong></li>
+          <li><strong>Example</strong>: The letter "A" in computer language is "01000001" - a string of 8 bits</li>
+        </ul>
+        <!-- Bit Visualization -->
+        <div class="bit-container">
+          <div class="bit" data-value="0">0</div>
+          <div class="bit" data-value="1">1</div>
+          <div class="bit" data-value="0">0</div>
+          <div class="bit" data-value="0">0</div>
+          <div class="bit" data-value="0">0</div>
+          <div class="bit" data-value="0">0</div>
+          <div class="bit" data-value="0">0</div>
+          <div class="bit" data-value="1">1</div>
+        </div>
+        <p>This shows how 8 bits represent the letter "A" in binary (01000001). Bits with a value of 1 are highlighted in green while those with 0 are red.</p>
+        <h1>The Bit Limitation</h1>
+        <ul>
+          <li>Bits can only be one thing at a time - either <strong>0 OR 1</strong></li>
+          <li>For complex problems with many possibilities, classical computers <strong>try each option one by one</strong></li>
+          <li>Like searching a giant maze by <strong>checking each path individually</strong></li>
+          <li>Fine for simple tasks, but can <strong>take forever for really complex problems</strong></li>
+        </ul>
+        <!-- Limitation Animation -->
+        <div class="limitation-demo">
+          <div class="option">Option 1</div>
+          <div class="option">Option 2</div>
+          <div class="option">Option 3</div>
+          <div class="option">Option 4</div>
+        </div>
+        <p>The animation above illustrates how a classical computer checks each option sequentially, one at a time, which can be slow for complex tasks.</p>
+      </article>
+    </main>
+    <footer>
+      <div class="container">
+        <p>© 2025 Sujay Kapadnis. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+  <script>
+    // Quantum field animation
+    const quantumField = document.getElementById('quantum-field');
     
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.top = Math.random() * 100 + 'vh';
-            quantumField.appendChild(particle);
-            animateParticle(particle);
-        }
-    
-        function animateParticle(particle) {
-            const duration = Math.random() * 3000 + 2000;
-            const keyframes = [
-                { transform: 'translate(0, 0)' },
-                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
-            ];
-            const animation = particle.animate(keyframes, {
-                duration: duration,
-                iterations: Infinity,
-                direction: 'alternate',
-                easing: 'ease-in-out'
-            });
-    
-            animation.onfinish = () => animateParticle(particle);
-        }
-    
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-    
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+    for (let i = 0; i < 50; i++) {
+      createParticle();
+    }
 
-        // Limitation Animation Script
-        const options = document.querySelectorAll('.option');
-        let currentIndex = 0;
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.top = Math.random() * 100 + 'vh';
+      quantumField.appendChild(particle);
+      animateParticle(particle);
+    }
 
-        function checkNextOption() {
-            options.forEach(option => option.classList.remove('checking'));
-            options[currentIndex].classList.add('checking');
-            currentIndex = (currentIndex + 1) % options.length;
-        }
+    function animateParticle(particle) {
+      const duration = Math.random() * 3000 + 2000;
+      const keyframes = [
+        { transform: 'translate(0, 0)' },
+        { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+      ];
+      const animation = particle.animate(keyframes, {
+        duration: duration,
+        iterations: Infinity,
+        direction: 'alternate',
+        easing: 'ease-in-out'
+      });
 
-        setInterval(checkNextOption, 1000);
-    </script>
+      animation.onfinish = () => animateParticle(particle);
+    }
+
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Limitation Animation Script
+    const options = document.querySelectorAll('.option');
+    let currentIndex = 0;
+
+    function checkNextOption() {
+      options.forEach(option => option.classList.remove('checking'));
+      options[currentIndex].classList.add('checking');
+      currentIndex = (currentIndex + 1) % options.length;
+    }
+
+    setInterval(checkNextOption, 1000);
+  </script>
 </body>
 </html>
