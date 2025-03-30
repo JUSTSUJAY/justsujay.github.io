@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoding LLMs | Sujay Kapadnis</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <a href="../../">Sujay Kapadnis</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../blogs/">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+            
+        </header>
+        <main class="container blog-post">
+            <h1 class="page-title">Decoding LLMs</h1>
+            <div class="post-meta">
+                <span class="post-date">March 28, 2025</span>
+                <span class="post-author">by Sujay Kapadnis</span>
+            </div>
+            <article class="post-content">
+                <p>LLMs are impressive of course, but their mysterious black box nature still remains unknown about how things are happening the way they are. We are just aware that this architecture is being used and the process of training them. But post training, how exactly are they being so intellignet? Let&#39;s decode...</p>
+<p style="color: aquamarine;">PS: This are my notes from this paper released by Anthropic.</p>
+<p>Big Bang happened, universe was created, lives were born, and over the period of centuries the complexity of us living beings increased. The principal of evolution are kind of simple but the mechanisms of living is still intricate to comprehend. Same goes for our LLMs, the architecture and algos we know but there&#39;s more that we don&#39;t know. </p>
+<p>In biology, with every evolved microsope things kept getting clearer and clearer. We need that microscopic lens to understand LLMs as well. Even in the fields of AI, such efforts [1] [2] [3] [4] [5] have been made and are still ongoing.</p>
+<p>The above efforts suggest that just like cell is the interpretable building block in biological system, there must be &quot;features&quot; (not literally collateral with cells yet) embeded within the internals of the LLMs which are the basic units of such models.</p>
+<p>Okay, let&#39;s say, such features exist in an LLM, but how do they interact? they standalone won&#39;t be much help, now do they? Anthorpic released a paper [6] where they introduced a set of tools to identify such features and how they might be interacting with each other. The attempt was to create something like the wiring diagrams in neuroscience which refers to map connections between neurons showing how they communicate with each other. The tools is called &quot;Attribution Graph&quot; which partially helps understand the chain of intermediate steps that allow a model to transform the input to output.</p>
+<p>This paper focused on using this attribution graphs on Oct 24 released Claude-3.5 Haiku.</p>
+<h2>Multi Step Reasoning.</h2>
+<ul>
+<li><p>In the experirment, Haiku was prompted, &quot;What is the capital of state containing Dallas?&quot; Now it has to first find the state containing Dallas and then capital of Texas which is Austin. And Haiku did answer that, but did it go through the intermediate steps? or it had just memorized the answer based on it&#39;s training data? Previous researches [7] [8] [9] suggests that it did go through the multi-step reasoning.</p>
+</li>
+<li><p>To confirm that it did do through the multiti-step reasoning, we need evidence, for this anthropic used Attribution Graphs(AGs). The AGs will describe the features the model used to produce this output.</p>
+</li>
+<li><p>And as per the attributions, features related to &quot;Dallas&quot; and with some help of features of &quot;State&quot; invoked the features related to State &quot;Texas&quot;.</p>
+</li>
+<li><p>Parallely, the features related to &quot;Capital&quot; along with of &quot;State&quot; invoked a feature &quot;Say a Capital&quot;</p>
+</li>
+<li><p>And combined the features &quot;Texas&quot; and &quot;Say a capital&quot; made it say &quot;Austin&quot;.</p>
+</li>
+<li><p>The graph indicates that the replacement model does in fact perform “multi-hop reasoning” – that is, its decision to say Austin hinges on a chain of several intermediate computational steps (Dallas → Texas, and Texas + capital → Austin)</p>
+</li>
+<li><p>To extend this experiement and confirm the multi-step reasoning, the experiment was repeated by changing Dallas with other cities like Oakland, which led to (Oakland → California, and California + capital → Sacramento).</p>
+</li>
+<li><p>In the next step, Anthropic tried feature injection where instead of the feature &quot;Texas&quot; they added other states like Georgia to see what the outputs will come, so &quot;Say a capital&quot; and &quot;Texas&quot; were on same level, which combined were giving the capital of that state, so when the feature &quot;Georgia&quot; was added, the model was predicing the capital of Georgia -&gt; &quot;Say Atlanta&quot;.</p>
+</li>
+</ul>
+<ol>
+<li><a href="https://arxiv.org/pdf/2309.08600">SPARSE AUTOENCODERS FIND HIGHLY INTERPRETABLE FEATURES IN LANGUAGE MODELS</a></li>
+<li><a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</a></li>
+<li><a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</a></li>
+<li><a href="https://arxiv.org/pdf/2406.04093">Scaling and evaluating sparse autoencoders</a></li>
+<li><a href="http://arxiv.org/pdf/2406.11944.pdf">Transcoders find interpretable LLM feature circuits</a></li>
+<li><a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html">Circuit Tracing: Revealing Computational Graphs in Language Models</a></li>
+<li><a href="https://arxiv.org/pdf/2402.16837">Do large language models latently perform multi-hop reasoning?</a></li>
+<li><a href="https://arxiv.org/pdf/2502.10835">Back Attention: Understanding and Enhancing Multi-Hop Reasoning in Large Language Models</a></li>
+<li><a href="https://arxiv.org/pdf/2406.12775">Hopping too late: Exploring the limitations of large language models on multi-hop queries</a></li>
+</ol>
+
+            </article>
+        </main>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Sujay Kapadnis. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Quantum field animation
+        const quantumField = document.getElementById('quantum-field');
+        
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+    
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+    
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+    
+            animation.onfinish = () => animateParticle(particle);
+        }
+    
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
