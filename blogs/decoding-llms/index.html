@@ -104,14 +104,14 @@
             
         </header>
         <main class="container blog-post">
-            <h1 class="page-title">Decoding LLMs</h1>
-            <div class="post-meta">
+            <h1 class="page-title quantum-title">Decoding LLMs</h1>
+            <div class="post-meta quantum-meta">
                 <span class="post-date">March 28, 2025</span>
                 <span class="post-author">by Sujay Kapadnis</span>
             </div>
             <article class="post-content">
                 <p>LLMs are impressive of course, but their mysterious black box nature still remains unknown about how things are happening the way they are. We are just aware that this architecture is being used and the process of training them. But post training, how exactly are they being so intellignet? Let&#39;s decode...</p>
-<p style="color: aquamarine;">PS: This are my notes from this paper released by Anthropic.</p>
+<p>PS: This are my notes from this paper released by Anthropic.</p>
 <p>Big Bang happened, universe was created, lives were born, and over the period of centuries the complexity of us living beings increased. The principal of evolution are kind of simple but the mechanisms of living is still intricate to comprehend. Same goes for our LLMs, the architecture and algos we know but there&#39;s more that we don&#39;t know. </p>
 <p>In biology, with every evolved microsope things kept getting clearer and clearer. We need that microscopic lens to understand LLMs as well. Even in the fields of AI, such efforts [1] [2] [3] [4] [5] have been made and are still ongoing.</p>
 <p>The above efforts suggest that just like cell is the interpretable building block in biological system, there must be &quot;features&quot; (not literally collateral with cells yet) embeded within the internals of the LLMs which are the basic units of such models.</p>
@@ -136,6 +136,38 @@
 <li><p>In the next step, Anthropic tried feature injection where instead of the feature &quot;Texas&quot; they added other states like Georgia to see what the outputs will come, so &quot;Say a capital&quot; and &quot;Texas&quot; were on same level, which combined were giving the capital of that state, so when the feature &quot;Georgia&quot; was added, the model was predicing the capital of Georgia -&gt; &quot;Say Atlanta&quot;.</p>
 </li>
 </ul>
+<h2>Planning in Rhyming Poems</h2>
+<p>How do we write the poems that rhyme? No, actually? There are two things that we need to look for </p>
+<ul>
+<li>It needs to Rhyme at the ends.</li>
+<li>It needs to make sense.
+To do this, as an overview we can think that this is how the model might be doing this.</li>
+<li><strong>Pure Improv</strong> - It writes the first line, and also the second line until the last finishing word, and then it chooses the word that satifies both the constraints we just talked about.</li>
+<li><strong>Planning</strong> - Or it can also happen that it plans the ending words of each line first while taking into account the rhyme and content of previous lines and then use this planned word to write the next lines.</li>
+</ul>
+<p>Now comes the most important part because LLMs being autoregressors knowing only to predict the next token, the first option seems viable, but the evidence says otherwise.</p>
+<ul>
+<li><p>It was revealed that the models first activated the features of the candidates for that ending rhyming word even before composing that line instead decided to compose the line after the rhyming word was chosen.</p>
+</li>
+<li><p>[10] [11] [12] [13] [14] [15] observed this planned behaviour in LLMs, to extend this Anthropics research tried to add evidence to it, and as mentioned following things were observed.</p>
+<ul>
+<li>Forward Planning - Choice of the ending word based on previous line(s).</li>
+<li>Backward Planning - Composing the line prior to that ending word which gives meaning to that ending.</li>
+<li>Multiple holds - Model has multiple candidates for that ending word in mind.</li>
+<li>Interesting exp. Apic edited planned ending word and observed whether the model constructed the line based on that.</li>
+</ul>
+</li>
+</ul>
+<p>So as an example, Apic passed the following prompt:</p>
+<pre><code>A rhyming couplet:⏎ He saw a carrot and had to grab it.⏎
+</code></pre>
+<p>now when this input was passed, the ending word of first line, <strong>it</strong> triggered the features that rhymed like rhyming with “eet/it/et” which in turn fired the features like <strong>habit</strong> and <strong>rabit</strong> and most probably because of the word carrot in it, the model chose the word <strong>rabbit</strong>.</p>
+<ul>
+<li><p>After certain suppressings and injections if features, it was confirmed that <strong>planning features strongly influence final token probabilities.</strong> When interjected, it tried to make sense to that rhyme for that interjected word and when suppressed it tried not to use that word and made sure it still made sense with his remaining candidate ending words.</p>
+</li>
+<li><p>This choice of ending word occurs at the newline and this ending word affects the intermediate words that assign it the sense.</p>
+</li>
+</ul>
 <ol>
 <li><a href="https://arxiv.org/pdf/2309.08600">SPARSE AUTOENCODERS FIND HIGHLY INTERPRETABLE FEATURES IN LANGUAGE MODELS</a></li>
 <li><a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</a></li>
@@ -146,6 +178,12 @@
 <li><a href="https://arxiv.org/pdf/2402.16837">Do large language models latently perform multi-hop reasoning?</a></li>
 <li><a href="https://arxiv.org/pdf/2502.10835">Back Attention: Understanding and Enhancing Multi-Hop Reasoning in Large Language Models</a></li>
 <li><a href="https://arxiv.org/pdf/2406.12775">Hopping too late: Exploring the limitations of large language models on multi-hop queries</a></li>
+<li><a href="https://arxiv.org/pdf/2407.15421">Planning in a recurrent neural network that plays Sokoban</a></li>
+<li><a href="https://openreview.net/pdf/e8ceadfe0b16829299aebe5ed2c5bcd1e660ba74.pdf">Interpreting Emergent Planning in Model-Free Reinforcement Learning</a></li>
+<li><a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/37d9f19150fce07bced2a81fc87d47a6-Paper-Conference.pdf">Evidence of learned look-ahead in a chess-playing neural network</a></li>
+<li><a href="https://arxiv.org/pdf/2311.04897">Future lens: Anticipating subsequent tokens from a single hidden state</a></li>
+<li><a href="https://arxiv.org/pdf/2404.00859">Do language models plan ahead for future tokens?</a></li>
+<li><a href="https://www.lesswrong.com/posts/9NqgYesCutErskdmu/parascope-do-language-models-plan-the-upcoming-paragraph">ParaScopes: Do Language Models Plan the Upcoming Paragraph?</a></li>
 </ol>
 
             </article>

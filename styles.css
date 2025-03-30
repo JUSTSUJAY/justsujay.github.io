@@ -318,3 +318,74 @@ footer {
     color: rgba(255, 255, 255, 0.5);
 }
 
+
+/* Quantum blog styling */
+.quantum-title {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.quantum-meta {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.blog-post h2 {
+    color: var(--primary);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.blog-post h3 {
+    color: var(--secondary);
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.blog-post ul, .blog-post ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.blog-post p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.blog-post a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--primary);
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.blog-post a:hover {
+    color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.blog-post code {
+    background-color: rgba(0, 255, 255, 0.1);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.blog-post pre {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-left: 3px solid var(--primary);
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.blog-post blockquote {
+    border-left: 3px solid var(--secondary);
+    padding-left: 15px;
+    margin-left: 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+}
+
