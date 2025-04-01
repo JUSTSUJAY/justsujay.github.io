@@ -163,7 +163,37 @@ To do this, as an overview we can think that this is how the model might be doin
 </code></pre>
 <p>now when this input was passed, the ending word of first line, <strong>it</strong> triggered the features that rhymed like rhyming with “eet/it/et” which in turn fired the features like <strong>habit</strong> and <strong>rabit</strong> and most probably because of the word carrot in it, the model chose the word <strong>rabbit</strong>.</p>
 <ul>
-<li><p>After certain suppressings and injections if features, it was confirmed that <strong>planning features strongly influence final token probabilities.</strong> When interjected, it tried to make sense to that rhyme for that interjected word and when suppressed it tried not to use that word and made sure it still made sense with his remaining candidate ending words.</p>
+<li>After certain suppressings and injections if features, it was confirmed that <strong>planning features strongly influence final token probabilities.</strong> When interjected, it tried to make sense to that rhyme for that interjected word and when suppressed it tried not to use that word and made sure it still made sense with his remaining candidate ending words.</li>
+</ul>
+<h2>Multilingual Circuits</h2>
+<ul>
+<li>Surprisingly or not, Neural Networks often unify the same concepts across multiple languages, more on Multilingual neurons  and features can be found at [16] [17] [18] and their multilingual representations in [19] [20]</li>
+</ul>
+<p>Experiement done here is, given the same prompt in different languages, how does the model completes it, let&#39;s see.</p>
+<ul>
+<li><strong>English</strong> - The opposite of &quot;small&quot; is &quot; → big</li>
+<li><strong>French</strong> - Le contraire de &quot;petit&quot; est &quot; → grand</li>
+<li><strong>Chinese</strong> - “小”的反义词是“ → 大”</li>
+</ul>
+<p>Observations: </p>
+<ul>
+<li><p>All 3 prompts were driven by the same circuit.</p>
+</li>
+<li><p>features of opposite in respective language triggered features of antonym.</p>
+</li>
+<li><p>and combined with the word small(in that language), it responded in big, grand, 大”</p>
+</li>
+<li><p>Research beautifully puts it in 3 parts</p>
+<ul>
+<li>Operation - Antonym</li>
+<li>Operand - Small</li>
+<li>language - English/French/Chinese</li>
+</ul>
+</li>
+<li><p>and it was observed that changing any of these blocks can be independently intervened and the model still works.</p>
+<ul>
+<li>for english example, keeping the operation antonym but changing the languge to french, it outputs grand</li>
+</ul>
 </li>
 <li><p>This choice of ending word occurs at the newline and this ending word affects the intermediate words that assign it the sense.</p>
 </li>
@@ -184,6 +214,11 @@ To do this, as an overview we can think that this is how the model might be doin
 <li><a href="https://arxiv.org/pdf/2311.04897">Future lens: Anticipating subsequent tokens from a single hidden state</a></li>
 <li><a href="https://arxiv.org/pdf/2404.00859">Do language models plan ahead for future tokens?</a></li>
 <li><a href="https://www.lesswrong.com/posts/9NqgYesCutErskdmu/parascope-do-language-models-plan-the-upcoming-paragraph">ParaScopes: Do Language Models Plan the Upcoming Paragraph?</a></li>
+<li><a href="https://distill.pub/2021/multimodal-neurons">Multimodal Neurons in Artificial Neural Networks</a></li>
+<li><a href="https://www.youtube.com/watch?v=8wYNsoycM1U">MLP Neurons - 40L Preliminary Investigation [rough early thoughts]</a></li>
+<li><a href="https://arxiv.org/pdf/2501.06346">Large Language Models Share Representations of Latent Grammatical Concepts Across Typologically Diverse Languages</a></li>
+<li><a href="https://openreview.net/pdf?id=0ku2hIm4BS">How do llamas process multilingual text? a latent exploration through activation patching</a></li>
+<li><a href="https://arxiv.org/pdf/2411.08745">Separating Tongue from Thought: Activation Patching Reveals Language-Agnostic Concept Representations in Transformers</a></li>
 </ol>
 
             </article>
