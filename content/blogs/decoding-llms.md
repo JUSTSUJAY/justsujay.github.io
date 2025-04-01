@@ -54,6 +54,26 @@ A rhyming couplet:⏎ He saw a carrot and had to grab it.⏎
 now when this input was passed, the ending word of first line, **it** triggered the features that rhymed like rhyming with “eet/it/et” which in turn fired the features like **habit** and **rabit** and most probably because of the word carrot in it, the model chose the word **rabbit**.
 
 - After certain suppressings and injections if features, it was confirmed that **planning features strongly influence final token probabilities.** When interjected, it tried to make sense to that rhyme for that interjected word and when suppressed it tried not to use that word and made sure it still made sense with his remaining candidate ending words.
+
+## Multilingual Circuits
+- Surprisingly or not, Neural Networks often unify the same concepts across multiple languages, more on Multilingual neurons  and features can be found at [16] [17] [18] and their multilingual representations in [19] [20] 
+
+Experiement done here is, given the same prompt in different languages, how does the model completes it, let's see.
+- **English** - The opposite of "small" is " → big
+- **French** - Le contraire de "petit" est " → grand
+- **Chinese** - “小”的反义词是“ → 大”
+
+Observations: 
+  - All 3 prompts were driven by the same circuit.
+  - features of opposite in respective language triggered features of antonym.
+  - and combined with the word small(in that language), it responded in big, grand, 大”
+  - Research beautifully puts it in 3 parts
+    - Operation - Antonym
+    - Operand - Small
+    - language - English/French/Chinese
+  - and it was observed that changing any of these blocks can be independently intervened and the model still works.
+    - for english example, keeping the operation antonym but changing the languge to french, it outputs grand
+
   
 - This choice of ending word occurs at the newline and this ending word affects the intermediate words that assign it the sense. 
 1. [SPARSE AUTOENCODERS FIND HIGHLY INTERPRETABLE FEATURES IN LANGUAGE MODELS](https://arxiv.org/pdf/2309.08600)
@@ -71,3 +91,8 @@ now when this input was passed, the ending word of first line, **it** triggered 
 13. [Future lens: Anticipating subsequent tokens from a single hidden state](https://arxiv.org/pdf/2311.04897)
 14. [Do language models plan ahead for future tokens?](https://arxiv.org/pdf/2404.00859)
 15. [ParaScopes: Do Language Models Plan the Upcoming Paragraph?](https://www.lesswrong.com/posts/9NqgYesCutErskdmu/parascope-do-language-models-plan-the-upcoming-paragraph)
+16. [Multimodal Neurons in Artificial Neural Networks](https://distill.pub/2021/multimodal-neurons)
+17. [MLP Neurons - 40L Preliminary Investigation [rough early thoughts]](https://www.youtube.com/watch?v=8wYNsoycM1U)
+18. [Large Language Models Share Representations of Latent Grammatical Concepts Across Typologically Diverse Languages](https://arxiv.org/pdf/2501.06346)
+19. [How do llamas process multilingual text? a latent exploration through activation patching](https://openreview.net/pdf?id=0ku2hIm4BS)
+20. [Separating Tongue from Thought: Activation Patching Reveals Language-Agnostic Concept Representations in Transformers](https://arxiv.org/pdf/2411.08745)
