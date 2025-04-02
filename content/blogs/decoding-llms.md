@@ -74,6 +74,17 @@ Observations:
   - and it was observed that changing any of these blocks can be independently intervened and the model still works.
     - for english example, keeping the operation antonym but changing the languge to french, it outputs grand
 
+**I love this observation** - 
+- let's think about our sentence, "The opposite of small is big", now in here, we had opposite which was triggering the feature such as anotonym, then we had features for small and externally we would quote the language which can be intercepted to get the opposite of small in that particular language, but when the features of small and anotonym triggered at that time which might lead to the features of large(in the same language as small), so in that graphical area, there's antonym, small and large as well, so what if the antonym and large somehow interact with each other and finally might just output small again. So when prompted the output will come as "The opposite of small is small". **That's when a beautiful observation was captured, the QK mediation and by diverting where the attention heads attend so that they don't nullify each other and output large"
+
+### How General are Multilingual Features?
+- we continuously observed that the "crux" of computation being performed in `language-agnostic` features as if some raw feature is being computed and then the language is being used to convert it into the language specific features.
+- To understand the degree of cross-language generalization and how often same features activate irrespective of the language the Apic team feature activations for the translations between Eng, French and Chinese and plotted, the intersection of features(the ones that activated in both) over union(ones that  activated in either).
+- Observation? - it was seen that the features were "Langugae Specific" at the start and end of the task and in the middle it was "Language Agnostic". **Bigger model, more language generalization**.
+
+### Do models think in English?
+- There are reseraches on both ways, one say that models are multilingual because of multilingual features were present while others have found that English over other language is previleged.
+- From what was observed via Haiku in experiment was that **in middle layers, models uses multilingual features** and this multilinaugal features have more corresponding weights to English and as for other languages, the output gets mediated with features like **say output in x language**
   
 - This choice of ending word occurs at the newline and this ending word affects the intermediate words that assign it the sense. 
 1. [SPARSE AUTOENCODERS FIND HIGHLY INTERPRETABLE FEATURES IN LANGUAGE MODELS](https://arxiv.org/pdf/2309.08600)
