@@ -203,9 +203,30 @@ To do this, as an overview we can think that this is how the model might be doin
 </ul>
 <h3>Do models think in English?</h3>
 <ul>
-<li><p>There are reseraches on both ways, one say that models are multilingual because of multilingual features were present while others have found that English over other language is previleged.</p>
+<li>There are reseraches on both ways, one say that models are multilingual because of multilingual features were present while others have found that English over other language is previleged.</li>
+<li>From what was observed via Haiku in experiment was that <strong>in middle layers, models uses multilingual features</strong> and this multilinaugal features have more corresponding weights to English and as for other languages, the output gets mediated with features like <strong>say output in x language</strong></li>
+</ul>
+<h2>Addition</h2>
+<ul>
+<li><a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html#graphs-addition">This</a> investigated how Haiku adds 2 digit numbers.</li>
+<li>It was found that it breaks the problem into 2 steps.<ul>
+<li>Rough addition</li>
+<li>Computes unit level digits addition</li>
+<li>ex. 36 + 59 -&gt; rough addition -&gt; 30 + 50 = 80, 6 + 9 = 15, 80 + 15 = 95</li>
+<li>**The interesting pattern was discovered that single digit addition pattern for (6, 9) -&gt; 5.</li>
+</ul>
 </li>
-<li><p>From what was observed via Haiku in experiment was that <strong>in middle layers, models uses multilingual features</strong> and this multilinaugal features have more corresponding weights to English and as for other languages, the output gets mediated with features like <strong>say output in x language</strong></p>
+<li>Even I have memorized this single digit addition pattern, so feels more humanlike to me.</li>
+</ul>
+<p>The activity of features on <code>=</code> token for 10000 prompts were checked for addition of <code>a+b=</code> a,b∈[0,99]</p>
+<ul>
+<li><p>The activity was plotted on Operand plots and some geometric patterns were observed such as </p>
+<ul>
+<li>Diagonal lines &gt; sensitive to sum </li>
+<li>Horizontal or Vertical lines &gt; sensitive to first or second input</li>
+<li>Isolated points -&gt; lookup feature (like that single digit sum pattern memorization)</li>
+<li>Repeating pattern -&gt; Modular information</li>
+</ul>
 </li>
 <li><p>This choice of ending word occurs at the newline and this ending word affects the intermediate words that assign it the sense.</p>
 </li>

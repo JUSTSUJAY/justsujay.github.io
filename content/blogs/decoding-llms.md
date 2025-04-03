@@ -85,6 +85,22 @@ Observations:
 ### Do models think in English?
 - There are reseraches on both ways, one say that models are multilingual because of multilingual features were present while others have found that English over other language is previleged.
 - From what was observed via Haiku in experiment was that **in middle layers, models uses multilingual features** and this multilinaugal features have more corresponding weights to English and as for other languages, the output gets mediated with features like **say output in x language**
+
+## Addition
+- [This](https://transformer-circuits.pub/2025/attribution-graphs/methods.html#graphs-addition) investigated how Haiku adds 2 digit numbers.
+- It was found that it breaks the problem into 2 steps.
+  - Rough addition
+  - Computes unit level digits addition
+  - ex. 36 + 59 -> rough addition -> 30 + 50 = 80, 6 + 9 = 15, 80 + 15 = 95
+  - **The interesting pattern was discovered that single digit addition pattern for (6, 9) -> 5.
+- Even I have memorized this single digit addition pattern, so feels more humanlike to me.
+
+The activity of features on `=` token for 10000 prompts were checked for addition of `a+b=` a,b∈[0,99]
+- The activity was plotted on Operand plots and some geometric patterns were observed such as 
+  - Diagonal lines > sensitive to sum 
+  - Horizontal or Vertical lines > sensitive to first or second input
+  - Isolated points -> lookup feature (like that single digit sum pattern memorization)
+  - Repeating pattern -> Modular information
   
 - This choice of ending word occurs at the newline and this ending word affects the intermediate words that assign it the sense. 
 1. [SPARSE AUTOENCODERS FIND HIGHLY INTERPRETABLE FEATURES IN LANGUAGE MODELS](https://arxiv.org/pdf/2309.08600)
