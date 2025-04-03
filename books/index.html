@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Library | Sujay Kapadnis</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* Updated styles for better readability and natural library feel */
+        .quantum-bookshelf {
+            perspective: 1000px;
+            margin: 30px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .quantum-bookshelf::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, #392f2d, #59433b, #392f2d);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .books-row {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(0,0,0,0.3);
+        }
+        
+        .books-row::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .books-row::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.3);
+            border-radius: 4px;
+        }
+        
+        .books-row::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        .quantum-book {
+            position: relative;
+            height: 220px;
+            width: 40px;
+            min-width: 40px;
+            margin: 0 2px;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+            cursor: pointer;
+            z-index: 1;
+        }
+        
+        .quantum-book:hover {
+            transform: translateY(-10px);
+            z-index: 10;
+        }
+        
+        .book-spine {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,255,255,0.2) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            border-left: 3px solid var(--primary);
+            font-family: 'Roboto Mono', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden;
+            padding: 10px 0;
+            box-shadow: -3px 0 8px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        .book-cover {
+            position: absolute;
+            height: 220px;
+            width: 150px;
+            background: rgba(0,0,0,0.8);
+            transform-origin: left;
+            transform: rotateY(-90deg);
+            transition: transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0,255,255,0.3);
+            pointer-events: none;
+            opacity: 0;
+            left: 40px;
+        }
+        
+        .quantum-book:hover .book-cover {
+            transform: rotateY(0deg);
+            pointer-events: all;
+            opacity: 1;
+        }
+        
+        .book-cover h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        .book-cover p {
+            font-family: 'Roboto Mono', sans-serif;
+            font-size: 14px;
+            margin: 0;
+            color: #fff;
+        }
+        
+        .book-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(1px);
+            transition: opacity 0.5s, transform 0.5s;
+            pointer-events: none;
+        }
+        
+        /* Keep the rest of the existing styles but modify .book-container */
+        .book-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <a href="../">Sujay Kapadnis</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../projects/">Projects</a></li>
+                    <li><a href="../resume/">Resume</a></li>
+                    <li><a href="../blogs/">Blog</a></li>
+                    <li><a href="../books/" class="active">Books</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            <h1 class="page-title">Quantum Library</h1>
+            <p class="section-intro">Explore the multiversal collection of books I've collapsed into definite states by reading them.</p>
+            
+            <div class="books-filter">
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search books and authors..." />
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-genre="all">All Books</button>
+                    <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
+                    <button class="filter-btn" data-genre="Non-Fiction">Non-Fiction</button>
+                    <button class="filter-btn" data-genre="Programming">Programming</button>
+                    <button class="filter-btn" data-genre="Science">Science</button>
+                    <button class="filter-btn" data-genre="Philosophy">Philosophy</button>
+                </div>
+            </div>
+            
+            <div class="quantum-bookshelf">
+                <div class="book-container" id="bookContainer">
+                    <!-- Books will be inserted here via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="entanglement-effect" id="entanglementEffect"></div>
+            
+            <div class="book-details" id="bookDetails">
+                <button class="close-details" id="closeDetails">×</button>
+                <div id="bookDetailsContent"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Books data remains the same
+        const books = [
+            {
+                title: "Quantum Computing for Everyone",
+                author: "Chris Bernhardt",
+                year: 2019,
+                genre: ["Science", "Computing", "Physics"],
+                cover: "linear-gradient(45deg, #001233, #023e8a)",
+                rating: 4.5,
+                review: "A fascinating introduction to the principles of quantum computing without requiring advanced mathematics. The author does an excellent job of explaining complex concepts in an accessible way.",
+                quote: "Quantum computing is not about making computers physically smaller but about using the principles of quantum physics to process information.",
+                key_takeaway: "Understanding qubits and quantum gates provides a foundation for appreciating how quantum computers can solve certain problems exponentially faster than classical computers."
+            },
+            {
+                title: "Dune",
+                author: "Frank Herbert",
+                year: 1965,
+                genre: ["Science Fiction", "Classic"],
+                cover: "linear-gradient(45deg, #3f6844, #ddbea9)",
+                rating: 5,
+                review: "An epic science fiction masterpiece that explores politics, religion, and ecology in a distant future. Herbert's world-building is unparalleled.",
+                quote: "Fear is the mind-killer. Fear is the little-death that brings total obliteration.",
+                key_takeaway: "The book offers profound insights into leadership, power dynamics, and environmental stewardship wrapped in an engrossing sci-fi narrative."
+            },
+            {
+                title: "Clean Code",
+                author: "Robert C. Martin",
+                year: 2008,
+                genre: ["Programming", "Software Development"],
+                cover: "linear-gradient(45deg, #2d3142, #4f5d75)",
+                rating: 4.7,
+                review: "A must-read for every software developer. Martin's principles have significantly improved my coding practices and how I think about software design.",
+                quote: "It is not enough for code to work. Code that works is often badly broken.",
+                key_takeaway: "Writing clean, readable code is not just an aesthetic choice but a professional responsibility that saves time and reduces bugs in the long run."
+            },
+            {
+                title: "Snow Crash",
+                author: "Neal Stephenson",
+                year: 1992,
+                genre: ["Science Fiction", "Cyberpunk"],
+                cover: "linear-gradient(45deg, #3a0ca3, #f72585)",
+                rating: 4.7,
+                review: "A mind-bending cyberpunk adventure that predicted many aspects of our current digital world. Stephenson's vision of the Metaverse was decades ahead of its time.",
+                quote: "When you are wrestling for possession of a sword, the man with the handle always wins.",
+                key_takeaway: "The book explores how language, through various mediums, can literally program human minds - a concept increasingly relevant in our age of digital influence."
+            },
+            {
+                title: "Atomic Habits",
+                author: "James Clear",
+                year: 2018,
+                genre: ["Non-Fiction", "Self Development"],
+                cover: "linear-gradient(45deg, #06d6a0, #118ab2)",
+                rating: 4.8,
+                review: "One of the most practical guides to building good habits and breaking bad ones. The 1% improvement concept has changed how I approach personal development.",
+                quote: "Success is the product of daily habits—not once-in-a-lifetime transformations.",
+                key_takeaway: "Sustainable improvement comes from focusing on systems rather than goals, and making tiny improvements consistently over time."
+            },
+            {
+                title: "The Three-Body Problem",
+                author: "Liu Cixin",
+                year: 2008,
+                genre: ["Science Fiction", "Hard SF"],
+                cover: "linear-gradient(45deg, #0b090a, #a4161a)",
+                rating: 4.6,
+                review: "A brilliant sci-fi novel that blends hard science with compelling storytelling. The scope of imagination is breathtaking, spanning from the Cultural Revolution to the end of the universe.",
+                quote: "In this universe, only two things are infinite: the universe and human stupidity.",
+                key_takeaway: "The novel challenges us to consider how humanity might respond to the discovery of advanced extraterrestrial civilizations, and the dangers of broadcasting our existence to the cosmos."
+            },
+            {
+                title: "Sapiens",
+                author: "Yuval Noah Harari",
+                year: 2011,
+                genre: ["Non-Fiction", "History", "Anthropology"],
+                cover: "linear-gradient(45deg, #789395, #94b49f)",
+                rating: 4.8,
+                review: "A thought-provoking exploration of human history that changed my perspective on our species' development and impact on the world.",
+                quote: "We study history not to know the future but to widen our horizons.",
+                key_takeaway: "Humans dominate the planet not because of individual strength but because of our unparalleled ability to cooperate flexibly in large numbers through shared myths and stories."
+            },
+            {
+                title: "Gödel, Escher, Bach",
+                author: "Douglas Hofstadter",
+                year: 1979,
+                genre: ["Science", "Philosophy", "Mathematics"],
+                cover: "linear-gradient(45deg, #5e2750, #e05780)",
+                rating: 4.9,
+                review: "An ambitious, mind-expanding journey through mathematics, art, music, and consciousness. Dense but rewarding, it's a book I frequently revisit for new insights.",
+                quote: "Meaningful things are intrinsically tangled with each other.",
+                key_takeaway: "Self-reference and recursive patterns are fundamental to consciousness and intelligence, appearing across different domains of human creativity."
+            },
+            {
+                title: "The Pragmatic Programmer",
+                author: "Andrew Hunt & David Thomas",
+                year: 1999,
+                genre: ["Programming", "Software Development"],
+                cover: "linear-gradient(45deg, #386641, #6a994e)",
+                rating: 4.8,
+                review: "This book transformed how I approach programming as a craft. The practical advice and philosophy have served me well throughout my career.",
+                quote: "You can't write perfect software. Did that hurt? It shouldn't. Accept it as an axiom of life.",
+                key_takeaway: "Programming is about making pragmatic choices and continuous learning rather than seeking perfect solutions."
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookContainer = document.getElementById('bookContainer');
+            const bookDetails = document.getElementById('bookDetails');
+            const bookDetailsContent = document.getElementById('bookDetailsContent');
+            const closeDetails = document.getElementById('closeDetails');
+            const searchBar = document.getElementById('searchBar');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const entanglementEffect = document.getElementById('entanglementEffect');
+            
+            // Create quantum field particles
+            createQuantumField();
+            
+            // Group books by genre for shelf organization
+            function groupBooksByGenre() {
+                const genreGroups = {};
+                
+                books.forEach(book => {
+                    const primaryGenre = book.genre[0];
+                    if (!genreGroups[primaryGenre]) {
+                        genreGroups[primaryGenre] = [];
+                    }
+                    genreGroups[primaryGenre].push(book);
+                });
+                
+                return genreGroups;
+            }
+            
+            // Render all books initially, grouped by genre
+            const genreGroups = groupBooksByGenre();
+            renderGroupedBooks(genreGroups);
+            
+            // Add event listeners for filtering and search
+            searchBar.addEventListener('input', filterBooks);
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Toggle active state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter books
+                    filterBooks();
+                });
+            });
+            
+            closeDetails.addEventListener('click', () => {
+                bookDetails.classList.remove('active');
+                fadeOutEntanglementEffect();
+            });
+            
+            function renderGroupedBooks(groups) {
+                bookContainer.innerHTML = '';
+                
+                Object.entries(groups).forEach(([genre, genreBooks]) => {
+                    const rowTitle = document.createElement('h3');
+                    rowTitle.className = 'shelf-title';
+                    rowTitle.textContent = genre;
+                    rowTitle.style.color = 'var(--primary)';
+                    rowTitle.style.marginBottom = '5px';
+                    rowTitle.style.fontSize = '1em';
+                    
+                    const row = document.createElement('div');
+                    row.className = 'books-row';
+                    
+                    genreBooks.forEach((book, index) => {
+                        const bookElement = createBookElement(book, books.findIndex(b => b.title === book.title));
+                        row.appendChild(bookElement);
+                    });
+                    
+                    bookContainer.appendChild(rowTitle);
+                    bookContainer.appendChild(row);
+                });
+            }
+            
+            function renderBooks(booksToRender) {
+                bookContainer.innerHTML = '';
+                
+                // If filtering is applied, don't do genre grouping
+                if (searchBar.value || document.querySelector('.filter-btn.active').getAttribute('data-genre') !== 'all') {
+                    const row = document.createElement('div');
+                    row.className = 'books-row';
+                    
+                    booksToRender.forEach((book, index) => {
+                        const bookElement = createBookElement(book, books.findIndex(b => b.title === book.title));
+                        row.appendChild(bookElement);
+                    });
+                    
+                    bookContainer.appendChild(row);
+                } else {
+                    // Group by genre for normal view
+                    const groups = {};
+                    booksToRender.forEach(book => {
+                        const primaryGenre = book.genre[0];
+                        if (!groups[primaryGenre]) {
+                            groups[primaryGenre] = [];
+                        }
+                        groups[primaryGenre].push(book);
+                    });
+                    
+                    renderGroupedBooks(groups);
+                }
+            }
+            
+            function createBookElement(book, index) {
+                const bookElement = document.createElement('div');
+                bookElement.className = 'quantum-book';
+                bookElement.setAttribute('data-index', index);
+                
+                // Add slight height variation for natural look
+                const heightVariation = Math.floor(Math.random() * 15) - 5;
+                bookElement.style.height = `${220 + heightVariation}px`;
+                
+                const spine = document.createElement('div');
+                spine.className = 'book-spine';
+                spine.textContent = book.title;
+                spine.style.height = '100%';
+                
+                const cover = document.createElement('div');
+                cover.className = 'book-cover';
+                cover.style.background = book.cover;
+                cover.style.height = bookElement.style.height;
+                
+                // Create book title on cover
+                const coverTitle = document.createElement('h3');
+                coverTitle.textContent = book.title;
+                cover.appendChild(coverTitle);
+                
+                // Create author on cover
+                const coverAuthor = document.createElement('p');
+                coverAuthor.textContent = `by ${book.author}`;
+                cover.appendChild(coverAuthor);
+                
+                // Create year on cover
+                const coverYear = document.createElement('p');
+                coverYear.textContent = book.year;
+                coverYear.style.marginTop = 'auto';
+                cover.appendChild(coverYear);
+                
+                // Create particles
+                for(let i = 0; i < 5; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'book-particle';
+                    bookElement.appendChild(particle);
+                }
+                
+                bookElement.appendChild(spine);
+                bookElement.appendChild(cover);
+                
+                bookElement.addEventListener('click', () => {
+                    showBookDetails(index);
+                    showEntanglementEffect();
+                });
+                
+                bookElement.addEventListener('mousemove', (e) => animateParticles(e, bookElement));
+                bookElement.addEventListener('mouseleave', () => resetParticles(bookElement));
+                
+                return bookElement;
+            }
+            
+            function filterBooks() {
+                const searchTerm = searchBar.value.toLowerCase();
+                const activeGenre = document.querySelector('.filter-btn.active').getAttribute('data-genre');
+                
+                const filteredBooks = books.filter(book => {
+                    // Check search term
+                    const matchesSearch = 
+                        book.title.toLowerCase().includes(searchTerm) || 
+                        book.author.toLowerCase().includes(searchTerm);
+                    
+                    // Check genre filter
+                    const matchesGenre = 
+                        activeGenre === 'all' || 
+                        book.genre.some(g => g === activeGenre);
+                    
+                    return matchesSearch && matchesGenre;
+                });
+                
+                renderBooks(filteredBooks);
+            }
+            
+            // Rest of the existing functions (showBookDetails, animateParticles, etc.)
+            function showBookDetails(index) {
+                const book = books[index];
+                
+                let genreTags = '';
+                book.genre.forEach(g => {
+                    genreTags += `<span class="book-genre-tag">${g}</span>`;
+                });
+                
+                bookDetailsContent.innerHTML = `
+                    <h2>${book.title}</h2>
+                    <h3>by ${book.author} (${book.year})</h3>
+                    <div class="book-rating">Rating: ${'★'.repeat(Math.floor(book.rating))}${book.rating % 1 >= 0.5 ? '½' : ''}</div>
+                    <div class="book-genres">${genreTags}</div>
+                    
+                    <blockquote class="book-quote">"${book.quote}"</blockquote>
+                    
+                    <div class="section-title">My Review:</div>
+                    <p>${book.review}</p>
+                    
+                    <div class="section-title">Key Takeaway:</div>
+                    <p>${book.key_takeaway}</p>
+                `;
+                
+                bookDetails.classList.add('active');
+            }
+            
+            function animateParticles(e, bookElement) {
+                const particles = bookElement.querySelectorAll('.book-particle');
+                const rect = bookElement.getBoundingClientRect();
+                
+                particles.forEach((particle, i) => {
+                    // Calculate position relative to book
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Add some randomness
+                    const offsetX = (Math.random() - 0.5) * 30;
+                    const offsetY = (Math.random() - 0.5) * 30;
+                    
+                    // Set particle position
+                    particle.style.left = `${x + offsetX}px`;
+                    particle.style.top = `${y + offsetY}px`;
+                    
+                    // Animate particle
+                    particle.style.opacity = '1';
+                    particle.style.transform = 'scale(1)';
+                    
+                    // Reset particle after animation
+                    setTimeout(() => {
+                        particle.style.opacity = '0';
+                        particle.style.transform = 'scale(0)';
+                    }, 1000 + i * 100);
+                });
+            }
+            
+            function resetParticles(bookElement) {
+                const particles = bookElement.querySelectorAll('.book-particle');
+                particles.forEach(particle => {
+                    particle.style.opacity = '0';
+                });
+            }
+            
+            function showEntanglementEffect() {
+                entanglementEffect.style.opacity = '1';
+                
+                // Create pulsing particles
+                for (let i = 0; i < 5; i++) {
+                    const pulse = document.createElement('div');
+                    pulse.style.position = 'absolute';
+                    pulse.style.width = '100px';
+                    pulse.style.height = '100px';
+                    pulse.style.borderRadius = '50%';
+                    pulse.style.backgroundColor = i % 2 === 0 ? 'rgba(0, 255, 255, 0.3)' : 'rgba(255, 0, 255, 0.3)';
+                    pulse.style.top = '50%';
+                    pulse.style.left = '50%';
+                    pulse.style.transform = 'translate(-50%, -50%)';
+                    pulse.style.animation = `pulse 1.5s ease-out ${i * 0.3}s`;
+                    pulse.style.opacity = '0';
+                    
+                    entanglementEffect.appendChild(pulse);
+                    
+                    // Remove pulse after animation completes
+                    setTimeout(() => {
+                        if (entanglementEffect.contains(pulse)) {
+                            entanglementEffect.removeChild(pulse);
+                        }
+                    }, 2000 + i * 300);
+                }
+            }
+            
+            function fadeOutEntanglementEffect() {
+                entanglementEffect.style.opacity = '0';
+                // Clear any remaining pulse elements
+                setTimeout(() => {
+                    entanglementEffect.innerHTML = '';
+                }, 500);
+            }
+            
+            function createQuantumField() {
+                const quantumField = document.getElementById('quantum-field');
+                
+                // Clear any existing particles
+                quantumField.innerHTML = '';
+                
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    quantumField.appendChild(particle);
+                    
+                    // Animate the particle
+                    animateFieldParticle(particle);
+                }
+            }
+            
+            function animateFieldParticle(particle) {
+                const duration = 3000 + Math.random() * 5000;
+                const keyframes = [
+                    { transform: 'translate(0, 0)' },
+                    { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)` }
+                ];
+                
+                const animation = particle.animate(keyframes, {
+                    duration: duration,
+                    iterations: Infinity,
+                    direction: 'alternate',
+                    easing: 'ease-in-out'
+                });
+                
+                animation.onfinish = () => animateFieldParticle(particle);
+            }
+        });
+    </script>
+</body>
+</html>
