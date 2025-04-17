@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markov Chain Monte Carlo (MCMC) - No BS | Sujay Kapadnis</title>
+    <link rel="icon" href="https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png" type="image/png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let favicon_video_image_counter = 0;
+            let favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+            let favicon_video_images = [
+                "https://favicongenerator.s3.amazonaws.com/d3b1608d49d61.png",
+                "https://favicongenerator.s3.amazonaws.com/9d6a6b0b477da.png",
+                "https://favicongenerator.s3.amazonaws.com/efe1874275571.png",
+                "https://favicongenerator.s3.amazonaws.com/d66a7d49c350f.png",
+                "https://favicongenerator.s3.amazonaws.com/132ed4554a655.png",
+                "https://favicongenerator.s3.amazonaws.com/71d365692f5da.png",
+                "https://favicongenerator.s3.amazonaws.com/fff0a73a1a4ec.png",
+                "https://favicongenerator.s3.amazonaws.com/3996876f6a042.png",
+                "https://favicongenerator.s3.amazonaws.com/b9542cfe64df2.png",
+                "https://favicongenerator.s3.amazonaws.com/a7ecf44e5c3f2.png",
+                "https://favicongenerator.s3.amazonaws.com/0e9f88204ebfc.png",
+                "https://favicongenerator.s3.amazonaws.com/ff8c2cadfe08f.png",
+                "https://favicongenerator.s3.amazonaws.com/9fba0cdd53a1c.png",
+                "https://favicongenerator.s3.amazonaws.com/4d3f965a130c2.png",
+                "https://favicongenerator.s3.amazonaws.com/fad0e250aa23.png",
+                "https://favicongenerator.s3.amazonaws.com/c87454ff36f67.png",
+                "https://favicongenerator.s3.amazonaws.com/3d007c1f49a7a.png",
+                "https://favicongenerator.s3.amazonaws.com/cadea07f55e45.png",
+                "https://favicongenerator.s3.amazonaws.com/6cbf7d36c3b51.png",
+                "https://favicongenerator.s3.amazonaws.com/5b5911fa713f3.png",
+                "https://favicongenerator.s3.amazonaws.com/1e9f9a52f3daf.png",
+                "https://favicongenerator.s3.amazonaws.com/b9347bf9e5a56.png",
+                "https://favicongenerator.s3.amazonaws.com/c72196c114492.png",
+                "https://favicongenerator.s3.amazonaws.com/7bfcd60bd2081.png",
+                "https://favicongenerator.s3.amazonaws.com/9b344a4fd2a9e.png",
+                "https://favicongenerator.s3.amazonaws.com/eead341ccbb03.png",
+                "https://favicongenerator.s3.amazonaws.com/93d747cc9c06d.png",
+                "https://favicongenerator.s3.amazonaws.com/2c97aca3dbc3d.png"
+            ];
+
+            async function favicon_video_to_data_url(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    let reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.send();
+            }
+
+            let favicon_video_loaded_images = [];
+
+            favicon_video_images.map((url, idx) => {
+                favicon_video_to_data_url(url, function (dataUrl) {
+                    favicon_video_loaded_images[idx] = dataUrl;
+                });
+            });
+
+            setInterval(function () {
+                if (favicon_video_loaded_images[favicon_video_image_counter]) {
+                    favicon_video_icon_tag.href = favicon_video_loaded_images[
+                        favicon_video_image_counter
+                    ].replace("application/octet-stream", "image/png");
+                }
+                if (
+                    favicon_video_image_counter ==
+                    favicon_video_loaded_images.length - 1
+                )
+                    favicon_video_image_counter = 0;
+                else favicon_video_image_counter++;
+            }, 100);
+        });
+    </script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="quantum-field"></div>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <a href="../../">Sujay Kapadnis</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
+                    <li><a href="../../resume/">Resume</a></li>
+                    <li><a href="../../blogs/">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+            
+        </header>
+        <main class="container blog-post">
+            <h1 class="page-title quantum-title">Markov Chain Monte Carlo (MCMC) - No BS</h1>
+            <div class="post-meta quantum-meta">
+                <span class="post-date">April 17, 2025</span>
+                <span class="post-author">by Sujay Kapadnis</span>
+            </div>
+            <article class="post-content">
+                <p>Have been reading this <a href="https://www.jeremykun.com/2015/04/06/markov-chain-monte-carlo-without-all-the-bullshit/">article</a> for a while now and it&#39;s a great read, thus taking my own notes to understand it better.</p>
+<h3>What is Markov Chain Monte Carlo (MCMC)?</h3>
+<ul>
+<li>To put it simply, it&#39;s a technique to solve problem of random sampling from a complex distribution.</li>
+<li>Imagine I got myself a cat(I love cats), now I want to give it a name, but there are a lot of possibilities like &quot;Oscar&quot;, &quot;Lando&quot;, &quot;Max&quot;, &quot;Lewis&quot; etc. I have a friend who also likes cats and in one shady market he bought a magic box which upon custom settings for me, given a name will return the probabilty of that name being the name of my cat.</li>
+<li>That custom settings is called the distribution specific to my preferences. (Consider that it can&#39;t be tempered)</li>
+<li>Now any person would think it is a good idea, keep giving it names and it will give me sort of compatibility of that name that I look for my cats, so after say a few tries, it gives a high probability to the name &quot;Carlos&quot;, and since it was customized to me, I&#39;m fairly happy with it.</li>
+<li>You might wonder, what is the problem? and where does MCMC come into picture?</li>
+<li>The problem is I want to draw names from that distribution, but effeciently! Why the current process not efficient? you ask. Well, I don&#39;t know what method that magic box uses to give me the probability, can I simulate it? No, I might even get biased towards it, just because I&#39;ve been told that it will help you decide a good name, so I might start thinking that &quot;Carlos&quot; is a good name, even it might not be, maybe &quot;Kimi&quot; was the perfect name.</li>
+<li></li>
+</ul>
+
+            </article>
+        </main>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Sujay Kapadnis. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Quantum field animation
+        const quantumField = document.getElementById('quantum-field');
+        
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+    
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            quantumField.appendChild(particle);
+            animateParticle(particle);
+        }
+    
+        function animateParticle(particle) {
+            const duration = Math.random() * 3000 + 2000;
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)` }
+            ];
+            const animation = particle.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'ease-in-out'
+            });
+    
+            animation.onfinish = () => animateParticle(particle);
+        }
+    
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
