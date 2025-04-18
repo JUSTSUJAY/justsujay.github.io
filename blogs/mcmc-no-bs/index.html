@@ -79,6 +79,167 @@
     </script>
     <link rel="stylesheet" href="../../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* MCMC Visualization Styles */
+        .visualization-container {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visualization-title {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        /* Cat Naming Probability Distribution */
+        .cat-name-container {
+            display: flex;
+            flex-direction: column;
+            height: 250px;
+            position: relative;
+        }
+        
+        .probability-bars {
+            display: flex;
+            height: 200px;
+            align-items: flex-end;
+            padding: 10px 0;
+        }
+        
+        .prob-bar {
+            flex: 1;
+            margin: 0 2px;
+            background: linear-gradient(to top, var(--primary), var(--secondary));
+            position: relative;
+            transition: height 0.5s;
+            min-width: 30px;
+        }
+        
+        .prob-bar:before {
+            content: attr(data-name);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-45deg);
+            font-size: 12px;
+            color: #fff;
+            white-space: nowrap;
+        }
+        
+        .prob-bar:after {
+            content: attr(data-probability);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: var(--primary);
+        }
+        
+        .sample-cat {
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            font-size: 24px;
+            transition: left 1s;
+        }
+        
+        /* Markov Chain Graph */
+        .graph-container {
+            height: 300px;
+            position: relative;
+        }
+        
+        .graph-node {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(0,255,255,0.1);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .graph-node.active {
+            background-color: rgba(0,255,255,0.4);
+            box-shadow: 0 0 15px var(--primary);
+        }
+        
+        .graph-edge {
+            position: absolute;
+            height: 2px;
+            background-color: var(--primary);
+            transform-origin: left center;
+        }
+        
+        .edge-label {
+            position: absolute;
+            background-color: rgba(0,0,0,0.7);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: var(--secondary);
+        }
+        
+        /* Random walker visualization */
+        .walker-container {
+            height: 200px;
+            position: relative;
+            border: 1px dashed rgba(255,255,255,0.2);
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .walker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: left 0.5s, top 0.5s;
+        }
+        
+        .walker-path {
+            position: absolute;
+            background-color: rgba(255,0,255,0.2);
+            height: 2px;
+        }
+        
+        .controls-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Roboto Mono', monospace;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            background-color: rgba(0,255,255,0.2);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
     <div id="quantum-field"></div>
@@ -115,6 +276,25 @@
 <ul>
 <li>To put it simply, it&#39;s a technique to solve problem of random sampling from a complex distribution.</li>
 <li>Imagine I got myself a cat(I love cats), now I want to give it a name, but there are a lot of possibilities like &quot;Oscar&quot;, &quot;Lando&quot;, &quot;Max&quot;, &quot;Lewis&quot; etc. I have a friend who also likes cats and in one shady market he bought a magic box which upon custom settings for me, given a name will return the probabilty of that name being the name of my cat.</li>
+</ul>
+
+<!-- Cat naming probability visualization -->
+<div class="visualization-container">
+    <div class="visualization-title">Cat Naming Probability Distribution</div>
+    <p>Hover over bars to see how the magic box returns probabilities for different cat names.</p>
+    <div class="cat-name-container">
+        <div class="sample-cat" id="sampleCat">🐱</div>
+        <div class="probability-bars" id="probBars">
+            <!-- Bars will be added by JavaScript -->
+        </div>
+    </div>
+    <div class="controls-container">
+        <button class="control-btn" id="sampleBtn">Generate Sample</button>
+        <button class="control-btn" id="resetBtn">Reset</button>
+    </div>
+</div>
+
+<ul>
 <li>That custom settings is called the distribution specific to my preferences. (Consider that it can&#39;t be tempered)</li>
 <li>Since the names are Distinct, D is a Discrete probability distribution and for discrete distributions, we can define a probability mass function (PMF) which is a function that gives the probability of a discrete random variable taking a certain value (in our case, the cat name)</li>
 <li>In reality, these distributions are skewed, where popular names like (lewis, Max) have higher probability than others.</li>
@@ -145,6 +325,117 @@
 <li>Probabilities are exponentially small: If most names have very low probabilities (𝑃(𝑥) is tiny), the coin will rarely land heads, so you’ll reject most names and need many tries to get a sample.</li>
 <li>Few names have nonzero probability: If only a few names have significant probabilities, you’ll rarely generate those names randomly, so you’ll need many tries to hit one.</li>
 </ol>
+<p>To understand it better, let&#39;s take an example:</p>
+<ul>
+<li>Suppose we have a distribution 𝐷 with 1M possible names, and the probability of each name is 1/1000000. </li>
+<li>And say P(Alex) = 0.05, P(Max) = 0.02 which takes most of the probability mass, the rest of the names have very low probability. even less than 0.000001.</li>
+<li>Now let&#39;s be optimistic and say luckily you got the name &quot;Max&quot;, the probability we have is 0.02, so only 2% of the time the coin will land heads and you&#39;ll accept it. so to get heads at least once, you&#39;ll need to try 50 times. You might say, 50 seems managable, right? But it&#39;s not that easy is it.</li>
+<li>Only between us, Max comes every 10^6 times. So to reach those 50 tries, you&#39;ll need to endure this much sampling.</li>
+</ul>
+<p>Now let&#39;s get even more granular to the level of bits and computations.</p>
+<ul>
+<li>1 bit can save 2 values(0 or 1)</li>
+<li>2 bits can save 4 values(00, 01, 10, 11)</li>
+<li>n bits can save 2^n values</li>
+</ul>
+<p>Now when we talk about english characters, we have 26 characters, so we need 5 bits to represent each character. because 4 bits can only represent 16 values, and 5 bits can represent 32 values. so 5 bits will work for us.</p>
+<p>and this also means that every character will be represented by 5 bits. such as </p>
+<ul>
+<li>a = 00000</li>
+<li>b = 00001</li>
+<li>c = 00010....</li>
+</ul>
+<p>now let&#39;s restric to the hypothesis that the name can be only one character long, like &quot;a&quot;, &quot;b&quot;, &quot;c&quot; etc. so we restrict the names list to 26 names. so for each name we&#39;ll have 5(1) bits. so for name with k characters, we&#39;ll have 5k bits.</p>
+<ul>
+<li>allowed 1 charracter names = 26 = 26^1</li>
+<li>allowed 2 character names = 26 * 26 = 26^2</li>
+<li>allowed 3 character names = 26 * 26 * 26 = 26^3</li>
+<li>allowed k character names = 26 * 26 * 26 * 26 = 26^k</li>
+</ul>
+<p>so for allowed k characters long names, that earlier 1M now becomes 26^k. I don&#39;t even want to do that math for that.</p>
+<h3>Random Walks, the &quot;Markov Chain&quot; Part of MCMC</h3>
+<p>Let&#39;s go take some fun part—random walks and how they turn into Markov chains, which are the heart of MCMC. Imagine we’re exploring a map of places, and this map is what we call a directed graph. </p>
+
+<!-- Markov Chain graph visualization -->
+<div class="visualization-container">
+    <div class="visualization-title">Markov Chain: Emotional States</div>
+    <div class="graph-container" id="emotionGraph">
+        <!-- Graph will be drawn by JavaScript -->
+    </div>
+    <div class="controls-container">
+        <button class="control-btn" id="stepBtn">Take One Step</button>
+        <button class="control-btn" id="autoBtn">Auto Walk</button>
+        <button class="control-btn" id="resetGraphBtn">Reset</button>
+    </div>
+</div>
+
+<ul>
+<li><p><strong>What’s a Directed Graph ( G = (V, E) )?</strong>  </p>
+<ul>
+<li>Think of it as a map with spots (called <strong>vertices</strong> or <strong>nodes</strong>, written as ( V )) and one-way roads (called <strong>edges</strong>, written as ( E )) connecting them.  </li>
+<li>In our example, the spots are emotional states: Cheerful (1), So-so (2), and Sad (3). The roads show how you can move from one state to another, like going from Cheerful to Sad.  </li>
+<li>( G ) isn’t some magic property—it’s a tool we create to model how things (like emotions or names) change. We build it based on the problem we’re solving!</li>
+</ul>
+</li>
+<li><p><strong>What’s a Random Walk?</strong>  </p>
+<ul>
+<li>It’s like a random stroll on this map. Start at one spot, say Cheerful (1), and decide where to go next using some chances.  </li>
+<li>From Cheerful, you can:  <ul>
+<li>Stay at Cheerful (1) with a 20% chance (0.2).  </li>
+<li>Move to So-so (2) with a 30% chance (0.3).  </li>
+<li>Move to Sad (3) with a 60% chance (0.6).</li>
+</ul>
+</li>
+<li>Pick one randomly based on those chances, then repeat from the new spot. That’s your walk!</li>
+</ul>
+</li>
+<li><p><strong>What Makes it a Markov Chain?</strong>  </p>
+<ul>
+<li>This random walk becomes a <strong>Markov chain</strong> when the next step only depends on where you are now, not where you’ve been before. Cool, right?  </li>
+<li>For each road (edge) from spot ( u ) to spot ( v ), we give a probability ( p_{u,v} ) (between 0 and 1).  </li>
+<li>Rule: The chances of all roads leaving a spot must add up to 1. For Cheerful (1): ( 0.2 + 0.3 + 0.6 = 1 ). This makes sure you always move somewhere!</li>
+</ul>
+</li>
+<li><p><strong>How Does it Work in the Example?</strong>  </p>
+<ul>
+<li>Start at Cheerful (1). Roll a “probability die” with weights 0.2, 0.3, 0.6. Say you get 0.6, so you move to Sad (3).  </li>
+<li>From Sad (3), roll again with 0.0 (to Cheerful), 0.7 (to So-so), 0.3 (to Sad). Get 0.7, so move to So-so (2).  </li>
+<li>Keep going—this is your Markov chain in action!</li>
+</ul>
+</li>
+<li><p><strong>Why Care About This for MCMC?</strong>  </p>
+<ul>
+<li>For your cat names, we can use a similar map where spots are names, and roads connect “similar” names (e.g., “Max” to “Maxi”). The probabilities ( p_{u,v} ) help us jump around to find names matching your distribution ( D ).  </li>
+<li>Over a long walk, you’ll spend more time at names you like, which is the goal of MCMC!</li>
+</ul>
+</li>
+<li><p><strong>Stationary Distribution (The Cool Part)</strong>  </p>
+<ul>
+<li>After lots of steps, the chance of being at any spot (like Cheerful) settles into a steady pattern, no matter where you started.  </li>
+<li>This pattern is the <strong>stationary distribution</strong>—it’s like finding the “natural” mix of emotions or names you’d pick!</li>
+</ul>
+</li>
+<li><p><strong>One Catch</strong>  </p>
+<ul>
+<li>The walk only works if every spot has a way out (some maps have dead ends). We might need to tweak the map, but the idea of random walking is solid!</li>
+</ul>
+</li>
+</ul>
+
+<!-- Random walk visualization -->
+<div class="visualization-container">
+    <div class="visualization-title">Random Walk Simulation</div>
+    <p>Watch how a random walk evolves over time, and how it eventually converges to the stationary distribution.</p>
+    <div class="walker-container" id="walkerContainer">
+        <div class="walker" id="walker"></div>
+        <!-- Paths will be added by JavaScript -->
+    </div>
+    <div class="controls-container">
+        <button class="control-btn" id="runWalkerBtn">Run Simulation</button>
+        <button class="control-btn" id="pauseWalkerBtn">Pause</button>
+        <button class="control-btn" id="resetWalkerBtn">Reset</button>
+    </div>
+</div>
 
             </article>
         </main>
@@ -193,6 +484,309 @@
     
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+        });
+
+        // ----------------
+        // Cat naming probability visualization
+        // ----------------
+        const catNames = ["Carlos", "Oscar", "Lando", "Max", "Lewis", "Kimi", "Alex"];
+        const catProbs = [0.35, 0.15, 0.2, 0.15, 0.1, 0.03, 0.02];
+        
+        const probBars = document.getElementById('probBars');
+        const sampleCat = document.getElementById('sampleCat');
+        const sampleBtn = document.getElementById('sampleBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        // Create probability bars
+        catNames.forEach((name, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'prob-bar';
+            bar.style.height = `${catProbs[i] * 200}px`;
+            bar.dataset.name = name;
+            bar.dataset.probability = `${(catProbs[i] * 100).toFixed(0)}%`;
+            
+            bar.addEventListener('mouseover', () => {
+                sampleCat.textContent = `🐱 ${name}`;
+                sampleCat.style.left = `${(i / catNames.length) * 100 + 10}%`;
+            });
+            
+            probBars.appendChild(bar);
+        });
+        
+        // Sample button functionality
+        sampleBtn.addEventListener('click', () => {
+            // Implementation of rejection sampling
+            let accepted = false;
+            let attempts = 0;
+            const maxAttempts = 20;
+            
+            const animateSampling = () => {
+                if (accepted || attempts >= maxAttempts) return;
+                
+                // Randomly select a name
+                const idx = Math.floor(Math.random() * catNames.length);
+                const name = catNames[idx];
+                const prob = catProbs[idx];
+                
+                // Move cat to that position
+                sampleCat.textContent = `🐱 ${name}`;
+                sampleCat.style.left = `${(idx / catNames.length) * 100 + 10}%`;
+                
+                // Flip the biased coin
+                const coinFlip = Math.random();
+                if (coinFlip < prob) {
+                    // Accept the sample
+                    accepted = true;
+                    sampleCat.style.color = '#00ffff';
+                    sampleBtn.textContent = `Accepted: ${name} (${attempts + 1} attempts)`;
+                } else {
+                    // Reject and try again
+                    attempts++;
+                    sampleCat.style.color = '#ff0000';
+                    setTimeout(animateSampling, 500);
+                }
+            };
+            
+            animateSampling();
+        });
+        
+        // Reset button functionality
+        resetBtn.addEventListener('click', () => {
+            sampleCat.textContent = '🐱';
+            sampleCat.style.left = '10%';
+            sampleCat.style.color = '#ffffff';
+            sampleBtn.textContent = 'Generate Sample';
+        });
+        
+        // ----------------
+        // Markov Chain graph visualization
+        // ----------------
+        const emotionGraph = document.getElementById('emotionGraph');
+        const stepBtn = document.getElementById('stepBtn');
+        const autoBtn = document.getElementById('autoBtn');
+        const resetGraphBtn = document.getElementById('resetGraphBtn');
+        
+        // Define the nodes and edges
+        const nodes = [
+            { id: 1, label: 'Cheerful', x: 50, y: 60 },
+            { id: 2, label: 'So-so', x: 180, y: 150 },
+            { id: 3, label: 'Sad', x: 310, y: 60 }
+        ];
+        
+        const edges = [
+            { from: 1, to: 1, probability: 0.2, labelPos: { x: 50, y: 30 } },
+            { from: 1, to: 2, probability: 0.3, labelPos: { x: 115, y: 90 } },
+            { from: 1, to: 3, probability: 0.5, labelPos: { x: 180, y: 40 } },
+            { from: 2, to: 1, probability: 0.4, labelPos: { x: 115, y: 130 } },
+            { from: 2, to: 2, probability: 0.3, labelPos: { x: 180, y: 180 } }, 
+            { from: 2, to: 3, probability: 0.3, labelPos: { x: 245, y: 130 } },
+            { from: 3, to: 1, probability: 0.0, labelPos: { x: 180, y: 20 } },
+            { from: 3, to: 2, probability: 0.7, labelPos: { x: 245, y: 90 } },
+            { from: 3, to: 3, probability: 0.3, labelPos: { x: 310, y: 30 } }
+        ];
+        
+        let currentNode = 1; // Start at cheerful
+        let autoWalkInterval;
+        
+        // Create nodes
+        nodes.forEach(node => {
+            const nodeEl = document.createElement('div');
+            nodeEl.className = 'graph-node';
+            nodeEl.id = `node-${node.id}`;
+            nodeEl.style.left = `${node.x}px`;
+            nodeEl.style.top = `${node.y}px`;
+            nodeEl.textContent = node.label;
+            emotionGraph.appendChild(nodeEl);
+        });
+        
+        // Create edges
+        edges.forEach(edge => {
+            const fromNode = nodes.find(n => n.id === edge.from);
+            const toNode = nodes.find(n => n.id === edge.to);
+            
+            // Create the edge line
+            const edgeEl = document.createElement('div');
+            edgeEl.className = 'graph-edge';
+            edgeEl.id = `edge-${edge.from}-${edge.to}`;
+            
+            if (edge.from === edge.to) {
+                // Self-loop - special handling
+                edgeEl.style.width = '20px';
+                edgeEl.style.height = '20px';
+                edgeEl.style.borderRadius = '50%';
+                edgeEl.style.borderTop = '2px solid var(--primary)';
+                edgeEl.style.borderRight = '2px solid var(--primary)';
+                edgeEl.style.background = 'transparent';
+                edgeEl.style.left = `${fromNode.x + 10}px`;
+                edgeEl.style.top = `${fromNode.y - 25}px`;
+            } else {
+                // Regular edge
+                const dx = toNode.x - fromNode.x;
+                const dy = toNode.y - fromNode.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+                
+                edgeEl.style.width = `${length}px`;
+                edgeEl.style.left = `${fromNode.x + 30}px`;
+                edgeEl.style.top = `${fromNode.y + 30}px`;
+                edgeEl.style.transform = `rotate(${angle}deg)`;
+            }
+            
+            emotionGraph.appendChild(edgeEl);
+            
+            // Create the probability label
+            const labelEl = document.createElement('div');
+            labelEl.className = 'edge-label';
+            labelEl.textContent = edge.probability.toFixed(1);
+            labelEl.style.left = `${edge.labelPos.x}px`;
+            labelEl.style.top = `${edge.labelPos.y}px`;
+            emotionGraph.appendChild(labelEl);
+        });
+        
+        // Update active node function
+        function updateActiveNode() {
+            // Reset all nodes
+            nodes.forEach(node => {
+                document.getElementById(`node-${node.id}`).classList.remove('active');
+            });
+            
+            // Set current node as active
+            document.getElementById(`node-${currentNode}`).classList.add('active');
+        }
+        
+        // Take one step in the Markov chain
+        function takeStep() {
+            const possibleMoves = edges.filter(e => e.from === currentNode);
+            const rand = Math.random();
+            let cumulativeProbability = 0;
+            
+            for (const move of possibleMoves) {
+                cumulativeProbability += move.probability;
+                if (rand < cumulativeProbability) {
+                    currentNode = move.to;
+                    break;
+                }
+            }
+            
+            updateActiveNode();
+        }
+        
+        // Initialize
+        updateActiveNode();
+        
+        // Button event listeners
+        stepBtn.addEventListener('click', takeStep);
+        
+        autoBtn.addEventListener('click', function() {
+            if (autoWalkInterval) {
+                clearInterval(autoWalkInterval);
+                autoWalkInterval = null;
+                autoBtn.textContent = 'Auto Walk';
+            } else {
+                autoWalkInterval = setInterval(takeStep, 1000);
+                autoBtn.textContent = 'Stop Auto';
+            }
+        });
+        
+        resetGraphBtn.addEventListener('click', function() {
+            if (autoWalkInterval) {
+                clearInterval(autoWalkInterval);
+                autoWalkInterval = null;
+                autoBtn.textContent = 'Auto Walk';
+            }
+            currentNode = 1;
+            updateActiveNode();
+        });
+        
+        // ----------------
+        // Random walk simulation
+        // ----------------
+        const walkerContainer = document.getElementById('walkerContainer');
+        const walker = document.getElementById('walker');
+        const runWalkerBtn = document.getElementById('runWalkerBtn');
+        const pauseWalkerBtn = document.getElementById('pauseWalkerBtn');
+        const resetWalkerBtn = document.getElementById('resetWalkerBtn');
+        
+        let walkerInterval;
+        let walkerPositions = [];
+        const containerWidth = walkerContainer.clientWidth;
+        const containerHeight = walkerContainer.clientHeight;
+        
+        // Initial position
+        let walkerX = containerWidth / 2;
+        let walkerY = containerHeight / 2;
+        updateWalkerPosition();
+        
+        function updateWalkerPosition() {
+            walker.style.left = `${walkerX}px`;
+            walker.style.top = `${walkerY}px`;
+            walkerPositions.push({ x: walkerX, y: walkerY });
+            
+            // Draw path if we have at least 2 positions
+            if (walkerPositions.length > 1) {
+                const prev = walkerPositions[walkerPositions.length - 2];
+                const curr = walkerPositions[walkerPositions.length - 1];
+                
+                const pathEl = document.createElement('div');
+                pathEl.className = 'walker-path';
+                
+                const dx = curr.x - prev.x;
+                const dy = curr.y - prev.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+                
+                pathEl.style.width = `${length}px`;
+                pathEl.style.left = `${prev.x}px`;
+                pathEl.style.top = `${prev.y}px`;
+                pathEl.style.transform = `rotate(${angle}deg)`;
+                
+                walkerContainer.appendChild(pathEl);
+            }
+        }
+        
+        function takeRandomStep() {
+            // Random step in x and y directions
+            walkerX += (Math.random() - 0.5) * 40;
+            walkerY += (Math.random() - 0.5) * 40;
+            
+            // Keep within bounds
+            walkerX = Math.max(20, Math.min(containerWidth - 20, walkerX));
+            walkerY = Math.max(20, Math.min(containerHeight - 20, walkerY));
+            
+            updateWalkerPosition();
+        }
+        
+        runWalkerBtn.addEventListener('click', function() {
+            if (!walkerInterval) {
+                walkerInterval = setInterval(takeRandomStep, 500);
+                runWalkerBtn.textContent = 'Running...';
+            }
+        });
+        
+        pauseWalkerBtn.addEventListener('click', function() {
+            if (walkerInterval) {
+                clearInterval(walkerInterval);
+                walkerInterval = null;
+                runWalkerBtn.textContent = 'Run Simulation';
+            }
+        });
+        
+        resetWalkerBtn.addEventListener('click', function() {
+            if (walkerInterval) {
+                clearInterval(walkerInterval);
+                walkerInterval = null;
+                runWalkerBtn.textContent = 'Run Simulation';
+            }
+            
+            // Clear paths
+            const paths = walkerContainer.querySelectorAll('.walker-path');
+            paths.forEach(path => path.remove());
+            
+            // Reset walker position
+            walkerX = containerWidth / 2;
+            walkerY = containerHeight / 2;
+            walkerPositions = [];
+            updateWalkerPosition();
         });
     </script>
 </body>

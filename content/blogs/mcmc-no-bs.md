@@ -38,3 +38,68 @@ It's  inefficient because:
 Problematics Cases: 
  1. Probabilities are exponentially small: If most names have very low probabilities (𝑃(𝑥) is tiny), the coin will rarely land heads, so you’ll reject most names and need many tries to get a sample.
  2. Few names have nonzero probability: If only a few names have significant probabilities, you’ll rarely generate those names randomly, so you’ll need many tries to hit one.
+
+To understand it better, let's take an example:
+- Suppose we have a distribution 𝐷 with 1M possible names, and the probability of each name is 1/1000000. 
+- And say P(Alex) = 0.05, P(Max) = 0.02 which takes most of the probability mass, the rest of the names have very low probability. even less than 0.000001.
+- Now let's be optimistic and say luckily you got the name "Max", the probability we have is 0.02, so only 2% of the time the coin will land heads and you'll accept it. so to get heads at least once, you'll need to try 50 times. You might say, 50 seems managable, right? But it's not that easy is it.
+- Only between us, Max comes every 10^6 times. So to reach those 50 tries, you'll need to endure this much sampling.
+
+Now let's get even more granular to the level of bits and computations.
+- 1 bit can save 2 values(0 or 1)
+- 2 bits can save 4 values(00, 01, 10, 11)
+- n bits can save 2^n values
+
+Now when we talk about english characters, we have 26 characters, so we need 5 bits to represent each character. because 4 bits can only represent 16 values, and 5 bits can represent 32 values. so 5 bits will work for us.
+
+and this also means that every character will be represented by 5 bits. such as 
+- a = 00000
+- b = 00001
+- c = 00010....
+
+now let's restric to the hypothesis that the name can be only one character long, like "a", "b", "c" etc. so we restrict the names list to 26 names. so for each name we'll have 5(1) bits. so for name with k characters, we'll have 5k bits.
+
+- allowed 1 charracter names = 26 = 26^1
+- allowed 2 character names = 26 * 26 = 26^2
+- allowed 3 character names = 26 * 26 * 26 = 26^3
+- allowed k character names = 26 * 26 * 26 * 26 = 26^k
+
+so for allowed k characters long names, that earlier 1M now becomes 26^k. I don't even want to do that math for that.
+
+### Random Walks, the "Markov Chain" Part of MCMC
+Let's go take some fun part—random walks and how they turn into Markov chains, which are the heart of MCMC. Imagine we’re exploring a map of places, and this map is what we call a directed graph. 
+
+- **What’s a Directed Graph \( G = (V, E) \)?**  
+  - Think of it as a map with spots (called **vertices** or **nodes**, written as \( V \)) and one-way roads (called **edges**, written as \( E \)) connecting them.  
+  - In our example, the spots are emotional states: Cheerful (1), So-so (2), and Sad (3). The roads show how you can move from one state to another, like going from Cheerful to Sad.  
+  - \( G \) isn’t some magic property—it’s a tool we create to model how things (like emotions or names) change. We build it based on the problem we’re solving!
+
+- **What’s a Random Walk?**  
+  - It’s like a random stroll on this map. Start at one spot, say Cheerful (1), and decide where to go next using some chances.  
+  - From Cheerful, you can:  
+    - Stay at Cheerful (1) with a 20% chance (0.2).  
+    - Move to So-so (2) with a 30% chance (0.3).  
+    - Move to Sad (3) with a 60% chance (0.6).  
+  - Pick one randomly based on those chances, then repeat from the new spot. That’s your walk!
+
+- **What Makes it a Markov Chain?**  
+  - This random walk becomes a **Markov chain** when the next step only depends on where you are now, not where you’ve been before. Cool, right?  
+  - For each road (edge) from spot \( u \) to spot \( v \), we give a probability \( p_{u,v} \) (between 0 and 1).  
+  - Rule: The chances of all roads leaving a spot must add up to 1. For Cheerful (1): \( 0.2 + 0.3 + 0.6 = 1 \). This makes sure you always move somewhere!
+
+- **How Does it Work in the Example?**  
+  - Start at Cheerful (1). Roll a “probability die” with weights 0.2, 0.3, 0.6. Say you get 0.6, so you move to Sad (3).  
+  - From Sad (3), roll again with 0.0 (to Cheerful), 0.7 (to So-so), 0.3 (to Sad). Get 0.7, so move to So-so (2).  
+  - Keep going—this is your Markov chain in action!
+
+- **Why Care About This for MCMC?**  
+  - For your cat names, we can use a similar map where spots are names, and roads connect “similar” names (e.g., “Max” to “Maxi”). The probabilities \( p_{u,v} \) help us jump around to find names matching your distribution \( D \).  
+  - Over a long walk, you’ll spend more time at names you like, which is the goal of MCMC!
+
+- **Stationary Distribution (The Cool Part)**  
+  - After lots of steps, the chance of being at any spot (like Cheerful) settles into a steady pattern, no matter where you started.  
+  - This pattern is the **stationary distribution**—it’s like finding the “natural” mix of emotions or names you’d pick!
+
+- **One Catch**  
+  - The walk only works if every spot has a way out (some maps have dead ends). We might need to tweak the map, but the idea of random walking is solid!
+
