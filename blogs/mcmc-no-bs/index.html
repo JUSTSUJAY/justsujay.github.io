@@ -116,11 +116,35 @@
 <li>To put it simply, it&#39;s a technique to solve problem of random sampling from a complex distribution.</li>
 <li>Imagine I got myself a cat(I love cats), now I want to give it a name, but there are a lot of possibilities like &quot;Oscar&quot;, &quot;Lando&quot;, &quot;Max&quot;, &quot;Lewis&quot; etc. I have a friend who also likes cats and in one shady market he bought a magic box which upon custom settings for me, given a name will return the probabilty of that name being the name of my cat.</li>
 <li>That custom settings is called the distribution specific to my preferences. (Consider that it can&#39;t be tempered)</li>
+<li>Since the names are Distinct, D is a Discrete probability distribution and for discrete distributions, we can define a probability mass function (PMF) which is a function that gives the probability of a discrete random variable taking a certain value (in our case, the cat name)</li>
+<li>In reality, these distributions are skewed, where popular names like (lewis, Max) have higher probability than others.</li>
 <li>Now any person would think it is a good idea, keep giving it names and it will give me sort of compatibility of that name that I look for my cats, so after say a few tries, it gives a high probability to the name &quot;Carlos&quot;, and since it was customized to me, I&#39;m fairly happy with it.</li>
 <li>You might wonder, what is the problem? and where does MCMC come into picture?</li>
 <li>The problem is I want to draw names from that distribution, but effeciently! Why the current process not efficient? you ask. Well, I don&#39;t know what method that magic box uses to give me the probability, can I simulate it? No, I might even get biased towards it, just because I&#39;ve been told that it will help you decide a good name, so I might start thinking that &quot;Carlos&quot; is a good name, even it might not be, maybe &quot;Kimi&quot; was the perfect name.</li>
-<li></li>
 </ul>
+<p>Sampling directly from D is hard because:</p>
+<ul>
+<li>You don’t know the internal process that defines 𝐷 (i.e., how you pick names).</li>
+<li>𝐷 is complicated, with potentially many names and uneven probabilities.</li>
+<li>Direct sampling (e.g., listing all names and their probabilities) is impractical due to the large number of possible names.</li>
+</ul>
+<p>Now, let&#39;s add one more layer to this to avoid that forced bias, once we get the probability of that name, we&#39;ll also carry a biased coin, which we&#39;ll flip to decide whether to accept that name or not.</p>
+<h4>Uniform Sampling with a Biased Coin</h4>
+<ul>
+<li>Generate a name 𝑥 uniformly at random: Pick a name from the set of all possible names, where each name has an equal chance of being chosen. For example, if there are 10,000 names, each has a 1/10000 chance of being picked.</li>
+<li>Query the magic box for 𝑃(𝑥): Ask the box for the probability 𝑃(𝑥) that you would choose name 𝑥 according to 𝐷.</li>
+<li>Flip a biased coin with probability 
+𝑃(𝑥): Use a coin where the probability of landing on heads is 
+𝑃(𝑥) If the coin lands heads, accept 𝑥 as your sample. If it lands tails, reject 𝑥 and start over (generate a new name and repeat).</li>
+</ul>
+<p><strong>Why This Setup?</strong>: This is a form of rejection sampling. The coin flip ensures that names with higher 𝑃(𝑥) are more likely to be accepted, so the accepted names follow the distribution 𝐷 However, it’s inefficient.</p>
+<p>It&#39;s  inefficient because:
+<strong>Exponentially many names</strong>: Exponentially many names: There are a vast number of possible names. The variable here is the number of bits needed to write down a name n=∣x∣ refers to the length of a name when encoded as a string (e.g., in a computer or as a sequence of characters).</p>
+<p>Problematics Cases: </p>
+<ol>
+<li>Probabilities are exponentially small: If most names have very low probabilities (𝑃(𝑥) is tiny), the coin will rarely land heads, so you’ll reject most names and need many tries to get a sample.</li>
+<li>Few names have nonzero probability: If only a few names have significant probabilities, you’ll rarely generate those names randomly, so you’ll need many tries to hit one.</li>
+</ol>
 
             </article>
         </main>
